@@ -4,9 +4,9 @@
 	<title>asd</title>
 </head>
 <body>
-<form action="testftp.php" method="post" enctype="multipart/form-data">
-<input type="file" name="filex" id="filex"><br>
-<input type="text" name = "new_name"> <br>
+<form action="download.php" method="get">
+<!-- <input type="file" name="filex" id="filex"><br> -->
+<input type="text" name = "filex"> <br>
 <input type="submit" name="submit" value="submit">
 
 </form>
