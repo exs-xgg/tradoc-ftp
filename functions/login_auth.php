@@ -50,7 +50,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 		$person->user_lname = $rs['USER_LNAME'];
 		$person->user_role = $rs['ROLE_ID'];
 
-		$_SESSION['user'] = $person;
+		$_SESSION['user'] = serialize($person);
 		
 		header("location: ".$uri."?grant=true&mark=".$mark);
 
