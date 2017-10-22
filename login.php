@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +26,7 @@
 <body>
     <div class="login-form" align="center">
 <br><br>
-<form class="form" method="post" action="">
+<form class="form" method="POST" action="./loginphp.php">
     <h4 class="title title-up upper">TRADOC FILE ARCHIVING SYSTEM</h4>
                                 <div class="header header-primary text-center">
                                     <h4 class="title title-up">Sign In</h4>
@@ -33,33 +36,30 @@
                                     
                                     <div class="input-group form-group-no-border">
                                         <span class="input-group-addon">
-                                            <i class="now-ui-icons users_single-02"></i>
+                                            <i class="now-ui-icons users_single-02">&nbsp;</i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="ID">
+                                        <input type="text" name="id" class="form-control" placeholder="ID">
                                     </div>
                                     <div class="input-group form-group-no-border">
                                         <span class="input-group-addon">
-                                            <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                            <i class="now-ui-icons ui-1_lock-circle-open">&nbsp;</i>
                                         </span>
-                                        <input type="password" placeholder="PIN" class="form-control">
+                                        <input type="password" name ="pwd" placeholder="PIN" class="form-control">
                                     </div>
-                                    
                                 </div>
                                 <div class="footer text-center">
-                                    <a href="#pablo" class="btn btn-neutral btn-round btn-lg">Login</a>
+                                    <button type="submit" class="btn btn-neutral btn-round btn-lg">Login</button>
                                 </div>
                             </form>
                     </div>
-
 </body>
 </html>
 
 <style type="text/css">
-    .login-form{
+.login-form{
         width: 100%;
         float: center;
-        background-color: ;
-       
+        background-color: ;     
     }
     .upper{
         color: white;

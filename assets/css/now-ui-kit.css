@@ -3963,6 +3963,9 @@ Created using IcoMoon - icomoon.io
     right: 14%; } }
 
 /*added for the message page*/
+.section2{
+  position:fixed;
+}
 .msg-main{
   height:70px;
   width:75%;
@@ -3971,12 +3974,13 @@ Created using IcoMoon - icomoon.io
 .msgs-sidebar{
   padding-top:35px;
   float:left;
-  height:92px;
   width:25%; 
   text-align:center;
   border: .5px solid rgba(0, 0, 0, 0.1);
 }
 .retrieved-msgs{
+ 
+  min-height:1000px;
   float:left;
   width:100.1%;
   margin-top: 35px;
@@ -3984,13 +3988,15 @@ Created using IcoMoon - icomoon.io
   border: .5px solid rgba(0, 0, 0, 0.1);
   box-shadow:;
 }
+.get-msg{
+  margin-top:10px;
+}
 .otherend{
   border: .5px solid rgba(0, 0, 0, 0.1);
   padding-top:35px;
 }
 
 .msg-area{
-  display: inline-block;
   padding: 10px 18px 10px 18px;
   margin-bottom: 15px;
   background-color:#FFF;
@@ -4000,9 +4006,9 @@ Created using IcoMoon - icomoon.io
 }
 
 .bottom{
+  overflow:hidden;
   padding: 10px 18px 10px 18px;
   position: fixed;
   width:inherit;
   bottom: 0px;
-
 }
