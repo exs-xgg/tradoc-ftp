@@ -16,7 +16,7 @@ SET time_zone = "+08:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `tradoc`
@@ -253,15 +253,3 @@ $$
 DELIMITER ;
 
 
-
---
--- Dumping data for database `tradoc`
---
-INSERT INTO `role` (`ROLE_ID`, `ROLE_NAME`, `ROLE_DESC`) VALUES
-(1, 'ADMIN', 'The one assigned to CREATE the user accounts. The '),
-(2, 'STAFF', 'Can only Upload, View and Download regular files f'),
-(3, 'SUPERUSER', 'Can upload, view and download regular and confiden');
-INSERT INTO `users` (`USER_ID`, `USER_NAME`, `USER_FNAME`, `USER_LNAME`, `USER_PW`, `ROLE_ID`) VALUES
-(1, 'user01', 'Antonio', 'Luna', '5f4dcc3b5aa765d61d8327deb882cf99', 1),
-(2, 'adminAq', 'Xander', 'Ford', '5f4dcc3b5aa765d61d8327deb882cf99', 2),
-(3, 'general', 'Rodrigo', 'Duterte', '5f4dcc3b5aa765d61d8327deb882cf99', 3);

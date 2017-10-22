@@ -8,7 +8,7 @@ MISSING: SHELL SCRIPT EXECUTION
 
 
 */
-$file = "files/".$_GET['filex'];
+$file = "../files/".$_GET['filex'];
 if (file_exists($file)) {
 set_time_limit(0);
         header('Connection: Keep-Alive');
