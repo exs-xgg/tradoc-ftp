@@ -13,24 +13,48 @@ MISSING THE SHELL SCRIPT TO COMPRESS THE FILE
 
 **/
 
-//include("db_con.php");
+include("db_con.php");
 include("crypto.php");
-//include("class/userclass.php");
-//session_start();
+include("class/userclass.php");
+session_start();
 
-//	$person = new User;
-//	$person = unserialize($_SESSION['user']);
+
 
 	//INIT SCRIPTS OVER HERE
-if (isset($_POST['submit'])){
-	$file = $_FILES['filex']['tmp_name'].'<br>';
-	echo $file;
-	$prefix_address = "../files/";
-	if (move_uploaded_file($_FILES['filex']['tmp_name'],$prefix_address . generateRandomString().".anyfuckingfile" )) {
-	 echo "successfully uploaded $file\n";
+
+if (isset($_SESSION['user']) && isset($_POST['submit'])){
+//if (isset($_POST['submit'])){
+	$person = new User;
+	$person = unserialize($_SESSION['user']);
+	$desc = $_POST['desc'];
+	$tags = json_encode(explode("\r\n", (strip_tags($_POST['tags']))));
+	echo $tags.'<br>';
+	$file_orig =  $_FILES['filex']['name'];
+	echo $file_orig.'<br>';
+	$file = $_FILES['filex']['tmp_name'];
+
+	//generate unique filename;
+	$randomString = generateRandomString();
+
+	$server_file_name = "../files/".$randomString;
+	if (move_uploaded_file($file,$server_file_name)) {
+		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		
+
+		$sql = 	"INSERT INTO FILE(F_NAME_ORIG,F_NAME_SERVER,F_UPLOADER,F_TAGS,FILE_X)
+		VALUES('$file_orig','$randomString',$person->userid,'$tags',0)";
+		echo '<br><br>'.$sql;
+		if($conn->query($sql)){
+					header("location: ".$uri."?success=yes");
+
+		}
+
+
 	} else {
-	header("location:../badrequest.php"); 
-	error_log("[ X ] There was a problem while uploading $file\n",1);
+		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		header("location: ".$uri."?success=no");
+
+	
 	}
 
 

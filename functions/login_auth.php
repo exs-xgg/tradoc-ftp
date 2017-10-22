@@ -44,7 +44,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 		$mark = generateRandomString();
 		$_SESSION['mark'] = $mark;
 		
-		$person->user_id = $rs['USER_ID'];
+		$person->userid = $rs['USER_ID'];
 		$person->user_name = $rs['USER_NAME'];
 		$person->user_fname = $rs['USER_FNAME'];
 		$person->user_lname = $rs['USER_LNAME'];
