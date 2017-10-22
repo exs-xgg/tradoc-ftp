@@ -6,7 +6,7 @@ AUTHOR: ROMEO MANUEL E. DAVID, EXISTENCE INNOVATIONS
 DATE WRITTEN: 10/21/17
 INSTRUCTIONS: 
 The caller must send the filename using an input type="file" with id `filex`
-
+The caller must prepare a receiver ?success with values [yes] or [no]
 STATUS: NOT READY
 
 MISSING THE SHELL SCRIPT TO COMPRESS THE FILE
