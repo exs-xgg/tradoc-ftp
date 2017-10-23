@@ -101,9 +101,9 @@ session_start();?>
                    </div>
                 </div>
                 <div class="msgs-sidebar">
-                    <div class="category">Conversations</div>
+                    <div class="category">ONLINE</div>
                     <div class="retrieved-msgs">
-                      <div class="get-msg">These are other messages.</div>
+                      <div class="get-msg">PEOPLE WHO ARE ONLINE</div>
                       <!--get messages-->
                     </div>            
                 </div>
@@ -130,7 +130,10 @@ session_start();?>
                xmlhttp.open('GET','getmsgs.php?uname='+uname+'&msg='+msginput,true);
                xmlhttp.send();
             }
-            
+      //$(document).ready(function(e){
+      //    $.ajaxSetup({cache:false});
+      //    setInterval(function(){$('#msg-area').load()})
+     // });
 }
             
 
