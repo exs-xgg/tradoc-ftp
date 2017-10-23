@@ -1,4 +1,5 @@
-<?php  include 'con-db.php'; ?>
+<?php  include 'con-db.php'; 
+session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>    
@@ -18,7 +19,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
-<body onload="checksession();" style="background-color: lightred ">
+<body style="background-color: lightred ">
 
     
 </div>    
@@ -114,24 +115,24 @@
 
 <script type="text/javascript">
     function sendmsg() {
+
             var msginput = document.getElementById("msg-input").value;
-            alert(msginput);
+            
             if (msginput != null){
                 <?php echo 'var uname = "'. $_SESSION['id'].'"'; ?> 
                   
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function(){
                   if(xmlhttp.readyState==4&&xmlhttp.status==200){
-                    document.getElementById('msg-area').innerHTML = xmlhttp.responseText;
+                    document.getElementById('msg-area').innerHTML = xmlhttp.responseText;                    
               }
               }
                xmlhttp.open('GET','getmsgs.php?uname='+uname+'&msg='+msginput,true);
                xmlhttp.send();
             }
             
-            
 }
-            }
+            
 
 </script> 
 

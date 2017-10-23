@@ -1,5 +1,11 @@
 <?php
-session_start();
+    session_start();
+    if($_SESSION['counter'] !=0){
+    //header ("Location: profile.php");
+    echo 'You are logged in!';
+}else{
+    echo 'you need to log in';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,7 +36,6 @@ session_start();
     <h4 class="title title-up upper">TRADOC FILE ARCHIVING SYSTEM</h4>
                                 <div class="header header-primary text-center">
                                     <h4 class="title title-up">Sign In</h4>
-                                    
                                 </div>
                                 <div class="content">
                                     

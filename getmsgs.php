@@ -2,11 +2,15 @@
 include 'con-db.php';
 $user = $_REQUEST['uname'];
 $msg = $_REQUEST['msg'];
-$sql = "INSERT INTO messages (`M_SENDER`, `M_MSG`, `M_RCVR`) VALUES (`$user`,`$msg`, `$user`)"; 
-$result = $conn->query($sql);
-$result1 = mysql_query("SELECT * FROM messages ORDER by M_TIME DESC"); 
+echo $user;	
+mysqli_query($conn, 'INSERT INTO messages (M_SENDER, M_MSG) VALUES ('.$user.','.$msg.')');
+if (!$check1_res) {
+    printf("Error: %s\n", mysqli_error($conn));
+    exit();
+}
+$result = mysqli_query($conn, "SELECT M_SENDER, M_MSG, M_TIME, M_RCVR, users.USER_ID, users.USER_NAME  FROM messages INNER JOIN users ON messages.M_SENDER=users.USER_ID WHERE users.USER_NAME=".$user." ORDER by M_TIME DESC"); 
 
-while ($extract = mysql_fetch_array($result1)){
-	echo $extract['M_SENDER'] . ": " . $extract['M_MSG'] . "</br>";
+while ($extract = mysqli_fetch_array($result)){
+	echo $extract['USER_NAME'] . ": " . $extract['M_MSG'] . "</br>";
 }
 ?>

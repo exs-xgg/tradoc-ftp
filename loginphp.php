@@ -12,14 +12,13 @@ if (!$row = $result->fetch_assoc()){
     echo '</script>';
     header("Location: ./login.php");
 }    
-
-else{
-    $r = $result->fetch_assoc();   
+else {
+    $r = $result->fetch_assoc();
+    $_SESSION['counter'] +=1;
     $_SESSION['id'] = $row['USER_ID'];
     $_SESSION['USER_FNAME'] = $row['USER_FNAME'];
     $_SESSION['USER_LNAME'] = $row['USER_LNAME'];
     echo $_SESSION['USER_FNAME'];
     header("Location: ./profile.php");
 }
-
 ?>
