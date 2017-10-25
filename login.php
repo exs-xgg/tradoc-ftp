@@ -1,11 +1,6 @@
 <?php
     session_start();
-    if($_SESSION['counter'] !=0){
-    //header ("Location: profile.php");
-    echo 'You are logged in!';
-}else{
-    echo 'you need to log in';
-}
+   
 ?>
 <!DOCTYPE html>
 <html>

@@ -31,8 +31,9 @@ session_start();?>
                    <span class="navbar-toggler-bar bar2"></span>
                    <span class="navbar-toggler-bar bar3"></span>
                </button>
-               <a class="navbar-brand" href="/index.html" rel="tooltip" >
-                   TRADOC-PA Web Portal
+
+               <a class="navbar-brand" href="/index.html" rel="tooltip">
+                
                </a>
            </div>
            <div class="collapse navbar-collapse justify-content-end" id="navigation" >
@@ -50,7 +51,7 @@ session_start();?>
                        </a>
                    </li>
                    <li class="nav-item">
-                       <a class="nav-link" href="./messages.html">
+                       <a class="nav-link" href="#">
                            <i class="now-ui-icons ui-1_email-85"></i>
                            <p>Messages</p>
                        </a>
@@ -73,22 +74,16 @@ session_start();?>
    </nav>
    <!-- End Navbar -->
 
-
-   <div class="wrapper">
-
-       <div class="space-50">
-
-       </div>
-   </div>
+ 
     
    <div class="main">
-    <div class="nav">
+    <div class="msgpanel">
                 <div class"">
                 </div>
                 <!--message input area-->
                 <div class="msg-main">
                         <div class="msg-container" align="right">
-                            <div  class="otherend"><p class="category" align="center"><img src="./sheri.jpg" class=" img rounded-circle" style="max-height: 40px">&nbsp;&nbsp;&nbsp;<a href="#">Corporal Sherry Rigor</a></p>
+                            <div  class="otherend"><div class="messages category text-primary" align="center">messages</div> 
                             </div>                            
                         </div>                              
                     <div class="bottom"> <!--message input-->
@@ -100,17 +95,21 @@ session_start();?>
                       </div>
                    </div>
                 </div>
-                <div class="msgs-sidebar">
-                    <div class="category">ONLINE</div>
-                    <div class="retrieved-msgs">
-                      <div class="get-msg">PEOPLE WHO ARE ONLINE</div>
-                      <!--get messages-->
-                    </div>            
+                <div class="msgs-sidebar" >
+                <div>
+                    <div class="messages category text-primary" align="center">Search</div>  <!-- Search barfor people/messages-->
+                    <div class="msgretrieve"></div> <!--Placeholder for returned results of the search. Empty if no return.-->      
                 </div>
+                <div class="msgsearch input-group form-group-no-border">
+                    <input type="text" class="form-control" placeholder="Search Messenger">
+                    <span class="input-group-addon">
+                        <i class="now-ui-icons ui-1_zoom-bold""></i>
+                    </span>
+                </div>
+              </div>
+
     </div>
-    <div>
-        <div class="card"> </div>
-    </div>
+     
 </body>
 
 <script type="text/javascript">
