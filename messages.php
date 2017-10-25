@@ -1,7 +1,8 @@
+<?php  include 'con-db.php'; 
+session_start();?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+<head>    
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
@@ -18,7 +19,10 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
-<body style="background-color: lightred">
+<body style="background-color: lightred ">
+
+    
+</div>    
     <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
        <div class="container">
            <div class="navbar-translate">
@@ -27,8 +31,9 @@
                    <span class="navbar-toggler-bar bar2"></span>
                    <span class="navbar-toggler-bar bar3"></span>
                </button>
-               <a class="navbar-brand" href="/index.html" rel="tooltip" >
-                   TRADOC-PA Web Portal
+
+               <a class="navbar-brand" href="/index.html" rel="tooltip">
+                
                </a>
            </div>
            <div class="collapse navbar-collapse justify-content-end" id="navigation" >
@@ -46,13 +51,13 @@
                        </a>
                    </li>
                    <li class="nav-item">
-                       <a class="nav-link" href="./messages.html">
+                       <a class="nav-link" href="#">
                            <i class="now-ui-icons ui-1_email-85"></i>
                            <p>Messages</p>
                        </a>
                    </li>
                    <li class="nav-item">
-                       <a class="nav-link" href="#">
+                       <a class="nav-link" href="profile.php">
                            <i class="now-ui-icons users_circle-08"></i>
                            <p>Profile</p>
                        </a>
@@ -69,52 +74,70 @@
    </nav>
    <!-- End Navbar -->
 
-
-   <div class="wrapper">
-
-       <div class="space-50">
-
-       </div>
-        
-   </div>
+ 
+    
    <div class="main">
-
-    <div class="section2">
+    <div class="msgpanel">
+                <div class"">
+                </div>
                 <!--message input area-->
                 <div class="msg-main">
                         <div class="msg-container" align="right">
-                            <div  class="otherend"><p class="category" align="center"><img src="./sheri.jpg" class=" img rounded-circle" style="max-height: 40px">&nbsp;&nbsp;&nbsp;<a href="#">Corporal Sherry Rigor</a></p>
-                            </div>
-                            <div class="msg-area" id="msg-area">&nbsp;</div> 
-                        </div>
-                               
-                    <div class="bottom">
-                     <div class="input-group form-group-no-border">
-                        <input class="form-control" id="msg-input" type="text" name="keyword" placeholder="Enter message here..." style="font-size: 15px;" onkeydown="if (event.keyCode==13) sendmsg();">
+                            <div  class="otherend"><div class="messages category text-primary" align="center">messages</div> 
+                            </div>                            
+                        </div>                              
+                    <div class="bottom"> <!--message input-->
+                     <div class="msg-area" id="msg-area">&nbsp;</div>
+                      <div class="input-group form-group-no-border">    
+                        <input class="form-control" id="msg-input" type="text" name="msg" placeholder="Enter message here..." style="font-size: 15px;" onkeydown="if (event.keyCode==13) sendmsg();">
+                    
                         <span class="input-group-addon"><button class="btn btn-primary btn-round" onclick="sendmsg();"><i class="now-ui-icons ui-1_send"></i>&nbsp;Send</button></span>          
-                    </div>
-                    </div>
+                      </div>
+                   </div>
                 </div>
-                <div class="msgs-sidebar">
-                    <div class="category">Active Now</div>
-                    <div class="retrieved-msgs">
-                      <div class="">These are other messages.</div>
-                      <!--get messages-->
-                    </div>            
+                <div class="msgs-sidebar" >
+                <div>
+                    <div class="messages category text-primary" align="center">Search</div>  <!-- Search barfor people/messages-->
+                    <div class="msgretrieve"></div> <!--Placeholder for returned results of the search. Empty if no return.-->      
                 </div>
+                <div class="msgsearch input-group form-group-no-border">
+                    <input type="text" class="form-control" placeholder="Search Messenger">
+                    <span class="input-group-addon">
+                        <i class="now-ui-icons ui-1_zoom-bold""></i>
+                    </span>
+                </div>
+              </div>
+
     </div>
-    <div>
-        <div class="card"> </div>
-    </div>
+     
 </body>
 
 <script type="text/javascript">
-        function sendmsg() {
-            var msginput = document.getElementById("msg-input");
-            var message = msginput.value;
-            document.getElementById("msg-area").innerHTML = message;  
-            }  
+    function sendmsg() {
+
+            var msginput = document.getElementById("msg-input").value;
+            
+            if (msginput != null){
+                <?php echo 'var uname = "'. $_SESSION['id'].'"'; ?> 
+                  
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                  if(xmlhttp.readyState==4&&xmlhttp.status==200){
+                    document.getElementById('msg-area').innerHTML = xmlhttp.responseText;                    
+              }
+              }
+               xmlhttp.open('GET','getmsgs.php?uname='+uname+'&msg='+msginput,true);
+               xmlhttp.send();
+            }
+      //$(document).ready(function(e){
+      //    $.ajaxSetup({cache:false});
+      //    setInterval(function(){$('#msg-area').load()})
+     // });
+}
+            
+
 </script> 
+
 <script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="./assets/js/core/tether.min.js" type="text/javascript"></script>
 <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>

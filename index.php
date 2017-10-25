@@ -2,7 +2,7 @@
 <?php
 include('con-db.php');
 session_start();
-if (!isset($_SESSION['user_'])) {
+if (!isset($_SESSION['id'])) {
    header("location: ./login.php");
 }
 
