@@ -22,6 +22,9 @@ if(isset($_REQUEST['mark']) && ($_REQUEST['mark'] == $_SESSION['mark']){
 }
 //==============================================================
 LOGIN_FINGERPRINT_MISMATCH = a security measure that throws an error when login fingerprint hashes do not match. 
+
+
+STATUS: READY
 **/
 
 

@@ -1,4 +1,6 @@
 <?php 
+
+//STATUS: READY
 class User { 
     public $user_id = 'a'; 
     public $user_name = 'a'; 

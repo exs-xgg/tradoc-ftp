@@ -7,6 +7,7 @@ DATE WRITTEN: 10/21/17
 INSTRUCTIONS: 
 The caller must send the filename using an input type="file" with id `filex`
 The caller must prepare a receiver ?success with values [yes] or [no]
+
 STATUS: NOT READY
 
 MISSING THE SHELL SCRIPT TO COMPRESS THE FILE
@@ -38,6 +39,10 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 
 	$server_file_name = "../files/".$randomString;
 	if (move_uploaded_file($file,$server_file_name)) {
+
+		//PROCESS FILE TO TEMP THEN PACK.SH
+
+
 		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		
 
