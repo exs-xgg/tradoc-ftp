@@ -1,0 +1,10 @@
+admin functions
+
+CRUD users
+
+delete files
+modify files
+
+view error logs
+view access logs
+

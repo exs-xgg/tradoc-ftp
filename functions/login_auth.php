@@ -21,7 +21,7 @@ if(isset($_REQUEST['mark']) && ($_REQUEST['mark'] == $_SESSION['mark']){
 	header("location: ./badrequest.php?error=LOGIN_FINGERPRINT_MISMATCH");
 }
 //==============================================================
-
+LOGIN_FINGERPRINT_MISMATCH = a security measure that throws an error when login fingerprint hashes do not match. 
 **/
 
 
@@ -31,6 +31,9 @@ include('./db_con.php');
 include('./class/userclass.php');
 session_start();
 $person = new User;
+if (isset($_SESSION['user'])) {
+	header("location: index.php");
+}
 if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 	$uname = fin(strip_tags($_POST['user_name']));
 	$pw = md5(fin(strip_tags($_POST['passwd'])));

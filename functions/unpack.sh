@@ -16,7 +16,7 @@ cp "$1".zst ./temp/"$1".zst
 cd ./temp
 
 #zstd kicks in yoooo
-zstd "$1" --rm -q -d
+zstd "$1".zst --rm -q -d
 mv "$1" ../"$2"
 
 
