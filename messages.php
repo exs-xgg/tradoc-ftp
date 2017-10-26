@@ -45,7 +45,7 @@ session_start();?>
                        </a>
                    </li>
                    <li class="nav-item">
-                       <a class="nav-link" href="./files.html">
+                       <a class="nav-link" href="./files.php">
                            <i class="now-ui-icons files_paper"></i>
                            <p>Files</p>
                        </a>

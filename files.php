@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Now Ui Kit by Creative Tim</title>
+    <title>Files</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -21,7 +21,7 @@
 
 
 <body style="background-color: lightred">
-     <nav class="navbar navbar-toggleable-md bg-info fixed-top">
+     <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="navbar-translate">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./files.html">
+                        <a class="nav-link" href="./files.php">
                             <i class="now-ui-icons files_paper"></i>
                             <p>Files</p>
                         </a>
@@ -115,10 +115,10 @@
                         <p>ID: 43248</p>
                         <p>Uploader: Corporal Sherry Rigor</p>
                         <p>Date Uploaded: 10/17/2017 7:53PM</p>
-                        <p>&nbsp;<span class="badge badge-info">file</span>&nbsp;<span class="badge badge-info">test file</span>&nbsp;<span class="badge badge-info">tradoc</span>&nbsp;<span class="badge badge-info">alligator</span></p>
+                        <p>&nbsp;<span class="badge badge-primary">file</span>&nbsp;<span class="badge badge-primary">test file</span>&nbsp;<span class="badge badge-primary">tradoc</span>&nbsp;<span class="badge badge-primary">alligator</span></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Nice Button</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
