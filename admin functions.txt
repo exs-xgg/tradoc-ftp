@@ -8,3 +8,5 @@ modify files
 view error logs
 view access logs
 
+check server status
+

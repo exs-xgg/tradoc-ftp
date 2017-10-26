@@ -2,3 +2,7 @@ notes
 chmod 777 tradoc-ftp
 chown apache:apache tradoc-ftp
 exclude confidential files from search
+
+
+
+how long will the files need to be there
