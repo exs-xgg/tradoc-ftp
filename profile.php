@@ -1,6 +1,33 @@
 
-<?php  include 'con-db.php'; 
-session_start();?>
+<?php  
+include 'functions/db_con.php'; 
+include 'functions/class/userclass.php';
+session_start();
+
+if (isset($_REQUEST['id'])) {
+  # code to view other person's profle
+} else {
+
+$person = new User;
+$person = unserialize($_SESSION['user']);
+
+
+
+
+//NOTES:
+/*
+
+I THINK WE SHOULD GET THE INITIAL PROFILE DATA FIRST, AND THEN TIMELINE INFO VIA AJAX 
+TO LESSEN THE LOADING TIME OF THE PAGE
+
+**/
+
+
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>    
@@ -8,7 +35,7 @@ session_start();?>
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title id=" ">RETURN THE NAME OF THE USER HERE</title>
+    <title id=" "><?php  echo $person->user_fname. " " . $person->user_lname ?></title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
