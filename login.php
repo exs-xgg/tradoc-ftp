@@ -1,7 +1,40 @@
 <?php
     session_start();
+    $_SESSION['times'] = 0;
+   if ((isset($_SESSION['user']))) {
+       header("location: files.php");
+   }
+   if (isset($_REQUEST['grant'])) {
+       # code...
+    if (($_REQUEST['grant'])=="false") {
+
+    if ($_SESSION['times'] < 5) {
+        # code...
+ 
+       ?>
+       <script type="text/javascript">alert("INVALID CREDENTIALS ENTERED. " <?php echo ($_REQUEST['times']-5). " attempts left. " ?>);</script>
+
+       <?php
+       $_SESSION['times'] += 1;
+          }
+   }
+
+   if (($_REQUEST['grant']=="true")){
+        if(isset($_REQUEST['mark']) && ($_REQUEST['mark'] == $_SESSION['mark'])){
+
+//JUST LEAVE THIS HERE
+
+}else{
+    header("location: ./badrequest.php?error=LOGIN_FINGERPRINT_MISMATCH");
+}
+
+   }
+
+   }
    
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +45,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Now Ui Kit by Creative Tim</title>
+    <title>Log In - TRADOC PORTAL</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -27,29 +60,30 @@
 <body>
     <div class="login-form" align="center">
 <br><br>
-<form class="form" method="POST" action="./loginphp.php">
+<form class="form" action="functions/login_auth.php" method="post">
     <h4 class="title title-up upper">TRADOC FILE ARCHIVING SYSTEM</h4>
                                 <div class="header header-primary text-center">
                                     <h4 class="title title-up">Sign In</h4>
                                 </div>
                                 <div class="content">
-                                    
                                     <div class="input-group form-group-no-border">
                                         <span class="input-group-addon">
                                             <i class="now-ui-icons users_single-02">&nbsp;</i>
                                         </span>
-                                        <input type="text" name="id" class="form-control" placeholder="ID">
+                                        <input type="text" name="user_name" class="form-control" placeholder="ID">
                                     </div>
                                     <div class="input-group form-group-no-border">
                                         <span class="input-group-addon">
                                             <i class="now-ui-icons ui-1_lock-circle-open">&nbsp;</i>
                                         </span>
-                                        <input type="password" name ="pwd" placeholder="PIN" class="form-control">
+                                        <input type="password" name ="passwd" placeholder="Password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="footer text-center">
                                     <button type="submit" class="btn btn-neutral btn-round btn-lg">Login</button>
                                 </div>
+
+
                             </form>
                     </div>
 </body>
