@@ -3245,13 +3245,13 @@ Created using IcoMoon - icomoon.io
 .page-header[filter-color="orange"] {
   background: rgba(44, 44, 44, 0.2);
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba(224, 23, 3, 0.6));
+  background: -webkit-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba((65,83,59)));
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba(224, 23, 3, 0.6));
+  background: -o-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba((65,83,59)));
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba(224, 23, 3, 0.6));
+  background: -moz-linear-gradient(90deg, rgba(44, 44, 44, 0.2), rgba((65,83,59)));
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(0deg, rgba(44, 44, 44, 0.2), rgba(224, 23, 3, 0.6));
+  background: linear-gradient(0deg, rgba(44, 44, 44, 0.2), rgba((65,83,59)));
   /* Standard syntax */ }
 .page-header .container {
   z-index: 2; }
@@ -3965,6 +3965,7 @@ Created using IcoMoon - icomoon.io
     right: 14%; } }
 
 /*--- MESSAGE PAGE CSS---*/
+
 .msg-main{
   height:70px;
   width:75%;
@@ -3990,6 +3991,7 @@ html {
 }
 .messages{
   border: .5px solid rgba(0, 0, 0, 0.1);
+  border-right: 0px;
   padding-bottom: 10px;
   padding-top:25px;
   border-top: 0px;
@@ -4007,6 +4009,7 @@ padding-top: 5px;
 }
 .msgpanel{
   overflow: hidden;
+  position: relative;
 }
 .otherend{
    
@@ -4044,10 +4047,10 @@ width:100%;
   flex-direction: column;
   min-height: 100vh;
   float:left;
-  width:40%; 
+  width:100%; 
   text-align:center;
 }
-.pane2{
+/*.pane2{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -4056,10 +4059,32 @@ width:100%;
   text-align:center;
   border: .5px solid rgba(0, 0, 0, 0.5);
   border-width: 0px 0px 0px .5px;
-}
+}*/
 .pinnedfiles{
   text-align: center;
   align-content: center;
+}
+.logo-trad{
+    cursor: pointer;
+    position: fixed;
+    z-index: 1;
+    top: 0.50%;
+    left: 1%;
+    border-radius: 50%;
+    font-size: 24px;
+    height: 56px;
+    margin: auto;
+    min-width: 56px;
+    width: 56px;
+    overflow: hidden;
+    border-width: 2px;
+    font-weight: 400;
+    line-height: 1.35em;
+    border: none;
+    
+    
+    background-color: #B8B8B8;
+    color: #FFFFFF;
 }
 
 .navbottom{
@@ -4105,3 +4130,35 @@ width:100%;
 align-self: center;
 margin:auto;
  }
+.tb:hover{
+  background: #eee;
+  cursor: pointer; 
+}
+
+/*--- HOME PAGE CSS---*/
+.welcomepane{
+  bottom: 0%;
+  top:0%;
+  max-width:60%;
+  max-height:40%;
+  position:fixed;
+}
+.login-body{
+margin: 10% 30% 10%;
+width: 100%;
+float: center;
+width: 40%;
+background-color: #41533b;
+color: black;
+border-radius: 20px;
+/*box-shadow: 2px 2px 10px gray;*/
+padding: 10px; 
+display: table;
+position: relative;
+height: 100%;
+   
+-webkit-background-size: cover;
+-moz-background-size: cover;
+background-size: cover;
+-o-background-size: cover;
+}

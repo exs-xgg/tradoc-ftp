@@ -5,8 +5,8 @@ session_start();?>
 <html lang="en">
 <head>    
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
+    <link rel="icon" type="image/png" href="./assets/img/tradoc_logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title id=" ">RETURN THE NAME OF THE USER HERE</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -21,52 +21,59 @@ session_start();?>
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
 <body class="profile-page sidebar-collapse">
-    <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
-       <div class="container">
-           <div class="navbar-translate">
-               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                   <span class="navbar-toggler-bar bar1"></span>
-                   <span class="navbar-toggler-bar bar2"></span>
-                   <span class="navbar-toggler-bar bar3"></span>
-               </button>
-
-               <a class="navbar-brand" href="/index.html" rel="tooltip">
-                
-               </a>
-           </div>
-           <div class="collapse navbar-collapse justify-content-end" id="navigation" >
-               <ul class="navbar-nav">
-                   
-                   <li class="nav-item">
-                       <a class="nav-link" href="./files.php">
-                           <i class="now-ui-icons files_paper"></i>
-                           <p>Files</p>
-                       </a>
-                   </li>
-                   <li class="nav-item">
-                       <a class="nav-link" href="messages.php">
-                           <i class="now-ui-icons ui-1_email-85"></i>
-                           <p>Messages</p>
-                       </a>
-                   </li>
-                   <li class="nav-item">
-                        <a class="nav-link" href="profile.php">
+   <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
+        <div class="container">
+            <div class="logo-trad">
+                  <a href="index.php" title="Home">
+                    <i class=""> <img src="./assets/img/tradoc_logo.png"></i>
+                  </a>
+            </div>
+            <div class="navbar-translate">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+                <a class="navbar-brand" href="/index.html" >
+                    TRADOC-PA Web Portal
+                </a>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" >
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Admin">
+                            <i class="now-ui-icons business_bank"></i>
+                            <p>Admin</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./files.php" title="Files">
+                            <i class="now-ui-icons files_paper"></i>
+                            <p>Files</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./messages.php" title="Messages">
+                            <i class="now-ui-icons ui-1_email-85"></i>
+                            <p>Messages</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php" title="Profile">
                             <i class="now-ui-icons users_circle-08"></i>
                             <p>Profile</p>
                         </a>
                     </li>
-                   <li class="nav-item">
-
-                       <a class="nav-link" href="#">
-                           <i class="now-ui-icons ui-1_settings-gear-63"></i>
-                           <p>Settings</p>
-                       </a>
-                   </li>
-                   
-               </ul>
-           </div>
-       </div>
-   </nav>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Settings">
+                            <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                            <p>Settings</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
        
    <div class="wrapper"><div class="space-50"></div></div>
     <!-- Navbar -->
@@ -98,25 +105,47 @@ session_start();?>
                 <h5 class="description">Some details here</h5>
         </div>        
             </div>
-        <div class="profilepane  ">
+        <div class="profilepane">
                 <div class="pane1">
                     <div class="pinnedfiles">
-                        <div ><h4 >Pinned Files &nbsp; </h4>
-                        
+                        <div ><h4 >Pinned Files &nbsp; </h4></div>
+                        <div id ="pinnedfiles" style="padding-left: 3%;padding-right: 3%; text-align: left;">
+                            <table class="table" >
+                            <tbody>
+                                <tr><th>Document ID</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Document Tags</th></tr>
+                                <tr class="tb" data-toggle="modal" data-target="#myModal"><td>43248</td><td>Test File.docx</td><td>10/17/2017 7:53PM</td><td>Corporal Sherry Rigor</td><td>file, test file, tradoc, alligator</td></tr>
+                            </tbody>
+                            </table>
                         </div>
-                        <div style="padding-left: 3%;padding-right: 3%; text-align: left;">
-                        <table class="table" >
-                        <tbody>
-                            <tr><th>File ID</th><th>File Name</th><th>Nick Name</th></tr>
-                            <tr class="tb" data-toggle="modal" data-target="#myModal"><td>43248</td><td>Test File.docx</td><td>What Nick name?</td></tr>
-                        </tbody>
-                        </table>
-                         </div>
              
                     </div>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                        <h4 class="title title-up">43248 - Test File.docx</h4>
                     </div>
+                    <div class="modal-body">
+                        <p>Description: This file contains porn</p>
+                        <p>ID: 43248</p>
+                        <p>Uploader: Corporal Sherry Rigor</p>
+                        <p>Date Uploaded: 10/17/2017 7:53PM</p>
+                        <p>&nbsp;<span class="badge badge-primary">file</span>&nbsp;<span class="badge badge-primary">test file</span>&nbsp;<span class="badge badge-primary">tradoc</span>&nbsp;<span class="badge badge-primary">alligator</span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+             </div>
+            </div>
+
                 
-                <div class="pane2">
+                <!--<div class="pane2">
                   <div ><h4 >Timeline &nbsp;</h4></div>
                   <div style="padding-left: 3%;padding-right: 3%; text-align: left;">
                   <table class="table" >
@@ -129,7 +158,7 @@ session_start();?>
                   </div>      
                 </div>
 
-            </div>    
+              </div>  -->
         </div>
     </div>
     

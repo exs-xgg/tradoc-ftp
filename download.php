@@ -53,14 +53,14 @@ if (isset($_SESSION['user'])) {
                 $uri = strtok($_SERVER['HTTP_REFERER'],'?');
                 header("location: ".$uri);
         }else{
-            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER")
+            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
         }
         
         }
 
     
     }else{
-        header("location: badrequest.php?error=FILE_NOT FOUND_FROM_DATABASE")
+        header("location: badrequest.php?error=FILE_NOT FOUND_FROM_DATABASE");
     }
 
 
@@ -68,7 +68,7 @@ if (isset($_SESSION['user'])) {
 
 
 }else{
-    header("location: badrequest.php?error=UNAUTHORIZED_ACCESS_TO_DOWNLOAD")
+    header("location: badrequest.php?error=UNAUTHORIZED_ACCESS_TO_DOWNLOAD");
 }
 
 ?>
