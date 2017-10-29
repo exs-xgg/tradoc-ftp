@@ -3,6 +3,9 @@
 include 'functions/db_con.php'; 
 include 'functions/class/userclass.php';
 session_start();
+if(!isset($_SESSION['user'])){
+  header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
 
 if (isset($_REQUEST['id'])) {
   # code to view other person's profle
@@ -35,7 +38,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title id=" "><?php  echo $person->user_fname. " " . $person->user_lname ?></title>
+    <title id=" "><?php  echo $person->user_fname . " " . $person->user_lname ?></title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -89,13 +92,27 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                            <p>Settings</p>
                        </a>
                    </li>
-                   
-               </ul>
-           </div>
-       </div>
-   </nav>
-       
-   <div class="wrapper"><div class="space-50"></div></div>
+                 <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout();">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                            <p>Log Out</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script type="text/javascript">
+                    function logout(){
+                       var answer = confirm("Logout?");
+                        if (answer) {
+                            window.location.href = "./logout.php";
+                        }
+                        else {
+                            //some code
+                        }
+                    }
+                </script>
     <!-- Navbar -->
 
     <div class="wrapper">
