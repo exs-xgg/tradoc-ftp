@@ -28,7 +28,9 @@ STATUS: READY
 **/
 
 
-
+if (!isset($_POST['submit'])) {
+	header("../badrequest.php?error=INVALID_REQUEST");
+}
 include('./crypto.php');
 include('./db_con.php');
 include('./class/userclass.php');
@@ -68,7 +70,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 
 	
 }else{
-	header("location: ../badrequest.php?error=UNAUTHORIZED_ACCESS_ON_LOGIN_API");
+	header("location: ../badrequest.php?error=UNAUTHORIZED_ACCESS");
 	
 }
 ?>

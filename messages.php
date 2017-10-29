@@ -24,58 +24,70 @@ session_start();?>
     
 </div>    
     <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
-        <div class="container">
-            <div class="logo-trad">
-                  <a href="index.php" title="Home">
-                    <i class=""> <img src="./assets/img/tradoc_logo.png"></i>
-                  </a>
-            </div>
-            <div class="navbar-translate">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
-                <a class="navbar-brand" href="/index.html" >
-                    TRADOC-PA Web Portal
-                </a>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation" >
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin.php" title="Admin">
-                            <i class="now-ui-icons business_bank"></i>
-                            <p>Admin</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="files.php" title="Files">
-                            <i class="now-ui-icons files_paper"></i>
-                            <p>Files</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="messages.php" title="Messages">
-                            <i class="now-ui-icons ui-1_email-85"></i>
-                            <p>Messages</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php" title="Profile">
-                            <i class="now-ui-icons users_circle-08"></i>
-                            <p>Profile</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" title="Settings">
-                            <i class="now-ui-icons ui-1_settings-gear-63"></i>
-                            <p>Settings</p>
+       <div class="container">
+           <div class="navbar-translate">
+               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-bar bar1"></span>
+                   <span class="navbar-toggler-bar bar2"></span>
+                   <span class="navbar-toggler-bar bar3"></span>
+               </button>
+
+               <a class="navbar-brand" href="/index.html" rel="tooltip">
+                
+               </a>
+           </div>
+           <div class="collapse navbar-collapse justify-content-end" id="navigation" >
+               <ul class="navbar-nav">
+                   <li class="nav-item">
+                       <a class="nav-link" href="#">
+                           <i class="now-ui-icons business_bank"></i>
+                           <p>Admin</p>
+                       </a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="./files.php">
+                           <i class="now-ui-icons files_paper"></i>
+                           <p>Files</p>
+                       </a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="#">
+                           <i class="now-ui-icons ui-1_email-85"></i>
+                           <p>Messages</p>
+                       </a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="profile.php">
+                           <i class="now-ui-icons users_circle-08"></i>
+                           <p>Profile</p>
+                       </a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="#">
+                           <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                           <p>Settings</p>
+                       </a>
+                   </li><li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout();">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                            <p>Log Out</p>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <script type="text/javascript">
+                    function logout(){
+                       var answer = confirm("Logout?");
+                        if (answer) {
+                            window.location.href = "./logout.php";
+                        }
+                        else {
+                            //some code
+                        }
+                    }
+                </script>
    <!-- End Navbar -->
 
  

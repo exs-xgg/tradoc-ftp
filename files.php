@@ -1,4 +1,13 @@
-<!DOCTYPE html> 
+
+<?php
+session_start();
+if(!isset($_SESSION['user'])){
+  header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -70,10 +79,27 @@
                             <p>Settings</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout();">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                            <p>Log Out</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <script type="text/javascript">
+                    function logout(){
+                       var answer = confirm("Logout?");
+                        if (answer) {
+                            window.location.href = "./logout.php";
+                        }
+                        else {
+                            //some code
+                        }
+                    }
+                </script>
     <!-- End Navbar -->
 
 
@@ -85,12 +111,13 @@
          
     </div>
     <div class="main" >
-
+<form action="#">
              <div class="section section-tabs" style="background-color: white">
                 <div class="container">
                     <div class="input-group form-group-no-border" >
-                        <input class="form-control" type="text" name="keyword" placeholder="Enter keyword here..." style="font-size: 20px;">
-                        <span class="input-group-addon" ><button class="btn btn-primary btn-round"onclick="alert();"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span>
+                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;">
+                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span></form>
+                        <span class="input-group-addon" ><button class="btn btn-primary btn-round"  data-toggle="modal" data-target="#uploadModal"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</button></span>
                     </div>
                 
                 
@@ -100,7 +127,33 @@
             <div id="files" style="padding-left: 5%;padding-right: 5%">
                 <table class="table">
                 <tr><th>Document ID</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Document Tags</th></tr>
-                <tr class="tb"  data-toggle="modal" data-target="#myModal"><td>43248</td><td>Test File.docx</td><td>10/17/2017 7:53PM</td><td>Corporal Sherry Rigor</td><td>file, test file, tradoc, alligator</td></tr>
+
+
+                <?php 
+                if (isset($_REQUEST['q'])) {
+                    include 'functions/db_con.php'; 
+                    include 'functions/class/userclass.php';
+                    $q = $_REQUEST['q'];
+                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID where FILE.F_NAME_ORIG like '%$q%'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#myModal"><td>' . $row["F_ID"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row["F_TAGS"];
+                    }
+                } else {
+                   
+                }
+            $conn->close();
+
+
+
+                }
+               
+
+                ?>
+                
+
                 </table> 
             </div>
            
@@ -155,5 +208,29 @@
 <script type="text/javascript">
    
 </script>
+           
 
+<!--UPLOAD DIALOG MODAL-->
+           <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                        <h4 class="title title-up">43248 - Test File.docx</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Description: This file contains porn</p>
+                        <p>ID: 43248</p>
+                        <p>Uploader: Corporal Sherry Rigor</p>
+                        <p>Date Uploaded: 10/17/2017 7:53PM</p>
+                        <p>&nbsp;<span class="badge badge-primary">file</span>&nbsp;<span class="badge badge-primary">test file</span>&nbsp;<span class="badge badge-primary">tradoc</span>&nbsp;<span class="badge badge-primary">alligator</span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
 </html>
