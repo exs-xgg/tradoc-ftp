@@ -74,7 +74,7 @@ session_start();?>
             </div>
         </div>
     </nav>
-       
+        
    <div class="wrapper"><div class="space-50"></div></div>
     <!-- Navbar -->
 
