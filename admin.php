@@ -77,5 +77,12 @@ session_start();?>
         </div>
     </nav>
 
+<div class="main">
+    <div class=" ">
+        
+    </div>
+    
+</div>>
+
 </body>
 </html>
