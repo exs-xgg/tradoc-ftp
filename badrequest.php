@@ -19,7 +19,7 @@ if (isset($_REQUEST['error'])){
 	getenv('HTTP_FORWARDED')?:
 	getenv('REMOTE_ADDR');
 	echo '<div align="center"><h2>'.$ip.'</h2>';
-	echo '<i>'.$err.'</i></div>';
+	echo '<i>'.$err.'</i><br><br><a href="index.php">Back to Home</a></div>';
 //LOG ERROR ON APACHE SERVER LOGS
 // `cat /var/log/httpd/error_log | grep  _ERROR_ `
 //	error_log("[ _ERROR_ ]" . $_REQUEST['error'] . " on [" . $ip . "]" . gethostbyaddr($_SERVER['REMOTE_ADDR']), 1);
