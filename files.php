@@ -110,7 +110,7 @@ if(!isset($_SESSION['user'])){
                 <div class="container">
                     <div class="input-group form-group-no-border" >
                         <input class="form-control" type="text" name="keyword" placeholder="Enter keyword here..." style="font-size: 20px;">
-                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" onclick=""><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span><span class="input-group-addon" ><button class="btn btn-primary btn-round" onclick=""><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span>
+                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" onclick=""><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span><span class="input-group-addon" ><button class="btn btn-primary btn-round"  data-toggle="modal" data-target="#uploadModal"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</button></span>
                     </div>
                 
                 
@@ -123,20 +123,26 @@ if(!isset($_SESSION['user'])){
 
 
                 <?php 
-
-                include 'functions/db_con.php'; 
-                include 'functions/class/userclass.php';
-                $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID ";
-                $result = $conn->query($sql);
-               if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo '<tr class="tb"  data-toggle="modal" data-target="#myModal"><td>' . $row["F_ID"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>' . $row["F_TAGS"] . '</td></tr>';
+                if (isset($_REQUEST['q'])) {
+                    include 'functions/db_con.php'; 
+                    include 'functions/class/userclass.php';
+                    $q = $_REQUEST['q'];
+                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID where FILE.F_NAME_ORIG like '%$q%'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#myModal"><td>' . $row["F_ID"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row["F_TAGS"];
+                    }
+                } else {
+                   
                 }
-            } else {
-                echo "0 results";
-            }
             $conn->close();
+
+
+
+                }
+               
 
                 ?>
                 
