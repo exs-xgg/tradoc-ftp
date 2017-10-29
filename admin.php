@@ -1,11 +1,13 @@
-<!DOCTYPE html> 
-<html>
-<head>
+<?php  include 'con-db.php'; 
+session_start();?>
+<!DOCTYPE html>
+<html lang="en">
+<head> 
     <meta charset="utf-8" />
     <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
     <link rel="icon" type="image/png" href="./assets/img/tradoc_logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>File Upload</title>
+    <title>Admin</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -13,11 +15,15 @@
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css" rel="stylesheet" />
+    <link href="./assets/css/msg-css.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
-<body>
- <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
+<body style="background-color: lightred ">
+
+    
+</div>    
+    <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="logo-trad">
                   <a href="index.php" title="Home">
@@ -70,45 +76,13 @@
             </div>
         </div>
     </nav>
-    <center>
-<div class="uploadmain">
-	<div class="uploadpanel" >
-                <form action="functions/post_file.php" method="post" enctype="multipart/form-data">
-                    <div class="header header-primary text-center">
-                        <h3 class="title title-up category">UPLOAD FILE</h3>
-                        <!--<i class="now-ui-icons  files_box "></i>-->
-                    </div>
-                    <div class="category">
 
-						<div class="input-group form-group-no-border text-center">
-                        	<span class="input-group-addon">
-                        		<i class="now-ui-icons files_single-copy-04"></i>                                	
-                        	</span>
-                        	<input type="text" name="desc" maxlength="200" class="form-control" placeholder="File Description (Max 200)">
-                        
-                   		 </div>
-                   		 	<!--<label class ="category">File Description (max 200)</label>-->
-						
-						<div class="input-group form-group-no-border text-center">
-	                        <span class="input-group-addon">
-	                            <i class="now-ui-icons shopping_tag-content"></i>
-	                        </span>
-	                        <input type="text" id="tags" name="tags" maxlength="200"  class="form-control" placeholder="Tags (Separate each tags with ENTER)">
-	                   		 </div><br>
-						<!--<label class="category ">Tags <small>(separate each by ENTER)</small></label>-->
-						<div class="input-group form-group-no-border">
-								<center><input  type="file" name="filex" id="filex"> </center>
-							</div>
-	 
-                    </div>
-                    <div class="  text-center">
-                    	<input type="submit" name="submit" value="Submit" class="btn btn-neutral btn-round btn-lg">
-                    </div>
-                </form>
-                        </div>
-                    </center>
-
-
+<div class="main">
+    <div class=" ">
+        
+    </div>
+    
 </div>>
+
 </body>
 </html>

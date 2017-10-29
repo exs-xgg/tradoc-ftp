@@ -39,11 +39,11 @@
 <html>
 <head>
 
-    <title></title>
+    <title>Login</title>
 
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
+    <link rel="icon" type="image/png" href="./assets/img/tradoc_logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Log In - TRADOC PORTAL</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -58,10 +58,11 @@
 
 </head>
 <body>
+	
     <div class="login-form" align="center">
 <br><br>
-<form class="form" action="functions/login_auth.php" method="post">
-    <h4 class="title title-up upper">TRADOC FILE ARCHIVING SYSTEM</h4>
+<form class="form" method="POST" action="./functions/login_auth.php">
+    <h4 class="title title-up upper">TRADOC WEB PORTAL</h4>
                                 <div class="header header-primary text-center">
                                     <h4 class="title title-up">Sign In</h4>
                                 </div>
@@ -100,7 +101,7 @@
     }
     body{
     background-image: url('http://cf.c.ooyala.com/1jcGtkYjE605slwPizeVEx_-_EBbKCuR/promo320279649');
-       display: table;
+    display: table;
     position: relative;
     width: 100%;
     height: 100%;
@@ -112,10 +113,10 @@
             }
     form{
         width: 40%;
-        background-color: #27ae60;
+        background-color: #41533b;
         color: black;
         border-radius: 20px;
-        box-shadow: 2px 2px 10px gray;
+        /*box-shadow: 2px 2px 10px gray;*/
         padding: 10px;
 
     }
@@ -123,7 +124,8 @@
         background-color: white
     }
     .btn:hover{
-        background-color: orange;
+        background-color: #B8B8B8;
         color: white
     }
 </style>
+  

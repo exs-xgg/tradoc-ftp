@@ -2,10 +2,10 @@
 session_start();?>
 <!DOCTYPE html>
 <html lang="en">
-<head>    
+<head>     
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
+    <link rel="icon" type="image/png" href="./assets/img/tradoc_logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Messages</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -142,7 +142,7 @@ session_start();?>
                     document.getElementById('msg-area').innerHTML = xmlhttp.responseText;                    
               }
               }
-               xmlhttp.open('GET','getmsgs.php?uname='+uname+'&msg='+msginput,true);
+               xmlhttp.open('GET','./functions/sendmsg.php?uname='+uname+'&msg='+msginput,true);
                xmlhttp.send();
             }
       //$(document).ready(function(e){
