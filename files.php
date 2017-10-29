@@ -105,12 +105,13 @@ if(!isset($_SESSION['user'])){
          
     </div>
     <div class="main" >
-
+<form action="#">
              <div class="section section-tabs" style="background-color: white">
                 <div class="container">
                     <div class="input-group form-group-no-border" >
-                        <input class="form-control" type="text" name="keyword" placeholder="Enter keyword here..." style="font-size: 20px;">
-                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" onclick=""><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span><span class="input-group-addon" ><button class="btn btn-primary btn-round"  data-toggle="modal" data-target="#uploadModal"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</button></span>
+                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;">
+                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span></form>
+                        <span class="input-group-addon" ><button class="btn btn-primary btn-round"  data-toggle="modal" data-target="#uploadModal"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</button></span>
                     </div>
                 
                 
