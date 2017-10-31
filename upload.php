@@ -19,7 +19,7 @@
 
 
 <body style="padding-right: 33px;" class="modal-open">
-     <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
+          <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="logo-trad">
                   <a href="index.php" title="Home">
@@ -32,17 +32,28 @@
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
-                <a class="navbar-brand" href="/index.html">
+                <a class="navbar-brand" href="/index.html" >
                     TRADOC-PA Web Portal
                 </a>
             </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" >
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Admin">
+                        <?php 
+                        include("functions/class/userclass.php");
+                        $person = new User;
+                        $person = unserialize($_SESSION['user']);
+                        if ($person->user_role > 2) {
+                         ?>
+<a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
                             <p>Admin</p>
                         </a>
+
+                         <?php 
+                        }
+                        ?>
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./files.php" title="Files">
@@ -103,32 +114,17 @@
         <div class="container">
            <h4 class="title title-up">Upload File</h4>
                     
-                    <div class="modal-body"><form action="functions/post_file.php" method="post" enctype="multipart/form-data" id="uploadform">
+                    <form action="functions/post_file.php" method="post" enctype="multipart/form-data" id="uploadform">
                     
-                    <div class="category">
-
-                        <div class="input-group form-group-no-border text-center">
-                            <span class="input-group-addon">
-                                <i class="now-ui-icons files_single-copy-04"></i>                                   
-                            </span>
+                    <input name="filetrack" maxlength="200" class="form-control" placeholder="File Tracking No." type="text"></input>
                             <textarea name="desc" maxlength="200" class="form-control" placeholder="File Description (Max 200)" type="text" form="uploadform"></textarea>
                         
-                         </div>
-                            <!--<label class ="category">File Description (max 200)</label>-->
-                        
-                        <div class="input-group form-group-no-border text-center">
-                            <span class="input-group-addon">
-                                <i class="now-ui-icons shopping_tag-content"></i>
-                            </span>
+                       
                             <textarea id="tags" name="tags" maxlength="200" class="form-control" placeholder="Tags (Separate each tags with ENTER)" type="text" form="uploadform"></textarea>
                              </div><br>
-                        <!--<label class="category ">Tags <small>(separate each by ENTER)</small></label>-->
-                        <div class="input-group form-group-no-border">
-                                <center><input name="filex" id="filex" type="file"> </center>
-                            </div>
-     
+                       <input name="filex" id="filex" type="file">
+                           
                     </div>
-                    <div class="  text-center">
                         <input name="submit" value="Submit" class="btn btn-neutral btn-round btn-lg" type="submit">
                     </div>
                 </form>

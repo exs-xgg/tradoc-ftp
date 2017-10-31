@@ -1,5 +1,11 @@
-<?php  include 'con-db.php'; 
-session_start();?>
+
+<?php
+session_start();
+if(!isset($_SESSION['user'])){
+  header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head> 

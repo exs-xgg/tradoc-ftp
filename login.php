@@ -75,18 +75,19 @@
                                 <div class="header header-primary text-center">
                                     <h4 class="title title-up">Sign In</h4>
                                 </div>
+
                                 <div class="content">
                                     <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon">
+                                        <span class="input-group-addon" style="background: white;">
                                             <i class="now-ui-icons users_single-02">&nbsp;</i>
                                         </span>
-                                        <input type="text" name="user_name" class="form-control" placeholder="ID">
+                                        <input type="text" name="user_name" class="form-control" placeholder="Username" style="background-color: white;"">
                                     </div>
                                     <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon">
+                                       <span class="input-group-addon" style="background: white;">
                                             <i class="now-ui-icons ui-1_lock-circle-open">&nbsp;</i>
                                         </span>
-                                        <input type="password" name ="passwd" placeholder="Password" class="form-control">
+                                        <input type="password" name ="passwd" placeholder="Password" class="form-control" style="background-color: white;"">
                                     </div>
                                 </div>
                                 <div class="footer text-center">

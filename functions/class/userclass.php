@@ -7,13 +7,15 @@ class User {
     public $user_fname = 'asd';
     public $user_lname = 'dsa';
     public $user_role = 'dsa';
+    public $user_office = 'a';
     
     function logout() { 
-    $this->userid = ''; 
+    $this->user_id = ''; 
     $this->user_name = ''; 
     $this->user_fname = '';
     $this->user_lname = '';
     $this->user_role = '';
+    $this->user_office = '';
     } 
     function callAll(){
   	echo $this->user_id; 
@@ -21,6 +23,7 @@ class User {
 	echo $this->user_fname ;
  	echo $this->user_lname ;
  	echo $this->user_role ;
+    echo $this->usr_office;
    }
 } 
 

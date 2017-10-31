@@ -1,7 +1,8 @@
 
 <?php  
-include 'functions/db_con.php'; 
-include 'functions/class/userclass.php';
+include('functions/crypto.php');
+include('functions/db_con.php');
+include('functions/class/userclass.php');
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
@@ -11,7 +12,6 @@ if (isset($_REQUEST['id'])) {
   # code to view other person's profle
 } else {
 
-$person = new User;
 $person = unserialize($_SESSION['user']);
 
 
@@ -51,7 +51,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
 <body class="profile-page sidebar-collapse">
-   <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
+        <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="logo-trad">
                   <a href="index.php" title="Home">
@@ -71,10 +71,18 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             <div class="collapse navbar-collapse justify-content-end" id="navigation" >
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Admin">
+                        <?php 
+                        if ($person->user_role > 2) {
+                         ?>
+<a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
                             <p>Admin</p>
                         </a>
+
+                         <?php 
+                        }
+                        ?>
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./files.php" title="Files">
@@ -94,14 +102,13 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                             <p>Profile</p>
                         </a>
                     </li>
-                   <li class="nav-item">
-
-                       <a class="nav-link" href="#">
-                           <i class="now-ui-icons ui-1_settings-gear-63"></i>
-                           <p>Settings</p>
-                       </a>
-                   </li>
-                 <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Settings">
+                            <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                            <p>Settings</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#" onclick="logout();">
                             <i class="now-ui-icons ui-1_simple-remove"></i>
                             <p>Log Out</p>
@@ -111,7 +118,6 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             </div>
         </div>
     </nav>
-        
    <div class="wrapper"><div class="space-50"></div></div>
     <script type="text/javascript">
                     function logout(){

@@ -57,6 +57,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 		$person->user_fname = $rs['USER_FNAME'];
 		$person->user_lname = $rs['USER_LNAME'];
 		$person->user_role = $rs['ROLE_ID'];
+		$person->user_office = $rs['USER_OFFICE'];
 
 		$_SESSION['user'] = serialize($person);
 		

@@ -50,10 +50,21 @@ if(!isset($_SESSION['user'])){
             <div class="collapse navbar-collapse justify-content-end" id="navigation" >
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Admin">
+                        <?php 
+                        include("functions/class/userclass.php");
+                        $person = new User;
+                        $person = unserialize($_SESSION['user']);
+                        if ($person->user_role > 2) {
+                         ?>
+<a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
                             <p>Admin</p>
                         </a>
+
+                         <?php 
+                        }
+                        ?>
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./files.php" title="Files">
@@ -114,10 +125,15 @@ if(!isset($_SESSION['user'])){
 <form action="#">
              <div class="section section-tabs" style="background-color: white">
                 <div class="container">
+                    <?php if (isset($_REQUEST['q'])) {
+                            echo '<p>'. 'Top 20 results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+                        }?>
                     <div class="input-group form-group-no-border" >
-                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;">
+                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;" <?php if (isset($_REQUEST['q'])) {
+                            echo 'value="'. $_REQUEST['q'] . '"';
+                        }?>>
                         <span class="input-group-addon" ><button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span></form>
-                        <span class="input-group-addon" ><button class="btn btn-primary btn-round"  data-toggle="modal" data-target="#uploadModal"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</button></span>
+                        <span class="input-group-addon" ><a class="btn btn-primary btn-round"  href="upload.php"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</a></span>
                     </div>
                 
                 
@@ -126,7 +142,7 @@ if(!isset($_SESSION['user'])){
 
             <div id="files" style="padding-left: 5%;padding-right: 5%">
                 <table class="table">
-                <tr><th>Tracking No.</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Uploaded From</th><th width="330px">Document Tags</th></tr>
+                <tr><th>Tracking No.</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Uploaded From</th><th width="30%">Document Tags</th></tr>
 
 
                 <?php 
@@ -134,7 +150,7 @@ if(!isset($_SESSION['user'])){
                     include 'functions/db_con.php'; 
                     include 'functions/class/userclass.php';
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%'";
+                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%' LIMIT 20";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -164,7 +180,7 @@ if(!isset($_SESSION['user'])){
                     <div class="modal-body">
                         <p>Description: <?php echo $row["F_DESC"];?></p>
                         <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
-                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"];?></p>
+                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"] . ", " .$row['OF_NAME'];?></p>
                         <p>Date Uploaded: <?php echo $row["F_UPLOAD_DATE"];?></p>
                         <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
@@ -199,29 +215,7 @@ if(!isset($_SESSION['user'])){
            
 
 
-           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <h4 class="title title-up">43248 - Test File.docx</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Description: This file contains porn</p>
-                        <p>ID: 43248</p>
-                        <p>Uploader: Corporal Sherry Rigor</p>
-                        <p>Date Uploaded: 10/17/2017 7:53PM</p>
-                        <p>&nbsp;<span class="badge badge-primary">file</span>&nbsp;<span class="badge badge-primary">test file</span>&nbsp;<span class="badge badge-primary">tradoc</span>&nbsp;<span class="badge badge-primary">alligator</span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-             </div>
-            </div>
+           
     </div>        
 </body>
 <style type="text/css">
@@ -248,29 +242,5 @@ if(!isset($_SESSION['user'])){
 <script type="text/javascript">
    
 </script>
-           
-
-<!--UPLOAD DIALOG MODAL-->
-           <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <h4 class="title title-up">43248 - Test File.docx</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Description: This file contains porn</p>
-                        <p>ID: 43248</p>
-                        <p>Uploader: Corporal Sherry Rigor</p>
-                        <p>Date Uploaded: 10/17/2017 7:53PM</p>
-                        <p>&nbsp;<span class="badge badge-primary">file</span>&nbsp;<span class="badge badge-primary">test file</span>&nbsp;<span class="badge badge-primary">tradoc</span>&nbsp;<span class="badge badge-primary">alligator</span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
+        
 </html>
