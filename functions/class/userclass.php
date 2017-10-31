@@ -23,7 +23,7 @@ class User {
 	echo $this->user_fname ;
  	echo $this->user_lname ;
  	echo $this->user_role ;
-    echo $this->usr_office;
+    echo $this->user_office;
    }
 } 
 
