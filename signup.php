@@ -8,7 +8,7 @@
     <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
     <link rel="icon" type="image/png" href="./assets/img/tradoc_logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>INVALID REQUEST</title>
+    <title>CREATE ACCOUNT</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -43,11 +43,6 @@
     </nav>
     <div class="space-100"></div>
     <center><h3>Create Account</h3></center>
-
-<input type="text" name="sdWU9IjEiIG" value="HQiIG5hbWU9In" hidden="true">
-<input type="text" name="GU9InRl" value="KPGlucHV0IHR5c" hidden="true">
-<input type="text" name="IG5hbWU9InNkV" value="nNkV1U5SWpFaUlH" hidden="true">
-<input type="text" name="dVOUluUmwiIHZh" value="Ij4KPGlucHV0IHR5cG" hidden="true">
 <?php
 
 if (isset($_REQUEST['r'])) {
@@ -92,21 +87,21 @@ if (isset($_REQUEST['r'])) {
 
 
            }else{
-             echo '<h1>DIDNTWORKED</h1>' ;
+             header("location: badrequest.php?error=BAD_SIGNUP_REQUEST");
            }
            }else{
-             echo '<h1>DIDNTWORKED</h1>' ;
+             header("location: badrequest.php?error=BAD_SIGNUP_REQUEST");
            }
     }else{
-            echo '<h1>DIDNTWORKED</h1>' ;
+           header("location: badrequest.php?error=BAD_SIGNUP_REQUEST");
 
     }
     }else{
-        echo '<h1>DIDNTWORKED</h1>' ;
+        header("location: badrequest.php?error=BAD_SIGNUP_REQUEST");
     }
     
 }else{
-    echo '<h1>DIDNTWORKEDasdasd</h1>' ;
+     header("location: badrequest.php?error=BAD_SIGNUP_REQUEST");
 }
 
 }
@@ -124,8 +119,9 @@ if (isset($_REQUEST['r'])) {
             <p class="category">LAST NAME: </p><input class="form form-control" type="text" required name="lname"><br>
             <input type="text" name="role" value="1" hidden="true">
             <script type="text/javascript">
-                
-var _0xfaa6=['exception','write','apply','Bja','tiZ','console','log','warn','debug','info','error','trace','zAc','Kek','Uyv','return\x20(function()\x20','fNx','SOt'];(function(_0xf50820,_0x56f041){var _0x2a9b10=function(_0x33f0f4){while(--_0x33f0f4){_0xf50820['push'](_0xf50820['shift']());}};_0x2a9b10(++_0x56f041);}(_0xfaa6,0xb6));var _0x6faa=function(_0x383627,_0x5be16e){_0x383627=_0x383627-0x0;var _0x2c16a0=_0xfaa6[_0x383627];return _0x2c16a0;};var _0x153856=function(){var _0x8fbf10=!![];return function(_0x2bd9d3,_0xb79237){var _0x2ab54e=_0x8fbf10?function(){if(_0xb79237){var _0x4d86fc=_0xb79237[_0x6faa('0x0')](_0x2bd9d3,arguments);_0xb79237=null;return _0x4d86fc;}}:function(){if(_0x6faa('0x1')!==_0x6faa('0x2')){}else{that[_0x6faa('0x3')][_0x6faa('0x4')]=_0x58c999;that['console'][_0x6faa('0x5')]=_0x19eb72;that['console'][_0x6faa('0x6')]=_0x40a2b1;that[_0x6faa('0x3')][_0x6faa('0x7')]=_0x5396db;that[_0x6faa('0x3')][_0x6faa('0x8')]=_0x27de71;that[_0x6faa('0x3')]['exception']=_0x410cb9;that[_0x6faa('0x3')][_0x6faa('0x9')]=_0x1bdb87;}};_0x8fbf10=![];return _0x2ab54e;};}();var _0x3e85ad=_0x153856(this,function(){var _0x22bec7=function(){if(_0x6faa('0xa')===_0x6faa('0xa')){}else{}};var _0x4a1b53;try{if(_0x6faa('0xb')!==_0x6faa('0xc')){var _0x220ba1=Function(_0x6faa('0xd')+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');_0x4a1b53=_0x220ba1();}else{var _0x161da6=_0x4a4c62('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');_0x308584=_0x2e5c58();}}catch(_0x1d5101){if(_0x6faa('0xe')==='fNx'){_0x4a1b53=window;}else{}}if(!_0x4a1b53[_0x6faa('0x3')]){if(_0x6faa('0xf')===_0x6faa('0xf')){_0x4a1b53[_0x6faa('0x3')]=function(_0x49dd9f){if('vWD'!=='PlT'){var _0x2f0ba2={};_0x2f0ba2[_0x6faa('0x4')]=_0x49dd9f;_0x2f0ba2[_0x6faa('0x5')]=_0x49dd9f;_0x2f0ba2['debug']=_0x49dd9f;_0x2f0ba2[_0x6faa('0x7')]=_0x49dd9f;_0x2f0ba2[_0x6faa('0x8')]=_0x49dd9f;_0x2f0ba2[_0x6faa('0x10')]=_0x49dd9f;_0x2f0ba2[_0x6faa('0x9')]=_0x49dd9f;return _0x2f0ba2;}else{if(_0xf4c56){var _0x33508d=fn[_0x6faa('0x0')](_0x544b9b,_0x2d6ec0);_0x272f1e=null;return _0x131a5c;}}}(_0x22bec7);}else{_0x5c1572=_0x432f72;}}else{if('pmd'!=='usO'){_0x4a1b53[_0x6faa('0x3')][_0x6faa('0x4')]=_0x22bec7;_0x4a1b53[_0x6faa('0x3')][_0x6faa('0x5')]=_0x22bec7;_0x4a1b53['console'][_0x6faa('0x6')]=_0x22bec7;_0x4a1b53['console'][_0x6faa('0x7')]=_0x22bec7;_0x4a1b53[_0x6faa('0x3')][_0x6faa('0x8')]=_0x22bec7;_0x4a1b53[_0x6faa('0x3')]['exception']=_0x22bec7;_0x4a1b53[_0x6faa('0x3')][_0x6faa('0x9')]=_0x22bec7;}else{var _0x1442a3=_0x9f5eb6?function(){if(_0x33840a){var _0xf2dfee=fn['apply'](_0x563f2c,_0x3e6959);_0x1b2347=null;return _0x588948;}}:function(){};_0x389754=![];return _0x3153b6;}}});_0x3e85ad();document[_0x6faa('0x11')](atob('PGlucHV0IHR5cGU9InRleHQiIG5hbWU9InNkV1U5SWpFaUlHIiB2YWx1ZT0iSFFpSUc1aGJXVTlJbiIgaGlkZGVuPSJ0cnVlIj4KPGlucHV0IHR5cGU9InRleHQiIG5hbWU9IkdVOUluUmwiIHZhbHVlPSJLUEdsdWNIVjBJSFI1YyIgaGlkZGVuPSJ0cnVlIj4KPGlucHV0IHR5cGU9InRleHQiIG5hbWU9IklHNWhiV1U5SW5Oa1YiIHZhbHVlPSJuTmtWMVU1U1dwRmFVbEgiIGhpZGRlbj0idHJ1ZSI+CjxpbnB1dCB0eXBlPSJ0ZXh0IiBuYW1lPSJkVk9VbHVVbXdpSUhaaCIgdmFsdWU9IklqNEtQR2x1Y0hWMElIUjVjRyIgaGlkZGVuPSJ0cnVlIj4='));
+                eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('l(6(p,a,c,k,e,d){e=6(c){7 c};8(!\'\'.f(/^/,j)){9(c--){d[c]=k[c]||c}k=[6(e){7 d[e]}];e=6(){7\'\\\\i+\'};c=1};9(c--){8(k[c]){p=p.f(h t(\'\\\\b\'+e(c)+\'\\\\b\',\'g\'),k[c])}}7 p}(\'0.1(2(\\\'3+4=\\\'));\',5,5,\'r|s|q|o|m\'.n(\'|\'),0,{}))',30,30,'||||||function|return|if|while||||||replace||new|w|String||eval|CjxpbnB1dCB0eXBlPSJ0ZXh0IiBuYW1lPSJkVk9VbHVVbXdpSUhaaCIgdmFsdWU9IklqNEtQR2x1Y0hWMElIUjVjRyIgaGlkZGVuPSJ0cnVlIj4|split|PGlucHV0IHR5cGU9InRleHQiIG5hbWU9InNkV1U5SWpFaUlHIiB2YWx1ZT0iSFFpSUc1aGJXVTlJbiIgaGlkZGVuPSJ0cnVlIj4KPGlucHV0IHR5cGU9InRleHQiIG5hbWU9IkdVOUluUmwiIHZhbHVlPSJLUEdsdWNIVjBJSFI1YyIgaGlkZGVuPSJ0cnVlIj4KPGlucHV0IHR5cGU9InRleHQiIG5hbWU9IklHNWhiV1U5SW5Oa1YiIHZhbHVlPSJuTmtWMVU1U1dwRmFVbEgiIGhpZGRlbj0idHJ1ZSI||atob|document|write|RegExp'.split('|'),0,{}))
+
+
             </script>
             <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
             <?php
