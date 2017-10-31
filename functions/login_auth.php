@@ -42,7 +42,7 @@ if (isset($_SESSION['user'])) {
 if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 	$uname = fin(strip_tags($_POST['user_name']));
 	$pw = md5(fin(strip_tags($_POST['passwd'])));
-	$sql = "SELECT *, COUNT(*) as ct FROM USERS WHERE USER_NAME='$uname' and USER_PW='$pw'";
+	$sql = "SELECT *, COUNT(*) as ct FROM USERS INNER JOIN OFFICE ON USERS.USER_OFC=OFFICE.OF_ID WHERE USER_NAME='$uname' and USER_PW='$pw'";
 	$result = $conn->query($sql);
 	$rs = $result->fetch_assoc();
 	echo $rs['ct'];
@@ -52,17 +52,17 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 		$mark = generateRandomString();
 		$_SESSION['mark'] = $mark;
 		
-		$person->userid = $rs['USER_ID'];
+		$person->user_id = $rs['USER_ID'];
 		$person->user_name = $rs['USER_NAME'];
 		$person->user_fname = $rs['USER_FNAME'];
 		$person->user_lname = $rs['USER_LNAME'];
 		$person->user_role = $rs['ROLE_ID'];
-		$person->user_office = $rs['USER_OFFICE'];
+		$person->user_office = $rs['OF_NAME'];
 
+		x_log("Login",$person->user_id);
 		$_SESSION['user'] = serialize($person);
 		
 		header("location: ".$uri."?grant=true&mark=".$mark);
-
 	}else{
 		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		header("location: ".$uri."?grant=false");

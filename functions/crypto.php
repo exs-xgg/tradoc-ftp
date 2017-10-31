@@ -8,5 +8,14 @@ function generateRandomString($length = 10) {
     }
     return md5($randomString);
 }
-
+function x_log($act,$uid){
+    include("db_con.php");
+    $sql =  "INSERT INTO ACTIVITY(ACT,UID) VALUES('$act',$uid)";
+    if($conn->query($sql)){
+        echo "";
+    }
+}
+function fin($str){
+	return mysql_real_escape_string($str);
+}
 ?>

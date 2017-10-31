@@ -1,19 +1,21 @@
 
 <?php  
-include('functions/crypto.php');
-include('functions/db_con.php');
 include('functions/class/userclass.php');
+include('functions/crypto.php');
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
 }
 
 if (isset($_REQUEST['id'])) {
-  # code to view other person's profle
+  
 } else {
 
 $person = unserialize($_SESSION['user']);
 
+
+
+x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 
 
@@ -140,8 +142,8 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                     <div class="photo-container">
                         <img src="sheri.jpg" alt="">
                     </div>
-                    <h3 class="profileid title">Sheribels</h3> <!--return the profile details here-->
-                    <p class="category">G6 Office</p>
+                    <h3 class="profileid title"><?php  echo $person->user_fname . " " . $person->user_lname ?></h3> <!--return the profile details here-->
+                    <p class="category"><?php  echo $person->user_office . " " . $person->user_lname ?></p>
                      
                 </div>
             </div>

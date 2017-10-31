@@ -1,4 +1,23 @@
 
+<?php  
+include('functions/class/userclass.php');
+include('functions/crypto.php');
+session_start();
+if(!isset($_SESSION['user'])){
+  header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
+
+if (isset($_REQUEST['id'])) {
+  
+} else {
+
+$person = unserialize($_SESSION['user']);
+
+
+
+x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+}
+?>
 <html lang="en"><head>
     <meta charset="utf-8">
     <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
@@ -32,7 +51,7 @@
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
-                <a class="navbar-brand" href="/index.html" >
+                <a class="navbar-brand" href="index.php" >
                     TRADOC-PA Web Portal
                 </a>
             </div>
@@ -40,9 +59,6 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <?php 
-                        include("functions/class/userclass.php");
-                        $person = new User;
-                        $person = unserialize($_SESSION['user']);
                         if ($person->user_role > 2) {
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
@@ -121,11 +137,20 @@
                         
                        
                             <textarea id="tags" name="tags" maxlength="200" class="form-control" placeholder="Tags (Separate each tags with ENTER)" type="text" form="uploadform"></textarea>
-                             </div><br>
-                       <input name="filex" id="filex" type="file">
-                           
+                            <br>
+                            <input name="password" maxlength="200" class="form-control" placeholder="Password" type="password"></input>
+                            <br>
+                             <input name="filex" id="filex" type="file">
+                             </div>
+                             <br>
+
+                             <br>
+                      
+                        
                     </div>
                         <input name="submit" value="Submit" class="btn btn-neutral btn-round btn-lg" type="submit">
+
+
                     </div>
                 </form>
                     </div></div>
