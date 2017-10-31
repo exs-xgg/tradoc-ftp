@@ -72,10 +72,28 @@ session_start();?>
                             <p>Settings</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout();">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                            <p>Log Out</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <script type="text/javascript">
+                    function logout(){
+                       var answer = confirm("Logout?");
+                        if (answer) {
+                            window.location.href = "./logout.php";
+                        }
+                        else {
+                            //some code
+                        }
+                    }
+                </script>
+    <!-- End Navbar -->
 
 <div class="main">
     <div class=" ">
