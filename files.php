@@ -1,9 +1,17 @@
 
 <?php
 session_start();
+
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
 }
+include("functions/class/userclass.php");
+$person = new User;
+$person = unserialize($_SESSION['user']);
+include 'functions/crypto.php';
+$id = $person->user_id;
+x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+
 ?>
 
 
@@ -51,9 +59,6 @@ if(!isset($_SESSION['user'])){
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <?php 
-                        include("functions/class/userclass.php");
-                        $person = new User;
-                        $person = unserialize($_SESSION['user']);
                         if ($person->user_role > 2) {
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
@@ -149,7 +154,7 @@ if(!isset($_SESSION['user'])){
                 if (isset($_REQUEST['q'])) {
                     include 'functions/db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%' LIMIT 20";
+                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%' ORDER BY FILE.F_UPLOAD_DATE DESC LIMIT 20 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
