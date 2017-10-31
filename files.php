@@ -126,7 +126,7 @@ if(!isset($_SESSION['user'])){
 
             <div id="files" style="padding-left: 5%;padding-right: 5%">
                 <table class="table">
-                <tr><th>Document ID</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Document Tags</th></tr>
+                <tr><th>Tracking No.</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Uploaded From</th><th width="330px">Document Tags</th></tr>
 
 
                 <?php 
@@ -134,12 +134,52 @@ if(!isset($_SESSION['user'])){
                     include 'functions/db_con.php'; 
                     include 'functions/class/userclass.php';
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID where FILE.F_NAME_ORIG like '%$q%'";
+                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo '<tr class="tb"  data-toggle="modal" data-target="#myModal"><td>' . $row["F_ID"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row["F_TAGS"];
+
+                        $tags = json_decode($row["F_TAGS"]);
+
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['OF_NAME'] .'</td><td>';
+                        $tag_decode = "";
+                        for ($i=0; $i < count($tags); $i++) { 
+                            $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
+                        }
+                        echo $tag_decode;
+                        echo '</td></tr>';
+                        ?>
+
+
+            <div class="modal fade" <?php echo 'id="m'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                        <h4 class="title title-up"><?php echo $row["F_NAME_ORIG"];?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Description: <?php echo $row["F_DESC"];?></p>
+                        <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
+                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"];?></p>
+                        <p>Date Uploaded: <?php echo $row["F_UPLOAD_DATE"];?></p>
+                        <p>&nbsp;<?php echo $tag_decode; ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+             </div>
+            </div>
+
+                        <?php 
+
+
+
                     }
                 } else {
                    
