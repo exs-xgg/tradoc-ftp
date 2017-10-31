@@ -30,7 +30,7 @@
             </div>
             <div class="navbar-translate">
                 
-                <a class="navbar-brand" href="index.html" >
+                <a class="navbar-brand" href="#" >
                     TRADOC-PA Web Portal
                 </a>
             </div>

@@ -100,12 +100,11 @@ if(!isset($_SESSION['user'])){
                     }
                 </script>
     <!-- End Navbar -->
-
+<div class="space-100"></div>
 <div class="main">
-    <div class=" ">
-        
+    <div class="container">
+       
     </div>
-    
 </div>>
 
 </body>

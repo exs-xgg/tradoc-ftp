@@ -148,7 +148,6 @@ if(!isset($_SESSION['user'])){
                 <?php 
                 if (isset($_REQUEST['q'])) {
                     include 'functions/db_con.php'; 
-                    include 'functions/class/userclass.php';
                     $q = $_REQUEST['q'];
                     $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%' LIMIT 20";
                     $result = $conn->query($sql);

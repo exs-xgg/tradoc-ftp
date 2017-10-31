@@ -91,12 +91,14 @@
                                     </div>
                                 </div>
                                 <div class="footer text-center">
-                                    <button type="submit" class="btn btn-neutral btn-round btn-lg">Login</button>
+                                    <button type="submit" class="btn btn-info btn-lg">Login</button>
+                                    <br><br>
+                                    <a class="btn btn-neutral" href="signup.php">Create Account</a>
                                 </div>
 
 
                             </form>
-                    </div>
+                    </div> 
 </body>
 </html>
 
