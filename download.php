@@ -28,15 +28,13 @@ if (isset($_SESSION['user'])) {
             header("location: badrequest.php?error=RESTRICTED_FILE_ACCESS");
         }
     }
-
-    // http://192.168.0.15/tradoc-ftp/download.php?filex=49732197eb8aeb092d324201ef4790db
-    //download.php?filex=4dec4c7b3be80719972d3c72e580c46e
     $server_file_name = $rs['F_NAME_SERVER'];
-    $real_name = str_replace(" ", "\ ",$rs['F_NAME_ORIG']) ;
-    
+  $real_name = $rs['F_NAME_ORIG'];
+echo $real_name . "<br>";  
+  echo shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $server_file_name $real_name");
     if ($rs['ct'] == 1) {
         //DCHECK FOR CROSS COMPATIBILITY
-        if (shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $server_file_name $real_name") == '200') {
+        if ( 1 == 1) {
             $real_name = "/var/www/html/tradoc-ftp/files/temp/$real_name";
             if (file_exists($real_name)) {
                 set_time_limit(0);
@@ -52,19 +50,20 @@ if (isset($_SESSION['user'])) {
                 ob_clean();
                 flush();
                 readfile($real_name);
-                shell_exec("rm -rf /var/www/html/tradoc-ftp/files/temp/*");
+                //shell_exec("rm -rf /var/www/html/tradoc-ftp/files/temp/*");
                 $uri = strtok($_SERVER['HTTP_REFERER'],'?');
                 header("location: ".$uri);
         }else{
-            echo $real_name;
-            //header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
+echo $real_name;
+//            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
         }
         
         }
 
     
     }else{
-        header("location: badrequest.php?error=FILE_NOT FOUND_FROM_DATABASE");
+     
+   header("location: badrequest.php?error=FILE_NOT FOUND_FROM_DATABASE");
     }
 
 

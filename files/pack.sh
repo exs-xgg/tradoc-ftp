@@ -5,21 +5,8 @@
 # 500 - fail
 
 
-#move file to temporary folder
-mv "$1" ./temp/"$1"
-
-#change dir to temporary folder
-cd ./temp
-
-#zstd kicks in yoooo
 /usr/local/bin/zstd -q "$1" --rm
 
-#move file out of the temp folder
-mv "$1".zst ../"$1".zst
-
-#delete temp folcer
-cd ..
-rm -rf ./temp/*
 
 if [ -e "$1".zst ] 
 then 

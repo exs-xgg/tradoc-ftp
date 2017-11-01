@@ -8,9 +8,8 @@ INSTRUCTIONS:
 The caller must send the filename using an input type="file" with id `filex`
 The caller must prepare a receiver ?success with values [yes] or [no]
 
-STATUS: NOT READY
+STATUS:  READY
 
-MISSING THE SHELL SCRIPT TO COMPRESS THE FILE
 
 **/
 
@@ -46,9 +45,9 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 
 		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		
-
+		$ofc = $person->user_office;
 		$sql = 	"INSERT INTO file(F_TRACK_NO,F_NAME_ORIG,F_NAME_SERVER,F_UPLOADER,F_OFFICE,F_TAGS,FILE_X)
-		VALUES('$filetrack','$file_orig','$randomString',$person->user_id,$person->user_office'$tags',0)";
+		VALUES('$filetrack','$file_orig','$randomString', $person->user_id, '$ofc','$tags',0)";
 		echo '<br><br>'.$sql;
 		if($conn->query($sql)){
 					header("location: ".$uri."?success=yes");
