@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `tradoc`
@@ -25,7 +25,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `activity`
 --
-
+CREATE Database tradoc;
+use tradoc;
 CREATE TABLE `activity` (
   `ID` int(11) NOT NULL,
   `UID` int(11) NOT NULL,

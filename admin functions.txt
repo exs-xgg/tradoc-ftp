@@ -6,7 +6,7 @@ delete files
 modify files
 
 view error logs
-view access logs
+view activity logs
 
 check server status
 

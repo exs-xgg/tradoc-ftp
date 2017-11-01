@@ -44,30 +44,37 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 	$pw = md5(fin(strip_tags($_POST['passwd'])));
 	$sql = "SELECT *, COUNT(*) as ct FROM USERS INNER JOIN OFFICE ON USERS.USER_OFC=OFFICE.OF_ID WHERE USER_NAME='$uname' and USER_PW='$pw'";
 	$result = $conn->query($sql);
-	$rs = $result->fetch_assoc();
-	echo $rs['ct'];
-	if ($rs['ct'] == 1){
 
-		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-		$mark = generateRandomString();
-		$_SESSION['mark'] = $mark;
-		
-		$person->user_id = $rs['USER_ID'];
-		$person->user_name = $rs['USER_NAME'];
-		$person->user_fname = $rs['USER_FNAME'];
-		$person->user_lname = $rs['USER_LNAME'];
-		$person->user_role = $rs['ROLE_ID'];
-		$person->user_office = $rs['OF_NAME'];
+	if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                    		if ($row['ct'] == 1){
 
-		x_log("Login",$person->user_id);
-		$_SESSION['user'] = serialize($person);
-		
-		header("location: ".$uri."?grant=true&mark=".$mark);
-	}else{
-		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-		header("location: ".$uri."?grant=false");
-		session_destroy();
-	}
+							$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+							$mark = generateRandomString();
+							$_SESSION['mark'] = $mark;
+							
+							$person->user_id = $row['USER_ID'];
+							$person->user_name = $row['USER_NAME'];
+							$person->user_fname = $row['USER_FNAME'];
+							$person->user_lname = $row['USER_LNAME'];
+							$person->user_role = $row['ROLE_ID'];
+							$person->user_office = $row['OF_NAME'];
+
+							x_log("Login",$person->user_id);
+							$_SESSION['user'] = serialize($person);
+							
+							header("location: ".$uri."?grant=true&mark=".$mark);
+						}else{
+							$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+							header("location: ".$uri."?grant=false");
+							session_destroy();
+						}
+                    }
+                }
+
+
+
 
 	
 }else{
