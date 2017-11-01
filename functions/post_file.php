@@ -28,7 +28,7 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	$person = new User;
 	$person = unserialize($_SESSION['user']);
 	$desc = $_POST['desc'];
-	$filetrack = $POST['filetrack'];
+	$filetrack = $_POST['filetrack'];
 	$tags = json_encode(explode("\r\n", (strip_tags($_POST['tags']))));
 	echo $tags.'<br>';
 	$file_orig =  $_FILES['filex']['name'];
@@ -38,16 +38,16 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	//generate unique filename;
 	$randomString = generateRandomString();
 
-	$server_file_name = "../files/".$randomString;
+	$server_file_name = "/var/www/html/tradoc-ftp/files/".$randomString;
 	if (move_uploaded_file($file,$server_file_name)) {
 
-		//PROCESS FILE TO TEMP THEN PACK.SH
+		shell_exec("/var/www/html/tradoc-ftp/files/pack.sh $server_file_name");
 
 
 		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		
 
-		$sql = 	"INSERT INTO FILE(F_TRACK_NO,F_NAME_ORIG,F_NAME_SERVER,F_UPLOADER,F_OFFICE,F_TAGS,FILE_X)
+		$sql = 	"INSERT INTO file(F_TRACK_NO,F_NAME_ORIG,F_NAME_SERVER,F_UPLOADER,F_OFFICE,F_TAGS,FILE_X)
 		VALUES('$filetrack','$file_orig','$randomString',$person->user_id,$person->user_office'$tags',0)";
 		echo '<br><br>'.$sql;
 		if($conn->query($sql)){

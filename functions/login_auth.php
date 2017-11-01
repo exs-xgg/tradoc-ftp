@@ -42,7 +42,7 @@ if (isset($_SESSION['user'])) {
 if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 	$uname = fin(strip_tags($_POST['user_name']));
 	$pw = md5(fin(strip_tags($_POST['passwd'])));
-	$sql = "SELECT *, COUNT(*) as ct FROM USERS INNER JOIN OFFICE ON USERS.USER_OFC=OFFICE.OF_ID WHERE USER_NAME='$uname' and USER_PW='$pw'";
+	$sql = "SELECT *, COUNT(*) as ct FROM users INNER JOIN office ON users.USER_OFC=office.OF_ID WHERE USER_NAME='$uname' and USER_PW='$pw'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {

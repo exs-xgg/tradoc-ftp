@@ -143,7 +143,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                         <img src="sheri.jpg" alt="">
                     </div>
                     <h3 class="profileid title"><?php  echo $person->user_fname . " " . $person->user_lname ?></h3> <!--return the profile details here-->
-                    <p class="category"><?php  echo $person->user_office . " " . $person->user_lname ?></p>
+                    <p class="category"><?php  echo $person->user_office; ?></p>
                      
                 </div>
             </div>
