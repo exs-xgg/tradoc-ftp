@@ -1,12 +1,12 @@
 admin functions
 
-CRUD users
+CRUD users(manage users)
 
 delete files
-modify files
+modify files (manage files)
 
 view error logs
-view activity logs
+view activity logs (view logs)
 
-check server status
+check server status (view server status)
 

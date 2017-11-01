@@ -42,7 +42,7 @@ if(!isset($_SESSION['user'])){
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
-                <a class="navbar-brand" href="/index.html" >
+                <a class="navbar-brand" href="#" >
                     TRADOC-PA Web Portal
                 </a>
             </div>
@@ -88,6 +88,7 @@ if(!isset($_SESSION['user'])){
             </div>
         </div>
     </nav>
+
     <script type="text/javascript">
                     function logout(){
                        var answer = confirm("Logout?");
@@ -99,13 +100,50 @@ if(!isset($_SESSION['user'])){
                         }
                     }
                 </script>
-    <!-- End Navbar -->
-<div class="space-100"></div>
+   <!-- End Navbar -->
+   <div class="space-50"></div>
 <div class="main">
+    <div class="panel">
     <div class="container">
-       
+       <table class="table">
+            <tr><th>Menu</th></tr>
+            <tr class="tblcontent" onclick="alert()"><td>Manage Users</td></tr>
+            <tr class="tblcontent"><a href="#"><td>Manage Files</td></a></tr>
+            <tr class="tblcontent"><td>View Logs</td></tr>
+            <tr class="tblcontent"><td>View System Status</td></tr>
+        </table>
     </div>
-</div>>
-
+    </div>
+    <div class="max">
+           <?php
+            for ($i=0; $i < 50; $i++) { 
+                echo "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            }
+           ?>
+     
+    </div>
+</div>
+<style type="text/css">
+.max{
+    max-width: 72%;
+    max-height: 500px;
+    float: right;
+    overflow-y: scroll;
+}
+    .panel{
+        max-width: 25%;
+        float: left;
+        box-shadow: 2px 2px 2px gray;
+    }
+    .tblcontent:hover{
+        color: white;
+        background-color: #41533b;
+    }
+</style>
 </body>
 </html>
