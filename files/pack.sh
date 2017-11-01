@@ -4,27 +4,22 @@
 # 200 - success
 # 500 - fail
 
-# trap file name
-"$1"
-
-#create temporary folder
-mkdir temp
 
 #move file to temporary folder
-mv "$2" ./temp/"$1"
+mv "$1" ./temp/"$1"
 
 #change dir to temporary folder
 cd ./temp
 
 #zstd kicks in yoooo
-zstd -q "$1" --rm
+/usr/local/bin/zstd -q "$1" --rm
 
 #move file out of the temp folder
 mv "$1".zst ../"$1".zst
 
 #delete temp folcer
 cd ..
-rm -rf ./temp 
+rm -rf ./temp/*
 
 if [ -e "$1".zst ] 
 then 

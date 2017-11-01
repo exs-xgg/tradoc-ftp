@@ -154,7 +154,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                 if (isset($_REQUEST['q'])) {
                     include 'functions/db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID  INNER JOIN OFFICE ON USERS.USER_OFC = OFFICE.OF_ID where FILE.F_NAME_ORIG like '%$q%' ORDER BY FILE.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID where FILE.F_NAME_ORIG like '%$q%' ORDER BY FILE.F_UPLOAD_DATE DESC LIMIT 20 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -162,7 +162,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
                         $tags = json_decode($row["F_TAGS"]);
 
-                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['OF_NAME'] .'</td><td>';
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
                         $tag_decode = "";
                         for ($i=0; $i < count($tags); $i++) { 
                             $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
@@ -189,7 +189,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
+                        <a <?php echo 'href="download.php?filex=' . $row['F_NAME_SERVER'] . '"'?>type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</a>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

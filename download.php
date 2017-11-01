@@ -16,9 +16,9 @@ if (isset($_SESSION['user'])) {
     $person = unserialize($_SESSION['user']);
 
 
-    $db_file_name = fin(strip_tags($_GET['filex']));
+    $db_file_name = fin(strip_tags($_REQUEST['filex']));
 
-    $sql = "SELECT *, COUNT(*) as ct FROM FILE WHERE F_NAME_SERVER='$db_file_name'";
+    $sql = "SELECT *, count(*) as ct FROM file WHERE F_NAME_SERVER='$db_file_name'";
 
     $result = $conn->query($sql);
 
@@ -28,12 +28,16 @@ if (isset($_SESSION['user'])) {
             header("location: badrequest.php?error=RESTRICTED_FILE_ACCESS");
         }
     }
-    $real_name = $rs['F_NAME_ORIG'];
 
+    // http://192.168.0.15/tradoc-ftp/download.php?filex=49732197eb8aeb092d324201ef4790db
+    //download.php?filex=4dec4c7b3be80719972d3c72e580c46e
+    $server_file_name = $rs['F_NAME_SERVER'];
+    $real_name = str_replace(" ", "\ ",$rs['F_NAME_ORIG']) ;
+    
     if ($rs['ct'] == 1) {
         //DCHECK FOR CROSS COMPATIBILITY
-        if (shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $db_file_name.zst $real_name") == 1) {
-            $real_name = "/var/www/html/tradoc-ftp/files/$real_name";
+        if (shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $server_file_name $real_name") == '200') {
+            $real_name = "/var/www/html/tradoc-ftp/files/temp/$real_name";
             if (file_exists($real_name)) {
                 set_time_limit(0);
                 header('Connection: Keep-Alive');
@@ -48,11 +52,12 @@ if (isset($_SESSION['user'])) {
                 ob_clean();
                 flush();
                 readfile($real_name);
-                shell_exec("rm -rf /var/www/html/tradoc-ftp/files/temp");
+                shell_exec("rm -rf /var/www/html/tradoc-ftp/files/temp/*");
                 $uri = strtok($_SERVER['HTTP_REFERER'],'?');
                 header("location: ".$uri);
         }else{
-            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
+            echo $real_name;
+            //header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
         }
         
         }
