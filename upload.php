@@ -1,4 +1,30 @@
 
+
+<?php
+
+if (isset($_REQUEST['success'])) {
+   if ($_REQUEST['success']=="yes") {
+      ?>
+<script type="text/javascript">
+    alert("File upload successful!");
+</script>
+<?php
+   }else{
+
+?>
+
+<script type="text/javascript">
+    alert("File upload unsuccessful.");
+</script>
+
+
+<?php
+
+   }
+}
+
+
+?>
 <?php  
 include('functions/class/userclass.php');
 include('functions/crypto.php');
@@ -18,6 +44,11 @@ $person = unserialize($_SESSION['user']);
 x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 }
 ?>
+
+
+
+
+
 <html lang="en"><head>
     <meta charset="utf-8">
     <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
@@ -118,49 +149,68 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                 </script>
     <!-- End Navbar -->
 
-
+<div class="space-50">
+    
+</div>
     <div class="wrapper">
 
-        <div class="space-50">
-
-        </div>
          
     </div>
     <div class="main">
-        <div class="container">
-           <h4 class="title title-up">Upload File</h4>
+        <div class="container cnt">
+           <h4 class="title title-up white">Upload File</h4>
                     
                     <form action="functions/post_file.php" method="post" enctype="multipart/form-data" id="uploadform">
-                    
-                    <input name="filetrack" maxlength="200" class="form-control" placeholder="File Tracking No." type="text"></input>
-                            <textarea name="desc" maxlength="200" class="form-control" placeholder="File Description (Max 200)" type="text" form="uploadform"></textarea>
+                    <input class="mytext white" name="filex" id="filex" type="file"><br><br>
+                    <input class="mytext" name="filetrack" maxlength="200"  placeholder="File Tracking No." type="text"></input><br>
+                            <textarea class="mytext" name="desc" maxlength="200"  placeholder="File Description (Max 200)" type="text" form="uploadform"></textarea><br>
                         
                        
-                            <textarea id="tags" name="tags" maxlength="200" class="form-control" placeholder="Tags (Separate each tags with ENTER)" type="text" form="uploadform"></textarea>
+                            <textarea class="mytext" id="tags" name="tags" maxlength="200"  placeholder="Tags (Separate each tags with ENTER)" type="text" form="uploadform"></textarea><br>
                             <br>
-                            <input name="password" maxlength="200" class="form-control" placeholder="Password" type="password"></input>
+                            <input class="mytext" name="password" maxlength="200"  placeholder="Your Password" type="password"></input>
                             <br>
-                             <input name="filex" id="filex" type="file">
-                             </div>
-                             <br>
-
-                             <br>
-                      
+                             <button name="submit" value="Submit" class="btn btn-info mytext" type="submit">Upload</button>
                         
+                             </div>
+                             
+                      
                     </div>
-                        <input name="submit" value="Submit" class="btn btn-neutral btn-round btn-lg" type="submit">
-
+                        
+<style type="text/css">
+    .title{
+        margin-top: 0px;
+    }
+    .white{
+        color: white;
+    }
+    .mytext{
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+        border-color: black;
+        border-width: 2px;
+        box-shadow: 2px 2px 2px gray;
+        width: 100%
+    }
+    body, .main{
+        background-color: #bdc3c7;
+    }
+    .cnt{
+        width: 500px;
+        float: center;
+        border-radius: 20px;
+        box-shadow: 2px 2px 2px gray;
+        background-color: #41533b;
+        padding: 20px;
+    }
+</style>
 
                     </div>
                 </form>
                     </div></div>
     </div>        
 
-<style type="text/css">
-    .tb:hover{
-        background-color: rgba(222, 222, 222, 0.5)
-    }
-</style>
 
 
 
