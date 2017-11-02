@@ -10,7 +10,7 @@ function generateRandomString($length = 10) {
 }
 function x_log($act,$uid){
     include("db_con.php");
-    $sql =  "INSERT INTO ACTIVITY(ACT,UID) VALUES('$act',$uid)";
+    $sql =  "INSERT INTO activity(ACT,UID) VALUES('$act',$uid)";
     if($conn->query($sql)){
         echo "";
     }

@@ -4,6 +4,14 @@ session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
 }
+
+$person = new User;
+    $person = unserialize($_SESSION['user']);
+    if ($person->user_role < 2) {
+        header("location: badrequest.php?error=RESTRICTED_ACCESS");
+    }
+
+    
 ?>
 
 <!DOCTYPE html>

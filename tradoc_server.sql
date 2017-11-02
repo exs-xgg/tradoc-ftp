@@ -16,21 +16,7 @@ use tradoc;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `activity`
---
 
-DROP TABLE IF EXISTS `activity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `activity` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `UID` int(11) NOT NULL,
-  `ACT` varchar(100) NOT NULL,
-  `TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `file`
@@ -176,7 +162,9 @@ CREATE TABLE `users` (
   `USER_LOCK` int(11) NOT NULL,
   PRIMARY KEY (`USER_ID`),
   KEY `ROLE_ID` (`ROLE_ID`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ROLE_ID`)
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ROLE_ID`),
+  KEY `USER_OFC` (`USER_OFC`),
+  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`USER_OFC`) REFERENCES `office` (`OF_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -205,4 +193,21 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+--
+-- Table structure for table `activity`
+--
+
+DROP TABLE IF EXISTS `activity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `activity` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `UID` int(11) NOT NULL,
+  `ACT` varchar(100) NOT NULL,
+  `TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
+  KEY `UID` (`UID`),
+  CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `users` (`USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 -- Dump completed on 2017-10-31  8:24:58

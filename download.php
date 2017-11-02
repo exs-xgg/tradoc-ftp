@@ -14,7 +14,9 @@ session_start();
 if (isset($_SESSION['user'])) {
     $person = new User;
     $person = unserialize($_SESSION['user']);
-
+    
+    $id = $person->user_id;
+    x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
     $db_file_name = fin(strip_tags($_REQUEST['filex']));
 
