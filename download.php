@@ -1,7 +1,7 @@
 <?php
 
 /**
-STATUS: READY FOR TESTING ON SERVER
+STATUS: READY
 
 error codes
 FILE_NOT_FOUND_ON_SERVER = the file is not found on the server
@@ -29,36 +29,18 @@ if (isset($_SESSION['user'])) {
         }
     }
     $server_file_name = $rs['F_NAME_SERVER'];
-  $real_name = $rs['F_NAME_ORIG'];
 echo $real_name . "<br>";  
-  echo shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $server_file_name $real_name");
+  echo shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $server_file_name $server_file_name");
     if ($rs['ct'] == 1) {
-        //DCHECK FOR CROSS COMPATIBILITY
-        if ( 1 == 1) {
-            $real_name = "/var/www/html/tradoc-ftp/files/temp/$real_name";
-            if (file_exists($real_name)) {
-                set_time_limit(0);
-                header('Connection: Keep-Alive');
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="'.basename($real_name).'"');
-                header('Content-Transfer-Encoding: binary');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-                header('Pragma: public');
-                header('Content-Length: ' . filesize($real_name));
-                ob_clean();
-                flush();
-                readfile($real_name);
-                //shell_exec("rm -rf /var/www/html/tradoc-ftp/files/temp/*");
-                $uri = strtok($_SERVER['HTTP_REFERER'],'?');
-                header("location: ".$uri);
+        
+                header('location: files/temp/'.$server_file_name);
+          
         }else{
-echo $real_name;
-//            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
+
+            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
         }
         
-        }
+        
 
     
     }else{

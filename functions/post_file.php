@@ -8,8 +8,9 @@ INSTRUCTIONS:
 The caller must send the filename using an input type="file" with id `filex`
 The caller must prepare a receiver ?success with values [yes] or [no]
 
-STATUS:  READY
+STATUS: NOT READY
 
+MISSING THE SHELL SCRIPT TO COMPRESS THE FILE
 
 **/
 
@@ -30,12 +31,12 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	$filetrack = $_POST['filetrack'];
 	$tags = json_encode(explode("\r\n", (strip_tags($_POST['tags']))));
 	echo $tags.'<br>';
-	$file_orig =  $_FILES['filex']['name'];
+	$file_orig =str_replace(" ", "_",  $_FILES['filex']['name']);
 	echo $file_orig.'<br>';
-	$file = $_FILES['filex']['tmp_name'];
+	$file =$_FILES['filex']['tmp_name'];
 
 	//generate unique filename;
-	$randomString = generateRandomString();
+	$randomString = generateRandomString()."_".$file_orig;
 
 	$server_file_name = "/var/www/html/tradoc-ftp/files/".$randomString;
 	if (move_uploaded_file($file,$server_file_name)) {

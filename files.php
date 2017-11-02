@@ -154,7 +154,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                 if (isset($_REQUEST['q'])) {
                     include 'functions/db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM FILE INNER JOIN USERS ON FILE.F_UPLOADER = USERS.USER_ID where FILE.F_NAME_ORIG like '%$q%' ORDER BY FILE.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_NAME_ORIG like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -184,12 +184,12 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                     <div class="modal-body">
                         <p>Description: <?php echo $row["F_DESC"];?></p>
                         <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
-                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"] . ", " .$row['OF_NAME'];?></p>
+                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"] . ", " .$row['F_OFFICE'];?></p>
                         <p>Date Uploaded: <?php echo $row["F_UPLOAD_DATE"];?></p>
                         <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
                     <div class="modal-footer">
-                        <a <?php echo 'href="download.php?filex=' . $row['F_NAME_SERVER'] . '"'?>type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</a>
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?>type="button" class="btn btn-primary" data-dismiss="modal">Download</a>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
