@@ -32,13 +32,28 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	$tags = json_encode(explode("\r\n", (strip_tags($_POST['tags']))));
 	echo $tags.'<br>';
 	$file_orig =str_replace(" ", "_",  $_FILES['filex']['name']);
+
+
+
+	//CHECK FOR FILE EXTENSION
+	//THESE ARE THE ALLOWED EXTENSIONS
+	$exts = array('docx', 'doc', 'ppt', 'pptx', 'xls', 'xlsx', 'pdf', 'txt', 'odt', 'ods', 'odp'); 
+	if(!in_array(end(explode('.', $file_orig)), $exts)){
+		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		header("location: ".$uri."?success=no");
+	}else{
+
+
+
+
+
 	echo $file_orig.'<br>';
 	$file =$_FILES['filex']['tmp_name'];
 
 	//generate unique filename;
 	$randomString = generateRandomString()."_".$file_orig;
 
-	$server_file_name = "/var/www/html/tradoc-ftp/files/".$randomString;
+	$server_file_name = "".$randomString;
 	if (move_uploaded_file($file,$server_file_name)) {
 
 		shell_exec("/var/www/html/tradoc-ftp/files/pack.sh $server_file_name");
@@ -53,6 +68,8 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 		if($conn->query($sql)){
 					header("location: ".$uri."?success=yes");
 
+		}else{
+			header("location: ".$uri."?success=no");
 		}
 
 
@@ -63,7 +80,7 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	
 	}
 
-
+}
 }else{
 header("location: ../badrequest.php");
 }
