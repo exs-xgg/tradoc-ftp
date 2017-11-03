@@ -3,9 +3,10 @@
 
 /*
 USAGE:
-                   /-- lock [ locks a user ] &uid= {userid}
-goUser.php?action= --- allow [ unlocks a user ] &uid= {userid}
-                   \-- mod [ change user info ] &uid= {userid}
+                   /-- lock [ locks a user ]&uid={userid}
+goUser.php?action= --- allow [ unlocks a user ]&uid={userid}
+                   \-- mod [ change user info ]&uid={userid}&fname={firstname}&lname={lastname}&office={officeid}
+                   								&uname={username}
 **/
 include '../db_con.php';
 include '../crypto.php';
@@ -30,6 +31,8 @@ if ($_REQUEST['action']=="allow") {
 	$sql =  "UPDATE users SET USER_LOCK=0 where USER_ID= $uid";
     if($conn->query($sql)){
         echo "Unlocked!";
+    }else{
+    	echo "Invalid Request";
     }
 //LOCK USER
 }elseif ($_REQUEST['action']=="lock") {
@@ -38,11 +41,36 @@ if ($_REQUEST['action']=="allow") {
 	$sql =  "UPDATE users SET USER_LOCK=1 where USER_ID= $uid";
     if($conn->query($sql)){
         echo "Locked!";
+    }else{
+    	echo "Invalid Request";
     }
 //MODIFY USER INFO
 }elseif ($_REQUEST['action']=="mod") {
 	$uid = $_REQUEST['uid'];
-	//GET JSON
+	$fname = "";
+	$lname = "";
+	$office = "";
+	$uname = "";
+
+	if (isset($_REQUEST['fname']) {
+		$fname = " USER_FNAME='".$_REQUEST['fname']. "' ";
+	}
+	if (isset($_REQUEST['lname']) {
+		$fname = " USER_LNAME='".$_REQUEST['lname']. "' ";
+	}
+	if (isset($_REQUEST['uname']) {
+		$fname = " USER_NAME='".$_REQUEST['uname']. "' ";
+	}
+	if (isset($_REQUEST['office']) {
+		$fname = " USER_OFC=".$_REQUEST['office']. " ";
+	}
+
+	$sql = "update users set $fname $lname $office $uname where USER_ID=$uid;"
+	if($conn->query($sql)){
+        echo "Change Succesful!";
+    }else{
+    	echo "Invalid Request";
+    }
 }
 
 
