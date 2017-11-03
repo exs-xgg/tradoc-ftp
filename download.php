@@ -31,16 +31,13 @@ if (isset($_SESSION['user'])) {
         }
     }
     $server_file_name = $rs['F_NAME_SERVER'];
-echo $real_name . "<br>";  
+  
   echo shell_exec("/var/www/html/tradoc-ftp/files/unpack.sh $server_file_name $server_file_name");
     if ($rs['ct'] == 1) {
         
                 header('location: files/temp/'.$server_file_name);
           
-        }else{
-
-            header("location: badrequest.php?error=FILE_NOT_FOUND_ON_SERVER");
-        }
+       
         
         
 

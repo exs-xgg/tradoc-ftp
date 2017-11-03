@@ -53,7 +53,7 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	//generate unique filename;
 	$randomString = generateRandomString()."_".$file_orig;
 
-	$server_file_name = "".$randomString;
+	$server_file_name = "/var/www/html/tradoc-ftp/files/".$randomString;
 	if (move_uploaded_file($file,$server_file_name)) {
 
 		shell_exec("/var/www/html/tradoc-ftp/files/pack.sh $server_file_name");

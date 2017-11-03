@@ -189,7 +189,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
                     <div class="modal-footer">
-                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?>type="button" class="btn btn-primary" data-dismiss="modal">Download</a>
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-primary" >Download</a>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

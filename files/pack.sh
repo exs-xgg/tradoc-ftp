@@ -4,9 +4,15 @@
 # 200 - success
 # 500 - fail
 
+mv "$1" ./temp/"$1"
+cd ./temp
 
 /usr/local/bin/zstd -q "$1" --rm
 
+mv "$1".zst ../"$1".zst
+
+cd ..
+rm -rf ./temp/*.zst
 
 if [ -e "$1".zst ] 
 then 
