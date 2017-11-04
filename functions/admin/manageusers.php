@@ -30,7 +30,64 @@ $person = new User;
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="../../assets/css/msg-css.css" rel="stylesheet" />
  <body>
- <a href="#" class="btn btn-primary" style="color: white;">View Pending Account Requests</a>&nbsp;<a href="#" class="btn btn-info" style="color: white;">Modify Users</a>&nbsp;<a href="#" class="btn btn-success" style="color: white;">Who's online?</a>
+ 	<a href="#pending" class="btn btn-primary" style="color: white;">View Pending Account Requests</a>&nbsp;<a href="#" class="btn btn-info" style="color: white;">Modify Users</a>&nbsp;<a href="#" class="btn btn-success" style="color: white;">Who's online?</a>
+ 	<br><br>
+ 	<div class="alert alert-info" role="alert">
+        <div class="container">
+            
+            <strong>USERS</strong> 
+
+        </div>
+    </div>
+     <table class="table">
+            	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Office</th></tr>
+            	<form action="#" method="post"><tr><td><input type="text" name="uid" value="9231" readonly  width="50px"></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td></tr></form>
+            </table>
+    <div class="alert alert-success" role="alert" id="#pending">
+        <div class="container">
+            
+            <strong>PENDING APPROVAL</strong> 
+
+        </div>
+    </div>
+     <table class="table">
+            	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Office</th></tr>
+            	<form action="#" method="post"><tr><td><input type="text" name="uid" value="9231" readonly  width="50px"></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td></tr></form>
+            </table>
+ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
  
  </body>
+
+
+
+
  </html>

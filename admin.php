@@ -154,15 +154,16 @@ iframe{
     flex-grow: 1; border: none; margin: 0; padding: 0;
 }
 .max{
-    max-width: 72%;
+    max-width: 84%;
     min-height: 500px;
     float: right;
     overflow-y: scroll;
     display: flex; width: 100%; height: 100%; flex-direction: column; background-color: blue; overflow: hidden;
 }
     .panel{
-        max-width: 25%;
+        max-width: 15%;
         float: left;
+        min-height: 100%;
         box-shadow: 2px 2px 2px gray;
     }
     .tblcontent:hover{
