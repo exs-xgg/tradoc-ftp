@@ -259,7 +259,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
     function resetTimer() {
         clearTimeout(t);
-        t = setTimeout(logout, 10000);  // time is in milliseconds
+        t = setTimeout(logout, 300000);  // 5 MINUTES
     }
 }
 idleLogout();
