@@ -5,9 +5,11 @@
 USAGE:
                    /-- lock [ locks a user ]&uid={userid}
 goUser.php?action= --- allow [ unlocks a user ]&uid={userid}
-                   \-- mod [ change user info ]&uid={userid}&fname={firstname}&lname={lastname}&office={officeid}
+                   \-- mod [ change useri info ]&uid={userid}&fname={firstname}&lname={lastname}&office={officeid}
                    								&uname={username}
 **/
+
+session_start();
 include '../db_con.php';
 include '../crypto.php';
 include '../class/userclass.php';
@@ -19,13 +21,16 @@ if (isset($_SESSION['user'])) {
 	x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 	//check if user has privileges
-	if ($person->user_role < 2) {
+	if (($person->user_role < 2) and false) {
 		header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");
 	}
 }else{
 header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");
 }
 //ALLOW USER
+if(!isset($_REQUEST['action'])){
+	header("location: ../../badrequest.php?error=NO_PARAMETERS_SET");
+}
 if ($_REQUEST['action']=="allow") {
 	$uid = $_REQUEST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=0 where USER_ID= $uid";
@@ -52,25 +57,27 @@ if ($_REQUEST['action']=="allow") {
 	$office = "";
 	$uname = "";
 
-	if (isset($_REQUEST['fname']) {
+	if (isset($_REQUEST['fname'])) {
 		$fname = " USER_FNAME='".$_REQUEST['fname']. "' ";
 	}
-	if (isset($_REQUEST['lname']) {
+	if (isset($_REQUEST['lname'])) {
 		$fname = " USER_LNAME='".$_REQUEST['lname']. "' ";
 	}
-	if (isset($_REQUEST['uname']) {
+	if (isset($_REQUEST['uname'])) {
 		$fname = " USER_NAME='".$_REQUEST['uname']. "' ";
 	}
-	if (isset($_REQUEST['office']) {
+	if (isset($_REQUEST['office'])) {
 		$fname = " USER_OFC=".$_REQUEST['office']. " ";
 	}
 
-	$sql = "update users set $fname $lname $office $uname where USER_ID=$uid;"
+	$sql = "update users set $fname $lname $office $uname where USER_ID=$uid;";
 	if($conn->query($sql)){
         echo "Change Succesful!";
     }else{
     	echo "Invalid Request";
     }
+}else{
+	header("location: ../../badrequest.php?error=WRONG_PARAMETERS");
 }
 
 
