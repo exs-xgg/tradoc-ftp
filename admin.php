@@ -115,10 +115,10 @@ $person = new User;
     <div class="container">
        <table class="table">
             <tr><th>Menu</th></tr>
-            <tr class="tblcontent" onclick="gotomanage()"><td>Manage Users</td></tr>
-            <tr class="tblcontent"><td>Manage Files</td></tr>
-            <tr class="tblcontent"><td>View Logs</td></tr>
-            <tr class="tblcontent"><td>View System Status</td></tr>
+            <tr class="tblcontent" onclick="gotouser()"><td>Manage Users</td></tr>
+            <tr class="tblcontent" onclick="gotofile()"><td>Manage Files</td></tr>
+            <tr class="tblcontent" onclick="gotologs()"><td>View Logs</td></tr>
+            <tr class="tblcontent" onclick="gotostat()"><td>View System Status</td></tr>
         </table>
     </div>
     </div>
@@ -127,8 +127,17 @@ $person = new User;
     </div>
 </div>
 <script type="text/javascript">
-    function gotomanage(){
-        document.getElementById('content1').src = "functions/admin/goUser.php"
+    function gotouser(){
+        document.getElementById('content1').src = "functions/admin/manageusers.php"
+    }
+    function gotofile(){
+        document.getElementById('content1').src = "functions/admin/managefiles.php"
+    }
+    function gotologs(){
+        document.getElementById('content1').src = "functions/admin/viewlogs.php"
+    }
+    function gotostat(){
+        document.getElementById('content1').src = "functions/admin/viewsysstat.php"
     }
 </script>
 <style type="text/css">
