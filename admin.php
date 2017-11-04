@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
 }
-
+include("functions/class/userclass.php");
 $person = new User;
     $person = unserialize($_SESSION['user']);
     if ($person->user_role < 2) {
@@ -115,33 +115,41 @@ $person = new User;
     <div class="container">
        <table class="table">
             <tr><th>Menu</th></tr>
-            <tr class="tblcontent" onclick="alert()"><td>Manage Users</td></tr>
-            <tr class="tblcontent"><a href="#"><td>Manage Files</td></a></tr>
+            <tr class="tblcontent" onclick="gotomanage()"><td>Manage Users</td></tr>
+            <tr class="tblcontent"><td>Manage Files</td></tr>
             <tr class="tblcontent"><td>View Logs</td></tr>
             <tr class="tblcontent"><td>View System Status</td></tr>
         </table>
     </div>
     </div>
     <div class="max">
-           <?php
-            for ($i=0; $i < 50; $i++) { 
-                echo "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            }
-           ?>
-     
+          <iframe  src="" id="content1">  </iframe>
     </div>
 </div>
+<script type="text/javascript">
+    function gotomanage(){
+        document.getElementById('content1').src = "functions/admin/goUser.php"
+    }
+</script>
 <style type="text/css">
+iframe{
+    background-color: white;
+}
+a:hover{
+    
+        color: white
+    
+    
+}
+iframe{
+    flex-grow: 1; border: none; margin: 0; padding: 0;
+}
 .max{
     max-width: 72%;
-    max-height: 500px;
+    min-height: 500px;
     float: right;
     overflow-y: scroll;
+    display: flex; width: 100%; height: 100%; flex-direction: column; background-color: blue; overflow: hidden;
 }
     .panel{
         max-width: 25%;
