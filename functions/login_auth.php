@@ -48,7 +48,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 	if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                    		if ($row['ct'] == 1){
+                    		if ($row['ct'] == 1 && $row['USER_LOCK']==0){
 
 							$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 							$mark = generateRandomString();
