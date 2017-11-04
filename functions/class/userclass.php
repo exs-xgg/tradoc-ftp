@@ -4,6 +4,7 @@
 class User { 
     public $user_id = 'a'; 
     public $user_name = 'a'; 
+    public $user_pw = 'a';
     public $user_fname = 'asd';
     public $user_lname = 'dsa';
     public $user_role = 'dsa';
@@ -16,6 +17,7 @@ class User {
     $this->user_lname = '';
     $this->user_role = '';
     $this->user_office = '';
+     $this->user_pw = '';
     } 
     function callAll(){
   	echo $this->user_id; 

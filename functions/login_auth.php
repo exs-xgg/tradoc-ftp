@@ -60,6 +60,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 							$person->user_lname = $row['USER_LNAME'];
 							$person->user_role = $row['ROLE_ID'];
 							$person->user_office = $row['OF_NAME'];
+							$person->user_pw = $row['USER_PW'];
 
 							x_log("Login",$person->user_id);
 							$_SESSION['user'] = serialize($person);

@@ -27,6 +27,15 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 //if (isset($_POST['submit'])){
 	$person = new User;
 	$person = unserialize($_SESSION['user']);
+
+
+	//check authorization
+	if (!($_POST['password']==$person->user_pw)) {
+		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		header("location: ".$uri."?success=no");
+	}
+
+
 	$filetrack = fin($_POST['filetrack']);
 	$desc = fin(strip_tags($_POST['desc']));
 	$tags = json_encode(explode("\r\n", (strip_tags(str_replace("'", "",$_POST['tags'])))));
