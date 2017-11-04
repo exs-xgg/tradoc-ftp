@@ -241,8 +241,28 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="./assets/js/now-ui-kit.js" type="text/javascript"></script>
+
+
 <script type="text/javascript">
-   
+   function idleLogout() {
+    var t;
+    window.onload = resetTimer;
+    window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer; // catches touchscreen presses
+    window.onclick = resetTimer;     // catches touchpad clicks
+    window.onscroll = resetTimer;    // catches scrolling with arrow keys
+    window.onkeypress = resetTimer;
+
+    function logout() {
+        window.location.href = 'logout.php';
+    }
+
+    function resetTimer() {
+        clearTimeout(t);
+        t = setTimeout(logout, 10000);  // time is in milliseconds
+    }
+}
+idleLogout();
 </script>
         
 </html>
