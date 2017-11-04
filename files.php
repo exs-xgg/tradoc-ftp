@@ -51,7 +51,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
-                <a class="navbar-brand" href="/index.html" >
+                <a class="navbar-brand" href="#" >
                     TRADOC-PA Web Portal
                 </a>
             </div>
