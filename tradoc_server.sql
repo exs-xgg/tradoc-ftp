@@ -140,6 +140,7 @@ CREATE TABLE `users` (
   `USER_OFC` int(11) NOT NULL,
   `USER_PW` varchar(32) NOT NULL,
   `ROLE_ID` int(11) NOT NULL,
+  `ONLINE` int DEFAULT 0,
   `USER_LOCK` int(11) NOT NULL,
   PRIMARY KEY (`USER_ID`),
   KEY `ROLE_ID` (`ROLE_ID`),

@@ -10,6 +10,6 @@ how long will the files need to be there(5 years, notify admin if the file will 
 
 view logs query=
 select users.USER_NAME AS users, activity.ACT as activity, activity.TIME as time_ from activity inner JOIN users on users.USER_ID=activity.UID order by activity.TIME desc
-
+BEST RECOMMENDED TO EXECUTE CREATE TABLE QUERIES ONE BY ONE, NOT BY THE WHOLE DUMP
 
 DONT FORGET TO SECURE EVERY ENTRY POINT ON THE SYSTEM AFTER FINISHING

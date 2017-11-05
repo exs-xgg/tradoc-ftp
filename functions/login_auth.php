@@ -61,7 +61,10 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 							$person->user_role = $row['ROLE_ID'];
 							$person->user_office = $row['OF_NAME'];
 							$person->user_pw = $row['USER_PW'];
-
+							$sql = "UPDATE users set ONLINE=1 where USER_ID=$person->user_id";
+							if($conn->query($sql)){
+										echo "";
+							}
 							x_log("Login",$person->user_id);
 							$_SESSION['user'] = serialize($person);
 							
