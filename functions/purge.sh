@@ -6,3 +6,4 @@
 
 rm -rf /var/www/html/tradoc-ftp/files/temp/*
 cp /var/www/html/tradoc-ftp/files/index.php /var/www/html/tradoc-ftp/files/temp/index.php
+echo "Purge Complete."

@@ -1,6 +1,11 @@
 notes
-chmod 777 tradoc-ftp
+chmod 770 tradoc-ftp
 chown apache:apache tradoc-ftp
+chown apache:apache files/temp
+chmod 777 files/temp
+chmod 770 unpack.sh
+chmod 770 pack.sh
+
 exclude confidential files from search and timeline
 
 

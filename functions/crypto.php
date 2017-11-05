@@ -28,7 +28,7 @@ function fin($str){
 }
 function noCancerPls($str){
     $ar_str = split("", $str);
-    for ($i=0; $i < $ar_str.length; $i++) { 
+    for ($i=0; $i < strlen($ar_str); $i++) { 
         switch ($ar_str[i]) {
             case " ":
                 $ar_str[i] = "_";
