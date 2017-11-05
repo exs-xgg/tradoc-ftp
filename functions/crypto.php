@@ -27,55 +27,14 @@ function fin($str){
 	return mysql_real_escape_string($str);
 }
 function noCancerPls($str){
-    $ar_str = split("", $str);
-    for ($i=0; $i < strlen($ar_str); $i++) { 
-        switch ($ar_str[i]) {
-            case " ":
-                $ar_str[i] = "_";
-                break;
-            case "'":
-                $ar_str[i] = "";
-                break;
-            case "(":
-                $ar_str[i] = "-";
-                break;
-            case ")":
-                $ar_str[i] = "-";
-                break;
-            case "{":
-                $ar_str[i] = "-";
-                break;
-            case "}":
-                $ar_str[i] = "-";
-                break;
-            case "<":
-                $ar_str[i] = "-";
-                break;
-            case ">":
-                $ar_str[i] = "-";
-                break;
-            case "[":
-                $ar_str[i] = "-";
-                break;
-            case "]":
-                $ar_str[i] = "-";
-                break;
-            case "@":
-                $ar_str[i] = "at";
-                break;
-            case "%":
-                $ar_str[i] = "";
-                break;
-            case "$":
-                $ar_str[i] = "S";
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-    }
-
-    return join("",$ar_str);
+    $str = str_replace(" ", "_", $str); 
+    $str = str_replace("(", "-",  $str); 
+    $str = str_replace(")", "-",  $str); 
+    $str = str_replace("[", "-",  $str); 
+    $str = str_replace("]", "-",  $str); 
+    $str = str_replace("{", "-",  $str); 
+    $str = str_replace("}", "-",  $str); 
+    $str = strip_tags($str); 
+    return $str; 
 }
 ?>
