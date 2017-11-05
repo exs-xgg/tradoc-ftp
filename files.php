@@ -176,9 +176,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header justify-content-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
+                        
                         <h4 class="title title-up"><?php echo $row["F_NAME_ORIG"];?></h4>
                     </div>
                     <div class="modal-body">
@@ -189,8 +187,12 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
                     <div class="modal-footer">
-                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-primary" >Download</a>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+                        <button type="button" class="btn btn-primary" onclick="pinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Pin File</b></button>
+
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
                     </div>
                 </div>
              </div>
@@ -244,7 +246,26 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
 
 <script type="text/javascript">
-   function idleLogout() {
+    function pinMeDaddy(fid){
+        var nick = prompt("Enter a nickname for this file (20 characters only)", "");
+        $.get("functions/pin.php?fid=" + fid + "&nick=" + nick,
+            function(data,status){
+                if (status=200) {
+                    if (data="1") {
+                        alert("Added to pinned files!");
+                    }else{
+                        alert("Something went wrong");
+                    }
+                }else{
+                    alert("Something went wrong. Error " + status);
+                }
+                
+           
+        });
+    
+        
+    }
+    function idleLogout() {
     var t;
     window.onload = resetTimer;
     window.onmousemove = resetTimer;

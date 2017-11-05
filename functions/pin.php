@@ -14,13 +14,13 @@ include 'crypto.php';
 include 'class/userClass.php';
 session_start();
 if (isset($_SESSION['user'])) {
-	if (isset($_POST['fid'])) {
-		//GET OTHER POST VARIABLES
+	if (isset($_REQUEST['fid'])) {
+		//GET OTHER REQUEST VARIABLES
 		//NICKNAME
-		$nick = $_POST['nick'];
+		$nick = $_REQUEST['nick'];
 
 		//FILE ID
-		$fid = $_POST['fid'];
+		$fid = $_REQUEST['fid'];
 
 		//UNSERIALIZE SESSION
 		$person = new User;
@@ -33,16 +33,16 @@ if (isset($_SESSION['user'])) {
 
 		//EXECUTE QUERY
 		if($conn->query($sql)){
-					return 1;
+					echo 1;
 
 		}else{
-			return 0;
+			echo 0;
 		}
 	}else{
-		return 0;
+		echo 0;
 	}
 }else{
-	return 0;
+	echo 0;
 }
 
 
