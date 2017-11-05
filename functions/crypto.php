@@ -18,4 +18,17 @@ function x_log($act,$uid){
 function fin($str){
 	return mysql_real_escape_string($str);
 }
+function noCancerPls($str){
+    $str = str_replace("'","",$str);
+    $str = str_replace(" ", "_",  $str);
+    $str = str_replace("(", "-",  $str);
+    $str = str_replace(")", "-",  $str);
+    $str = str_replace("[", "-",  $str);
+    $str = str_replace("]", "-",  $str);
+    $str = str_replace("{", "-",  $str);
+    $str = str_replace("}", "-",  $str);
+    $str = strip_tags($str);
+    return $str;
+
+}
 ?>

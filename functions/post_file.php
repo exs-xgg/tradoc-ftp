@@ -40,7 +40,7 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	$desc = fin(strip_tags($_POST['desc']));
 	$tags = json_encode(explode("\r\n", (strip_tags(str_replace("'", "",$_POST['tags'])))));
 	echo $tags.'<br>';
-	$file_orig = str_replace("'","",str_replace(" ", "_",  $_FILES['filex']['name']));
+	$file_orig = noCancerPls($_FILES['filex']['name']);
 	$file_orig = fin(strip_tags($file_orig));
 
 
