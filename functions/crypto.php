@@ -1,4 +1,12 @@
 <?php
+/**
+STATUS: READY
+DESCRIPTION: holds all functions necessary for input control
+WRITTEN BY: Romeo Manuel E. David
+Instuctions:
+Just include it in the php file and call the functions.
+*/
+
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
