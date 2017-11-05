@@ -11,7 +11,7 @@ ex. pin.php?fid=231&nick=foobar
 
 include 'db_con.php';
 include 'crypto.php';
-include 'class/userClass.php';
+include 'class/userclass.php';
 session_start();
 if (isset($_SESSION['user'])) {
 	if (isset($_REQUEST['fid'])) {
