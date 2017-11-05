@@ -19,11 +19,55 @@ function fin($str){
 	return mysql_real_escape_string($str);
 }
 function noCancerPls($str){
-    $cancers = "'()[]{}<>@%$,";
-        for ($i=0; $i < strlen($cancers); $i++) { 
-         $str = str_replace(substr($cancers, i, 1), "", $str);
+    $ar_str = split("", $str);
+    for ($i=0; $i < $ar_str.length; $i++) { 
+        switch ($ar_str[i]) {
+            case " ":
+                $ar_str[i] = "_";
+                break;
+            case "'":
+                $ar_str[i] = "";
+                break;
+            case "(":
+                $ar_str[i] = "-";
+                break;
+            case ")":
+                $ar_str[i] = "-";
+                break;
+            case "{":
+                $ar_str[i] = "-";
+                break;
+            case "}":
+                $ar_str[i] = "-";
+                break;
+            case "<":
+                $ar_str[i] = "-";
+                break;
+            case ">":
+                $ar_str[i] = "-";
+                break;
+            case "[":
+                $ar_str[i] = "-";
+                break;
+            case "]":
+                $ar_str[i] = "-";
+                break;
+            case "@":
+                $ar_str[i] = "at";
+                break;
+            case "%":
+                $ar_str[i] = "";
+                break;
+            case "$":
+                $ar_str[i] = "S";
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
-    $str = str_replace(" ", "_", $str);
-    return $str;
+
+    return join("",$ar_str);
 }
 ?>
