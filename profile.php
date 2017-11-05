@@ -2,6 +2,7 @@
 <?php  
 include('functions/class/userclass.php');
 include('functions/crypto.php');
+include 'functions/db_con.php';
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
@@ -135,90 +136,96 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <!-- Navbar -->
 
     <div class="wrapper">
-        <div class="page-header page-header-small" filter-color="orange">
-            <div class="page-header-image" data-parallax="true" style="background-image: url('./assets/img/bg1.jpg');"></div>
-            <div class="container">
-                <div class="content-center">
-                    <div class="photo-container">
-                        <img src="sheri.jpg" alt="">
-                    </div>
-                    <h3 class="profileid title"><?php  echo $person->user_fname . " " . $person->user_lname ?></h3> <!--return the profile details here-->
-                    <p class="category"><?php  echo $person->user_office; ?></p>
-                     
-                </div>
-            </div>
-        </div>
+        
         <div class="section">
             <div class="container">
-                <div class="button-container">
-                    
-                    <a href="messages.php" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip" title="Send me a message.">
-                        <i class="now-ui-icons ui-1_send"></i>
-                    </a>
-
-                </div>
-                <h3 class="title">About me</h3>
-                <h5 class="description">Some details here</h5>
-        </div>        
+                
+                <h3 class="title"><?php  echo $person->user_fname . " " . $person->user_lname; ?></h3>
+                <h5 class="description"><?php  echo $person->user_office; ?></h5>
+              
             </div>
-        <div class="profilepane">
-                <div class="pane1">
-                    <div class="pinnedfiles">
-                        <div ><h4 >Pinned Files &nbsp; </h4></div>
-                        <div id ="pinnedfiles" style="padding-left: 3%;padding-right: 3%; text-align: left;">
-                            <table class="table" >
-                            <tbody>
-                                <tr><th>Document ID</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Document Tags</th></tr>
-                                <tr class="tb" data-toggle="modal" data-target="#myModal"><td>43248</td><td>Test File.docx</td><td>10/17/2017 7:53PM</td><td>Corporal Sherry Rigor</td><td>file, test file, tradoc, alligator</td></tr>
-                            </tbody>
-                            </table>
-                        </div>
-             
-                    </div>
-                </div>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div id="files" style="padding-left: 5%;padding-right: 5%">
+                <table class="table">
+                <tr><th>Tracking No.</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Uploaded From</th><th width="30%">File Nickname</th></tr>
+
+
+                <?php 
+                if (!isset($_REQUEST['id'])) {
+                    include 'functions/db_con.php'; 
+
+
+                    //FIX THIS QUERY
+
+                    $sql = "SELECT * FROM pinned INNER JOIN file on pinned.PIN_FILE=file.F_ID INNER JOIN users on file.F_UPLOADER=users.USER_ID where pinned.PIN_USER=$person->user_id ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
+
+
+
+
+
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+
+                        $tags = json_decode($row["F_TAGS"]);
+
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
+                        $tag_decode = "";
+                        for ($i=0; $i < count($tags); $i++) { 
+                            $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
+                        }
+                        echo $row['PIN_NICKNAME'];
+                        echo '</td></tr>';
+                        ?>
+
+
+            <div class="modal fade" <?php echo 'id="m'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header justify-content-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <h4 class="title title-up">43248 - Test File.docx</h4>
+                        
+                        <h4 class="title title-up"><?php echo $row["F_NAME_ORIG"];?></h4>
                     </div>
                     <div class="modal-body">
-                        <p>Description: This file contains porn</p>
-                        <p>ID: 43248</p>
-                        <p>Uploader: Corporal Sherry Rigor</p>
-                        <p>Date Uploaded: 10/17/2017 7:53PM</p>
-                        <p>&nbsp;<span class="badge badge-primary">file</span>&nbsp;<span class="badge badge-primary">test file</span>&nbsp;<span class="badge badge-primary">tradoc</span>&nbsp;<span class="badge badge-primary">alligator</span></p>
+                        <p>Description: <?php echo $row["F_DESC"];?></p>
+                        <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
+                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"] . ", " .$row['F_OFFICE'];?></p>
+                        <p>Date Uploaded: <?php echo $row["F_UPLOAD_DATE"];?></p>
+                        <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nice Button</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+                        <button type="button" class="btn btn-primary" onclick="unpinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Unpin File</b></button>
+
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
                     </div>
                 </div>
              </div>
             </div>
 
-                
-                <!--<div class="pane2">
-                  <div ><h4 >Timeline &nbsp;</h4></div>
-                  <div style="padding-left: 3%;padding-right: 3%; text-align: left;">
-                  <table class="table" >
-                        <tbody>
-                            <tr><th>File ID</th><th>Name</th><th>Uploader</th><th>Date</th><th>Metatags</th></tr>
-                            <tr><td>43248</td><td>Test File.docx</td><td>Juan Luna</td><td>10/17/2017 7:53PM</td><td>Test File.docx</td>
-                            </tr>
-                        </tbody>
-                        </table>
-                  </div>      
-                </div>
+                        <?php 
 
-              </div>  -->
+                    }
+                } else {
+                   
+                }
+            $conn->close();
+
+
+
+                }
+               
+
+                ?>
+                
+
+                </table> 
+            </div>
         </div>
     </div>
-    
-    </div>    
+      
     <div class="navbottom">
       <a href="bop2.php"  rel="tooltip" title="Upload a new File?">
         <i class="now-ui-icons files_paper"></i>
@@ -226,19 +233,59 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     </div>
     
 </body>
+<script type="text/javascript">
+    function unpinMeDaddy(fid){
+        var nick = prompt("Enter a nickname for this file (20 characters only)", "");
+        $.get("functions/pin.php?x=0&fid=" + fid + "&nick=" + nick,
+            function(data,status){
+                if (status=200) {
+                    if (data="1") {
+                        alert("Added to pinned files!");
+                    }else{
+                        alert("Something went wrong");
+                    }
+                }else{
+                    alert("Something went wrong. Error " + status);
+                }
+                
+           
+            });
+        
+            
+        }
+        function idleLogout() {
+        var t;
+        window.onload = resetTimer;
+        window.onmousemove = resetTimer;
+        window.onmousedown = resetTimer; // catches touchscreen presses
+        window.onclick = resetTimer;     // catches touchpad clicks
+        window.onscroll = resetTimer;    // catches scrolling with arrow keys
+        window.onkeypress = resetTimer;
+
+        function logout() {
+            window.location.href = 'logout.php';
+        }
+
+        function resetTimer() {
+            clearTimeout(t);
+            t = setTimeout(logout, 300000);  // 5 MINUTES
+        }
+    }
+    idleLogout();
+</script>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+<script src="./assets/js/plugins/bootstrap-switch.js"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
 <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-<script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Share Library etc -->
-<script src="../assets/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
+<script src="./assets/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+<script src="./assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
 
 </html>
