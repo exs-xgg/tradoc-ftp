@@ -19,16 +19,11 @@ function fin($str){
 	return mysql_real_escape_string($str);
 }
 function noCancerPls($str){
-    $str = str_replace("'","",$str);
-    $str = str_replace(" ", "_",  $str);
-    $str = str_replace("(", "-",  $str);
-    $str = str_replace(")", "-",  $str);
-    $str = str_replace("[", "-",  $str);
-    $str = str_replace("]", "-",  $str);
-    $str = str_replace("{", "-",  $str);
-    $str = str_replace("}", "-",  $str);
-    $str = strip_tags($str);
+    $cancers = "'()[]{}<>@%$,";
+        for ($i=0; $i < strlen($cancers); $i++) { 
+         $str = str_replace(substr($cancers, i, 1), "", $str);
+    }
+    $str = str_replace(" ", "_", $str);
     return $str;
-
 }
 ?>
