@@ -92,25 +92,6 @@ CREATE TABLE `office` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `pinned`
---
-
-DROP TABLE IF EXISTS `pinned`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pinned` (
-  `PIN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PIN_USER` int(11) NOT NULL,
-  `PIN_FILE` int(11) NOT NULL,
-  `PIN_NICKNAME` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`PIN_ID`),
-  KEY `PIN_TO_FILE` (`PIN_FILE`),
-  KEY `PIN_TO_USER` (`PIN_USER`),
-  CONSTRAINT `PIN_TO_FILE` FOREIGN KEY (`PIN_FILE`) REFERENCES `file` (`F_ID`),
-  CONSTRAINT `PIN_TO_USER` FOREIGN KEY (`PIN_USER`) REFERENCES `users` (`USER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `role`
@@ -192,6 +173,25 @@ DELIMITER ;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+--
+-- Table structure for table `pinned`
+--
+
+DROP TABLE IF EXISTS `pinned`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pinned` (
+  `PIN_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PIN_USER` int(11) NOT NULL,
+  `PIN_FILE` int(11) NOT NULL,
+  `PIN_NICKNAME` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`PIN_ID`),
+  KEY `PIN_TO_FILE` (`PIN_FILE`),
+  KEY `PIN_TO_USER` (`PIN_USER`),
+  CONSTRAINT `PIN_TO_FILE` FOREIGN KEY (`PIN_FILE`) REFERENCES `file` (`F_ID`),
+  CONSTRAINT `PIN_TO_USER` FOREIGN KEY (`PIN_USER`) REFERENCES `users` (`USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `activity`
