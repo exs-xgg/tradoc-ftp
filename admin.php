@@ -56,7 +56,7 @@ if ($person->user_role < 2) {
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navigation" >
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="#" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
                             <p>Admin</p>
@@ -81,7 +81,7 @@ if ($person->user_role < 2) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Settings">
+                        <a class="nav-link" href="settings.php" title="Settings">
                             <i class="now-ui-icons ui-1_settings-gear-63"></i>
                             <p>Settings</p>
                         </a>

@@ -1,17 +1,47 @@
+
 <?php  
-include 'con-db.php'; 
+include('functions/class/userclass.php');
+include('functions/crypto.php');
+include 'functions/db_con.php';
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
-}?>
+}
+
+if (isset($_REQUEST['id'])) {
+  
+} else {
+
+$person = unserialize($_SESSION['user']);
+
+
+
+x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+
+
+
+//NOTES:
+/*
+
+I THINK WE SHOULD GET THE INITIAL PROFILE DATA FIRST, AND THEN TIMELINE INFO VIA AJAX 
+TO LESSEN THE LOADING TIME OF THE PAGE
+
+**/
+
+
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>     
+<head>    
     <meta charset="utf-8" />
     <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
     <link rel="icon" type="image/png" href="./assets/img/tradoc_logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Messages</title>
+    <title id=" "><?php  echo $person->user_fname . " " . $person->user_lname ?></title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -23,11 +53,8 @@ if(!isset($_SESSION['user'])){
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
-<body style="background-color: lightred ">
-
-    
-</div>    
-         <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
+<body class="profile-page sidebar-collapse">
+        <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="logo-trad">
                   <a href="index.php" title="Home">
@@ -40,7 +67,7 @@ if(!isset($_SESSION['user'])){
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
-                <a class="navbar-brand" href="#" >
+                <a class="navbar-brand" href="/index.html" >
                     TRADOC-PA Web Portal
                 </a>
             </div>
@@ -48,9 +75,6 @@ if(!isset($_SESSION['user'])){
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <?php 
-                        include("functions/class/userclass.php");
-                        $person = new User;
-                        $person = unserialize($_SESSION['user']);
                         if ($person->user_role > 2) {
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
@@ -69,7 +93,7 @@ if(!isset($_SESSION['user'])){
                             <p>Files</p>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="./messages.php" title="Messages">
                             <i class="now-ui-icons ui-1_email-85"></i>
                             <p>Messages</p>
@@ -81,7 +105,7 @@ if(!isset($_SESSION['user'])){
                             <p>Profile</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="settings.php" title="Settings">
                             <i class="now-ui-icons ui-1_settings-gear-63"></i>
                             <p>Settings</p>
@@ -97,6 +121,7 @@ if(!isset($_SESSION['user'])){
             </div>
         </div>
     </nav>
+   <div class="wrapper"><div class="space-50"></div></div>
     <script type="text/javascript">
                     function logout(){
                        var answer = confirm("Logout?");
@@ -108,97 +133,12 @@ if(!isset($_SESSION['user'])){
                         }
                     }
                 </script>
-   <!-- End Navbar -->
+    <!-- Navbar -->
 
-
-   <div class="main">
-    <div class="msgpanel">
-                <div class"">
-                </div>
-                <!--message input area-->
-                <div class="msg-main">
-                        <div class="msg-container" align="right">
-                            <div  class="otherend"><div class="messages category text-primary" align="center">messages</div> 
-                            </div>                            
-                        </div>                              
-                    <div class="bottom"> <!--message input-->
-                     <div class="msg-area" id="msg-area">&nbsp;</div>
-                      <div class="input-group form-group-no-border">    
-                        <input class="form-control" id="msg-input" type="text" name="msg" placeholder="Enter message here..." style="font-size: 15px;" onkeydown="if (event.keyCode==13) sendmsg();">
-                    
-                        <span class="input-group-addon"><button class="btn btn-primary btn-round" onclick="sendmsg();"><i class="now-ui-icons ui-1_send"></i>&nbsp;Send</button></span>          
-                      </div>
-                   </div>
-                </div>
-                <div class="msgs-sidebar" >
-                <div>
-                    <div class="messages category text-primary" align="center">Search</div>  <!-- Search barfor people/messages-->
-                    <div class="msgretrieve"></div> <!--Placeholder for returned results of the search. Empty if no return.-->      
-                </div>
-                <div class="msgsearch input-group form-group-no-border">
-                    <input type="text" class="form-control" placeholder="Search Messenger">
-                    <span class="input-group-addon">
-                        <i class="now-ui-icons ui-1_zoom-bold""></i>
-                    </span>
-                </div>
-              </div>
-
-    </div>
-     
+    
+    
 </body>
 
-<script type="text/javascript">
-    function sendmsg() {
-
-            var msginput = document.getElementById("msg-input").value;
-            
-            if (msginput != null){
-                <?php echo 'var uname = "'. $_SESSION['id'].'"'; ?> 
-                  
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function(){
-                  if(xmlhttp.readyState==4&&xmlhttp.status==200){
-                    document.getElementById('msg-area').innerHTML = xmlhttp.responseText;                    
-              }
-              }
-               xmlhttp.open('GET','./functions/sendmsg.php?uname='+uname+'&msg='+msginput,true);
-               xmlhttp.send();
-            }
-      //$(document).ready(function(e){
-      //    $.ajaxSetup({cache:false});
-      //    setInterval(function(){$('#msg-area').load()})
-     // });
-}
-            
-
-</script> 
-
-<script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="./assets/js/core/tether.min.js" type="text/javascript"></script>
-<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="./assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-<script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script src="./assets/js/now-ui-kit.js" type="text/javascript"></script>
-<script type="text/javascript">
-   $(document).ready(function() {
-       // the body of this function is in assets/js/now-ui-kit.js
-       nowuiKit.initSliders();
-   });
-
-   function scrollToDownload() {
-
-       if ($('.section-download').length != 0) {
-           $("html, body").animate({
-               scrollTop: $('.section-download').offset().top
-           }, 1000);
-       }
-   }
-</script>
 <script>
 var _0x22be=["\x66\x75\x6E\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6D\x69\x6C\x6F\x63\x6B\x65\x64\x2E\x70\x68\x70",
     "\x6A\x73\x6F\x6E",
@@ -240,4 +180,19 @@ var _0x22be=["\x66\x75\x6E\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6D\x69\x6C\x6F\x63\x
     }
     }idleLogout()
 </script>
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="./assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+<script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Share Library etc -->
+<script src="./assets/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script src="./assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+
 </html>

@@ -72,7 +72,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         ?>
                         
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="./files.php" title="Files">
                             <i class="now-ui-icons files_paper"></i>
                             <p>Files</p>
@@ -91,7 +91,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Settings">
+                        <a class="nav-link" href="settings.php" title="Settings">
                             <i class="now-ui-icons ui-1_settings-gear-63"></i>
                             <p>Settings</p>
                         </a>

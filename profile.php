@@ -99,14 +99,14 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                             <p>Messages</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="profile.php" title="Profile">
                             <i class="now-ui-icons users_circle-08"></i>
                             <p>Profile</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="Settings">
+                        <a class="nav-link" href="settings.php" title="Settings">
                             <i class="now-ui-icons ui-1_settings-gear-63"></i>
                             <p>Settings</p>
                         </a>
