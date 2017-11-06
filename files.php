@@ -243,6 +243,20 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
 
 <script type="text/javascript">
+    setInterval(function(){
+        $.get("functions/amilocked.php",
+            function(data,status){
+                if (status=200) {
+                    if (data=="x") {
+                       logout();
+                    }else{
+                        console.log(data);
+                    }
+                }
+        });
+    }, 3000);
+    clearTimeout(t);
+    
     function pinMeDaddy(fid){
         var nick = prompt("Enter a nickname for this file (20 characters only)", "");
         $.get("functions/pin.php?fid=" + fid + "&nick=" + nick,
@@ -256,8 +270,6 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                 }else{
                     alert("Something went wrong. Error " + status);
                 }
-                
-           
         });
     
         
