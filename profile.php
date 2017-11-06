@@ -235,7 +235,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
 </body>
 <script type="text/javascript">
     function unpinMeDaddy(fid){
-        var nick = prompt("Enter a nickname for this file (20 characters only)", "");
+        var nick = "x";
         $.get("functions/pin.php?x=0&fid=" + fid + "&nick=" + nick,
             function(data,status){
                 if (status=200) {
