@@ -182,10 +182,6 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             <div class="modal fade" <?php echo 'id="m'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        
-                        <h4 class="title title-up"><?php echo $row["F_NAME_ORIG"];?></h4>
-                    </div>
                     <div class="modal-body">
                         <p>Description: <?php echo $row["F_DESC"];?></p>
                         <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
