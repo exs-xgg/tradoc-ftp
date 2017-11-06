@@ -4,6 +4,7 @@ session_start();
 
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
+
 }
 include("functions/class/userclass.php");
 $person = new User;
@@ -96,7 +97,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="logout();">
+                        <a class="nav-link" href="#" onclick="c_logout();">
                             <i class="now-ui-icons ui-1_simple-remove"></i>
                             <p>Log Out</p>
                         </a>
@@ -106,7 +107,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
         </div>
     </nav>
     <script type="text/javascript">
-                    function logout(){
+                    function c_logout(){
                        var answer = confirm("Logout?");
                         if (answer) {
                             window.location.href = "./logout.php";
@@ -243,56 +244,62 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
 
 <script type="text/javascript">
-    setInterval(function(){
-        $.get("functions/amilocked.php",
-            function(data,status){
-                if (status=200) {
-                    if (data=="x") {
-                       logout();
-                    }else{
-                        console.log(data);
-                    }
-                }
-        });
-    }, 3000);
-    clearTimeout(t);
-    
     function pinMeDaddy(fid){
         var nick = prompt("Enter a nickname for this file (20 characters only)", "");
-        $.get("functions/pin.php?fid=" + fid + "&nick=" + nick,
-            function(data,status){
-                if (status=200) {
-                    if (data="1") {
-                        alert("Added to pinned files!");
-                    }else{
-                        alert("Something went wrong");
-                    }
-                }else{
-                    alert("Something went wrong. Error " + status);
+
+        $.ajax({
+            url: "functions/pin.php?fid=" + fid + "&nick=" + nick,
+            dataType: 'json',
+            success: function(data) {
+                if (data.return) {
+                    alert("Added to pinned files!");
+                } else {
+                    alert("Something went wrong");
                 }
+            }
         });
-    
         
     }
-    function idleLogout() {
+
+    var _0x22be=["\x66\x75\x6E\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6D\x69\x6C\x6F\x63\x6B\x65\x64\x2E\x70\x68\x70",
+    "\x6A\x73\x6F\x6E",
+    "\x72\x65\x74\x75\x72\x6E",
+    "\x61\x6A\x61\x78",
+    "\x6F\x6E\x6C\x6F\x61\x64",
+    "\x6F\x6E\x6D\x6F\x75\x73\x65\x6D\x6F\x76\x65",
+    "\x6F\x6E\x6D\x6F\x75\x73\x65\x64\x6F\x77\x6E",
+    "\x6F\x6E\x63\x6C\x69\x63\x6B",
+    "\x6F\x6E\x73\x63\x72\x6F\x6C\x6C",
+    "\x6F\x6E\x6B\x65\x79\x70\x72\x65\x73\x73",
+    "\x68\x72\x65\x66",
+    "\x6C\x6F\x63\x61\x74\x69\x6F\x6E",
+    "\x6C\x6F\x67\x6F\x75\x74\x2E\x70\x68\x70"];
     var t;
-    window.onload = resetTimer;
-    window.onmousemove = resetTimer;
-    window.onmousedown = resetTimer; // catches touchscreen presses
-    window.onclick = resetTimer;     // catches touchpad clicks
-    window.onscroll = resetTimer;    // catches scrolling with arrow keys
-    window.onkeypress = resetTimer;
+    setInterval(function(){
+        $[_0x22be[3]]({
+        url:_0x22be[0],dataType:_0x22be[1],success:function(_0xe8b6x2){
+        if(_0xe8b6x2[_0x22be[2]]){
+        c_logout()
+    }else {
 
-    function logout() {
-        window.location.href = 'logout.php';
-    }
-
-    function resetTimer() {
-        clearTimeout(t);
-        t = setTimeout(logout, 300000);  // 5 MINUTES
-    }
+        }
 }
-idleLogout();
+})
+    },3000);
+    clearTimeout(t);
+    function idleLogout(){
+        window[_0x22be[4]]= _0xe8b6x5;
+        window[_0x22be[5]]= _0xe8b6x5;
+    window[_0x22be[6]]= _0xe8b6x5;
+    window[_0x22be[7]]= _0xe8b6x5;
+    window[_0x22be[8]]= _0xe8b6x5;
+    window[_0x22be[9]]= _0xe8b6x5;
+    function _0xe8b6x4(){
+        window[_0x22be[11]][_0x22be[10]]= _0x22be[12]
+    }function _0xe8b6x5(){clearTimeout(t);
+        t= setTimeout(_0xe8b6x4,300000)
+    }
+    }idleLogout()
 </script>
         
 </html>

@@ -39,17 +39,18 @@ if (isset($_SESSION['user'])) {
 		}
 		//EXECUTE QUERY
 		if($conn->query($sql)){
-					echo 1;
+					$return = true;
 
 		}else{
-			echo 0;
+			$return = false;
 		}
 	}else{
-		echo 0;
+		$return = false;
 	}
 }else{
-	echo 0;
+	$return = false;
 }
+die(json_encode(array('return' => $return)));
 
 
 ?>

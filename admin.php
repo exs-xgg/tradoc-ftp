@@ -6,10 +6,10 @@ if(!isset($_SESSION['user'])){
 }
 include("functions/class/userclass.php");
 $person = new User;
-    $person = unserialize($_SESSION['user']);
-    if ($person->user_role < 2) {
-        header("location: badrequest.php?error=RESTRICTED_ACCESS");
-    }
+$person = unserialize($_SESSION['user']);
+if ($person->user_role < 2) {
+    header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
 
     
 ?>
@@ -123,7 +123,7 @@ $person = new User;
     </div>
     </div>
     <div class="max">
-          <iframe  src="" id="content1">  </iframe>
+          <iframe  src="" id="content1" >  </iframe>
     </div>
 </div>
 <script type="text/javascript">
