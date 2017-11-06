@@ -32,18 +32,24 @@ if ($_REQUEST['action']=="allow") {
 	$uid = $_POST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=0 where USER_ID= $uid";
     if($conn->query($sql)){
-        echo "Unlocked!";
+        $uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		header("location: ".$uri."?rs=ok");
     }else{
-    	echo "Invalid Request";
+    	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+    	x_log("XQRY=".$sql,$person->user_id);
+		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
     }
 //LOCK USER
 }elseif ($_REQUEST['action']=="lock") {
 	$uid = $_POST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=1 where USER_ID= $uid";
     if($conn->query($sql)){
-        echo "Locked!";
+         $uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		header("location: ".$uri."?rs=ok");
     }else{
-    	echo "Invalid Request";
+    	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+    	x_log("XQRY=".$sql,$person->user_id);
+		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
     }
 //MODIFY USER INFO
 }elseif ($_REQUEST['action']=="mod") {
