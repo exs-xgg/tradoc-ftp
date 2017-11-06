@@ -39,10 +39,93 @@ $person = new User;
 
         </div>
     </div>
-     <table class="table">
-            	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Office</th></tr>
-            	<form action="#" method="post"><tr><td><input type="text" name="uid" value="9231" readonly  width="50px"></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td></tr></form>
+     <table>
+            	<tr><th>Username</th><th>Role</th><th>Action</th></tr>
+            	<form action="#" method="post">
+                <tr>
+                    <td>
+                        <select name="username">
+                            <option>general</option>
+                            <option>adminAq</option>
+                        </select>
+                    </td>
+                    
+                    <td>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>Lock</option>
+                            <option>Allow</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="btn" type="submit" name="submit" value="Go">
+                    </td>
+                </tr>
+                </form>
+                <form action="#" method="post">
+                <tr>
+                    <td>
+                        <select name="username">
+                            <option>general</option>
+                            <option>adminAq</option>
+                        </select>
+                    </td>
+                    
+                    <td>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>Lock</option>
+                            <option>Allow</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="btn" type="submit" name="submit" value="Go">
+                    </td>
+                </tr>
+                </form><form action="#" method="post">
+                <tr>
+                    <td>
+                        <select name="username">
+                            <option>general</option>
+                            <option>adminAq</option>
+                        </select>
+                    </td>
+                    
+                    <td>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>Lock</option>
+                            <option>Allow</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="btn" type="submit" name="submit" value="Go">
+                    </td>
+                </tr>
+                </form>
             </table>
+            <style type="text/css">
+                td, th{
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            </style>
+            <br><hr><br>
     <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">
             

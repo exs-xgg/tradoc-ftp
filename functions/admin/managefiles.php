@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -29,7 +30,102 @@ $person = new User;
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="../../assets/css/msg-css.css" rel="stylesheet" />
  <body>
- <a href="#" class="btn btn-primary" style="color: white;">View Pending Account Requests</a>&nbsp;<a href="#" class="btn btn-info" style="color: white;">Modify Users</a>&nbsp;<a href="#" class="btn btn-success" style="color: white;">Who's online?</a>
+    <div class="section section-tabs" style="background-color: white">
+        <form action="#">
+                <div class="container">
+                    <?php if (isset($_REQUEST['q'])) {
+                            echo '<p>'. 'Top 20 results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+                        }?>
+                    <div class="input-group form-group-no-border" >
+                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;" <?php if (isset($_REQUEST['q'])) {
+                            echo 'value="'. $_REQUEST['q'] . '"';
+                        }?>>
+                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span></form>
+                        
+                    </div>
+                
+                
+                </div>
+            </div>
+ <div id="files" style="padding-left: 5%;padding-right: 5%">
+                <table class="table">
+                <tr><th>Tracking No.</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Uploaded From</th><th width="30%">Document Tags</th></tr>
+
+
+                <?php 
+                if (isset($_REQUEST['q'])) {
+                    include '../db_con.php'; 
+                    $q = $_REQUEST['q'];
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_NAME_ORIG like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+
+                        $tags = json_decode($row["F_TAGS"]);
+
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
+                        $tag_decode = "";
+                        for ($i=0; $i < count($tags); $i++) { 
+                            $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
+                        }
+                        echo $tag_decode;
+                        echo '</td></tr>';
+                        ?>
+
+
+            <div class="modal fade" <?php echo 'id="m'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+                        <p>Description: <?php echo $row["F_DESC"];?></p>
+                        <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
+                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"] . ", " .$row['F_OFFICE'];?></p>
+                        <p>Date Uploaded: <?php echo $row["F_UPLOAD_DATE"];?></p>
+                        <p>&nbsp;<?php echo $tag_decode; ?></p>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" onclick="pinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Pin File</b></button>
+
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
+                    </div>
+                </div>
+             </div>
+            </div>
+
+                        <?php 
+
+                    }
+                } else {
+                   
+                }
+            $conn->close();
+
+
+
+                }
+               
+
+                ?>
+                
+
+                </table> 
+            </div>
  
+<script src="../../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="../../assets/js/core/tether.min.js" type="text/javascript"></script>
+<script src="../../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../../assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="../../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+<script src="../../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script src="../../assets/js/now-ui-kit.js" type="text/javascript"></script>
  </body>
  </html>
