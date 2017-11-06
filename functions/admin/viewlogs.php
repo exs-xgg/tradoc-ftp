@@ -29,7 +29,27 @@ $person = new User;
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="../../assets/css/msg-css.css" rel="stylesheet" />
  <body>
- <a href="#" class="btn btn-primary" style="color: white;">View Pending Account Requests</a>&nbsp;<a href="#" class="btn btn-info" style="color: white;">Modify Users</a>&nbsp;<a href="#" class="btn btn-success" style="color: white;">Who's online?</a>
- 
+    <div class="alert alert-info" role="alert">
+        <div class="container">
+            
+            <strong>LOGS</strong> 
+
+        </div>
+    </div>
+    <table class="table">
+        <tr><th>User</th><th>Time</th><th>Activity</th></tr>
+    
+ <?php
+include '../db_con.php';
+$sql = "SELECT * FROM activity inner join users on users.USER_ID = activity.UID order by TIME DESC limit 30";
+$result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo '<tr><td>'.$row['USER_NAME'].'</td><td>'.$row['TIME'].'</td><td>'.$row['ACT'].'</td></tr>';
+        }
+    }
+ ?>
+ </table>
  </body>
  </html>
