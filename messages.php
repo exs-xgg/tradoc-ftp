@@ -1,8 +1,34 @@
 <?php  
-include 'con-db.php'; 
+include('functions/class/userclass.php');
+include('functions/crypto.php');
+include 'functions/db_con.php';
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
+
+if (isset($_REQUEST['id'])) {
+  
+} else {
+
+$person = unserialize($_SESSION['user']);
+
+
+
+x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+
+
+
+//NOTES:
+/*
+
+I THINK WE SHOULD GET THE INITIAL PROFILE DATA FIRST, AND THEN TIMELINE INFO VIA AJAX 
+TO LESSEN THE LOADING TIME OF THE PAGE
+
+**/
+
+
+
 }?>
 <!DOCTYPE html>
 <html lang="en">
