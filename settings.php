@@ -121,7 +121,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             </div>
         </div>
     </nav>
-   <div class="wrapper"><div class="space-50"></div></div>
+   <div class="wrapper"><div class="space-100"></div></div>
     <script type="text/javascript">
                     function logout(){
                        var answer = confirm("Logout?");
@@ -134,9 +134,56 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                     }
                 </script>
     <!-- Navbar -->
+    <div class="connt">
+        <h2 class="head">Edit Account Settings</h2>
+        <div class="midform">
+            <form class="form form-control" action="functions/admin/goUser.php?action=mod" method="post">
+            <p class="category">Username</p>
+            <input class="form form-control" type="text" name="uname" value=<?php echo '"'.$person->user_name.'"';?>><br>
+            <p class="category">First Name</p>
+            <input class="form form-control" type="text" name="fname" value=<?php echo '"'.$person->user_fname.'"';?>><br>
+            <p class="category">Last Name</p>
+            <input class="form form-control" type="text" name="lname" value=<?php echo '"'.$person->user_lname.'"';?>><br><hr><br>
+            <p class="category">Current Password</p>
+            <input class="form form-control" type="password" name="pw1"><br>
+            <p class="category">New Password</p>
+            <input class="form form-control" type="password" name="pw2"><br>
+            <input class="form form-control" type="password" name="uid" value=<?php echo '"'.$person->user_id.'"';?> hidden>
+            
 
+            <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
+            <?php
+            
+            $sql = "SELECT * FROM OFFICE";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+
+                        echo '<option value="' . $row['OF_ID'] . '">' . $row['OF_NAME'] .'</option>';
+                    }
+                }
+            ?>
+            </select>
+            <input class="form form-control" type="submit" name="submit">
+        </form>
+        </div>
+        
+    </div>
     
-    
+    <style type="text/css">
+        .form{
+            font-size: 15px;
+        }
+        .connt{
+        }
+        .midform{ 
+            padding-left: 20%;
+            padding-right: 20%;
+            float: center;
+           
+        }
+    </style>
 </body>
 
 <script>

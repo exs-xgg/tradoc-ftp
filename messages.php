@@ -74,9 +74,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <?php 
-                        include("functions/class/userclass.php");
-                        $person = new User;
-                        $person = unserialize($_SESSION['user']);
+                       
                         if ($person->user_role > 2) {
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">

@@ -3,8 +3,9 @@
 
 /*
 USAGE:
-                   /-- lock [ locks a user ]&uid={userid}
-goUser.php?action= --- allow [ unlocks a user ]&uid={userid}
+												THERE ARE ALL POST REQUESTS
+                   /-- lock [ locks a user ]	&uid={userid}
+goUser.php?action= --- allow [ unlocks a user ]	&uid={userid}
                    \-- mod [ change useri info ]&uid={userid}&fname={firstname}&lname={lastname}&office={officeid}
                    								&uname={username}
 **/
@@ -20,10 +21,6 @@ if (isset($_SESSION['user'])) {
 	$id = $person->user_id;
 	x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
-	//check if user has privileges
-	if (($person->user_role < 2) and false) {
-		header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");
-	}
 }else{
 header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");
 }
@@ -32,7 +29,7 @@ if(!isset($_REQUEST['action'])){
 	header("location: ../../badrequest.php?error=NO_PARAMETERS_SET");
 }
 if ($_REQUEST['action']=="allow") {
-	$uid = $_REQUEST['uid'];
+	$uid = $_POST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=0 where USER_ID= $uid";
     if($conn->query($sql)){
         echo "Unlocked!";
@@ -41,8 +38,7 @@ if ($_REQUEST['action']=="allow") {
     }
 //LOCK USER
 }elseif ($_REQUEST['action']=="lock") {
-	$uid = $_REQUEST['uid'];
-	$uid = $_REQUEST['uid'];
+	$uid = $_POST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=1 where USER_ID= $uid";
     if($conn->query($sql)){
         echo "Locked!";
@@ -51,33 +47,52 @@ if ($_REQUEST['action']=="allow") {
     }
 //MODIFY USER INFO
 }elseif ($_REQUEST['action']=="mod") {
-	$uid = $_REQUEST['uid'];
+	$uid = $_POST['uid'];
+	echo $uid;
 	$fname = "";
 	$lname = "";
 	$office = "";
 	$uname = "";
+	$ppw = "";
+	if (isset($_POST['fname'])) {
+		$fname = " USER_FNAME='".$_POST['fname']. "', ";
+	}
+	if (isset($_POST['lname'])) {
+		$lname = " USER_LNAME='".$_POST['lname']. "', ";
+	}
+	if (isset($_POST['uname'])) {
+		$uname = " USER_NAME='".$_POST['uname']. "', ";
+	}
+	if (isset($_POST['office'])) {
+		$office = " USER_OFC=".$_POST['office']. ", ";
+	}
+	if (isset($_POST['pw1'])) {
+		$pw1 = $_POST['pw1'];
+		$pw2 = $_POST['pw2'];
+		if(md5($pw1)==$person->user_pw){
+			$pw2 = md5($pw2);
+			$ppw = " USER_PW='$pw2', ";
+		}else{
+			header("location: ../../badrequest.php?error=WRONG_PARAMETERS");
+		}
+	}
 
-	if (isset($_REQUEST['fname'])) {
-		$fname = " USER_FNAME='".$_REQUEST['fname']. "' ";
-	}
-	if (isset($_REQUEST['lname'])) {
-		$fname = " USER_LNAME='".$_REQUEST['lname']. "' ";
-	}
-	if (isset($_REQUEST['uname'])) {
-		$fname = " USER_NAME='".$_REQUEST['uname']. "' ";
-	}
-	if (isset($_REQUEST['office'])) {
-		$fname = " USER_OFC=".$_REQUEST['office']. " ";
-	}
+	$sql = "update users set $fname $lname $office $uname $ppw USER_LOCK=0 where USER_ID=$uid;";
+	echo $sql;
 
-	$sql = "update users set $fname $lname $office $uname where USER_ID=$uid;";
 	if($conn->query($sql)){
-        echo "Change Succesful!";
+        $uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		header("location: ".$uri."?rs=ok");
     }else{
-    	echo "Invalid Request";
+    	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+    	x_log("XQRY=".$sql,$person->user_id);
+		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
+
     }
 }else{
-	header("location: ../../badrequest.php?error=WRONG_PARAMETERS");
+	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+	x_log("XQRY=".$sql,$person->user_id);
+	header("location: ".$uri."?rs=no&er=WRONG_ARGUMENTS");
 }
 
 
