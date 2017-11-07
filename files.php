@@ -261,45 +261,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
         
     }
 
-    var _0x22be=["\x66\x75\x6E\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6D\x69\x6C\x6F\x63\x6B\x65\x64\x2E\x70\x68\x70",
-    "\x6A\x73\x6F\x6E",
-    "\x72\x65\x74\x75\x72\x6E",
-    "\x61\x6A\x61\x78",
-    "\x6F\x6E\x6C\x6F\x61\x64",
-    "\x6F\x6E\x6D\x6F\x75\x73\x65\x6D\x6F\x76\x65",
-    "\x6F\x6E\x6D\x6F\x75\x73\x65\x64\x6F\x77\x6E",
-    "\x6F\x6E\x63\x6C\x69\x63\x6B",
-    "\x6F\x6E\x73\x63\x72\x6F\x6C\x6C",
-    "\x6F\x6E\x6B\x65\x79\x70\x72\x65\x73\x73",
-    "\x68\x72\x65\x66",
-    "\x6C\x6F\x63\x61\x74\x69\x6F\x6E",
-    "\x6C\x6F\x67\x6F\x75\x74\x2E\x70\x68\x70"];
-    var t;
-    setInterval(function(){
-        $[_0x22be[3]]({
-        url:_0x22be[0],dataType:_0x22be[1],success:function(_0xe8b6x2){
-        if(_0xe8b6x2[_0x22be[2]]){
-        c_logout()
-    }else {
-
-        }
-}
-})
-    },3000);
-    clearTimeout(t);
-    function idleLogout(){
-        window[_0x22be[4]]= _0xe8b6x5;
-        window[_0x22be[5]]= _0xe8b6x5;
-    window[_0x22be[6]]= _0xe8b6x5;
-    window[_0x22be[7]]= _0xe8b6x5;
-    window[_0x22be[8]]= _0xe8b6x5;
-    window[_0x22be[9]]= _0xe8b6x5;
-    function _0xe8b6x4(){
-        window[_0x22be[11]][_0x22be[10]]= _0x22be[12]
-    }function _0xe8b6x5(){clearTimeout(t);
-        t= setTimeout(_0xe8b6x4,300000)
-    }
-    }idleLogout()
+    eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('e t;d(2(){$.f({c:"h/i.5",b:\'8\',a:2(7){9(7.g){3()}v{}}})},q);6(t);2 4(){1.r=0;1.s=0;1.j=0;1.u=0;1.p=0;1.o=0;2 3(){1.k.l=\'3.5\'}2 0(){6(t);t=m(3,n)}}4();',32,32,'resetTimer|window|function|logout|idleLogout|php|clearTimeout|data|json|if|success|dataType|url|setInterval|var|ajax|return|functions|amilocked|onmousedown|location|href|setTimeout|300000|onkeypress|onscroll|3000|onload|onmousemove||onclick|else'.split('|'),0,{}))
 </script>
         
 </html>
