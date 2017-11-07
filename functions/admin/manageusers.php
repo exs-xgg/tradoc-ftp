@@ -43,23 +43,22 @@ $person = new User;
         <tr><td>
              <table>
                 <tr><th>Username</th><th>Role</th><th>Action</th></tr>
-                <form action="functions/admin/modRole.php" method="post">
+                <form action="goUser.php?action=mod" method="post">
                 <tr>
                     <td>
-                <select class="form-control" name="username">
+                <select class="form-control" name="uid">
                     <?php 
-                        $sql = "SELECT USER_NAME,USER_ID FROM users";
+                        $sql = "SELECT * FROM users where USER_LOCK=0";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME'] . '</option>';
+                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
                             }
                         }
 
                     ?>
-                    <option>general</option>
-                    <option>adminAq</option>
+                    
                 </select>
                     </td>
                     
@@ -82,35 +81,27 @@ $person = new User;
         <td>
             
              <table>
-                <tr><th>Username</th><th>Access</th><th>Action</th><th</tr>
-                <form action="functions/admin/modAxs.php" method="post">
+                <tr><th>Username</th><th>Action</th><th</tr>
+                <form action="goUser.php?action=lock" method="post">
                 <tr>
                     <td>
-                <select class="form-control" name="username">
+                <select class="form-control" name="uid">
                     <?php 
-                        $sql = "SELECT USER_NAME,USER_ID FROM users";
+                        $sql = "SELECT * FROM users where USER_LOCK=0";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME'] . '</option>';
+                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
                             }
                         }
 
                     ?>
-                    <option>general</option>
-                    <option>adminAq</option>
                 </select>
                     </td>
                     
                     <td>
-                        <select class="form-control" name="action">
-                            <option>Lock</option>
-                            <option>Allow</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input class="btn btn-success" type="submit" name="submit" value="Go">
+                        <input class="btn btn-danger" type="submit" name="submit" value="Lock">
                     </td>
                 </tr>
                 </form>
@@ -129,14 +120,14 @@ $person = new User;
     <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">
             
-            <strong>PENDING APPROVAL</strong> 
+            <strong>PENDING APPROVAL/LOCKED ACCOUNTS</strong> 
 
         </div>
     </div>
      <table class="table">
             	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Office</th><th>Action</th></tr>
-
-            	<tr><td>88</td><td>rdalisay</td><td>Ricardo</td><td>Dalisay</td><td>MRW</td><td><button class="btn btn-primary">Approve</button>&nbsp;<button class="btn btn-danger">Decline</button></td></tr></form>
+                <form action="goUser.php?action=allow">
+            	<tr><td>88</td><td>rdalisay</td><td>Ricardo</td><td>Dalisay</td><td>MRW</td><td><button class="btn btn-primary">Grant Access</button></td></tr></form>
      </table>
      <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">
