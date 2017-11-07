@@ -53,7 +53,7 @@ $person = new User;
 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
+                                echo '<option value="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
                             }
                         }
 
@@ -64,8 +64,8 @@ $person = new User;
                     
                     <td>
                         <select class="form-control" name="role">
-                            <option id="1">Staff</option>
-                            <option id="2">Admin</option>
+                            <option value="1">Staff</option>
+                            <option value="2">Admin</option>
                         </select>
                     </td>
                     
@@ -92,7 +92,7 @@ $person = new User;
 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
+                                echo '<option value="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
                             }
                         }
 
@@ -120,14 +120,25 @@ $person = new User;
     <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">
             
-            <strong>PENDING APPROVAL/LOCKED ACCOUNTS</strong> 
+            <strong>PENDING APPROVAL / LOCKED ACCOUNTS</strong> 
 
         </div>
     </div>
      <table class="table">
-            	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Office</th><th>Action</th></tr>
-                <form action="goUser.php?action=allow">
-            	<tr><td>88</td><td>rdalisay</td><td>Ricardo</td><td>Dalisay</td><td>MRW</td><td><button class="btn btn-primary">Grant Access</button></td></tr></form>
+            	<tr><th>Username</th><th>First Name</th><th>Last Name</th><th>Office</th><th>Action</th></tr>
+                <?php
+                    $sql = "SELECT * FROM users inner join office on users.USER_OFC=office.OF_ID where users.USER_LOCK=1";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo '<form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post">';
+                            echo '<tr><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><input class="btn btn-primary" type="submit" value="Approve"></td></tr></form>';
+                        }
+                    }
+
+                ?>
+                
      </table>
      <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">

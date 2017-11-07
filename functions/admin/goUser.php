@@ -29,7 +29,7 @@ if(!isset($_REQUEST['action'])){
 	header("location: ../../badrequest.php?error=NO_PARAMETERS_SET");
 }
 if ($_REQUEST['action']=="allow") {
-	$uid = $_POST['uid'];
+	$uid = $_REQUEST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=0 where USER_ID= $uid";
     if($conn->query($sql)){
         $uri = strtok($_SERVER['HTTP_REFERER'],'?');
