@@ -225,7 +225,45 @@ if ($result->num_rows > 0) {
    }
 </script> 
 <script>
-eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('e t;d(2(){$.f({c:"h/i.5",b:\'8\',a:2(7){9(7.g){3()}v{}}})},q);6(t);2 4(){1.r=0;1.s=0;1.j=0;1.u=0;1.p=0;1.o=0;2 3(){1.k.l=\'3.5\'}2 0(){6(t);t=m(3,n)}}4();',32,32,'resetTimer|window|function|logout|idleLogout|php|clearTimeout|data|json|if|success|dataType|url|setInterval|var|ajax|return|functions|amilocked|onmousedown|location|href|setTimeout|300000|onkeypress|onscroll|3000|onload|onmousemove||onclick|else'.split('|'),0,{}))
+var t;
+
+function logout() {
+        window.location.href = 'logout.php';
+    }
+
+    setInterval(function(){
+        $.ajax({
+            url: "functions/amilocked.php",
+            dataType: 'json',
+            success: function(data) {
+                if (data.return) {
+                    logout();
+                } else {
+                    //alert("return is false");
+                }
+            }
+        });
+        
+    }, 3000);
+    clearTimeout(t);
+    
+    
+    function idleLogout() {
+   
+    window.onload = resetTimer;
+    window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer; // catches touchscreen presses
+    window.onclick = resetTimer;     // catches touchpad clicks
+    window.onscroll = resetTimer;    // catches scrolling with arrow keys
+    window.onkeypress = resetTimer;
+
+    
+    function resetTimer() {
+        clearTimeout(t);
+        t = setTimeout(logout, 300000);  // 5 MINUTES
+    }
+}
+idleLogout();
 </script>
 
 

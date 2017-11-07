@@ -29,7 +29,7 @@ $person = new User;
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="../../assets/css/msg-css.css" rel="stylesheet" />
  <body>
- <a href="#" class="btn btn-primary" style="color: white;">View Pending Account Requests</a>&nbsp;<a href="#" class="btn btn-info" style="color: white;">Modify Users</a>&nbsp;<a href="#" class="btn btn-success" style="color: white;">Who's online?</a>
+ 
  
  </body>
  </html>
