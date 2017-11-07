@@ -46,13 +46,11 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="./assets/css/msg-css.css" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="./assets/css/demo.css" rel="stylesheet" />
+   
 </head>
-<body style="background-color: lightred ">
-
+<body>
     
-</div>    
+  
          <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="logo-trad">
@@ -133,69 +131,50 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                     }
                 </script>
    <!-- End Navbar -->
+<br>
+   <div class="space-100"></div>
+<div class="main">
+    <div class="panel">
+        <div class="container">
+               
+        <div class="category text-primary" align="center">Search</div>
+    
+        <input type="text" class="form-control " placeholder="Search People" id="person" list="peoplelist" onchange="gotoMsg()" onclick="document.getElementById('person').value='';" >
 
+            <datalist id="peoplelist">
+<?php
 
-   <div class="main">
-    <div class="msgpanel">
-                <div class"">
-                </div>
-                <!--message input area-->
-                <div class="msg-main">
-                        <div class="msg-container" align="right">
-                            <div  class="otherend"><div class="messages category text-primary" align="center">messages</div> 
-                            </div>                            
-                        </div>                              
-                    <div class="bottom"> <!--message input-->
-                     <div class="msg-area" id="msg-area">&nbsp;</div>
-                      <div class="input-group form-group-no-border">    
-                        <input class="form-control" id="msg-input" type="text" name="msg" placeholder="Enter message here..." style="font-size: 15px;" onkeydown="if (event.keyCode==13) sendmsg();">
-                    
-                        <span class="input-group-addon"><button class="btn btn-primary btn-round" onclick="sendmsg();"><i class="now-ui-icons ui-1_send"></i>&nbsp;Send</button></span>          
-                      </div>
-                   </div>
-                </div>
-                <div class="msgs-sidebar" >
-                <div>
-                    <div class="messages category text-primary" align="center">Search</div>  <!-- Search barfor people/messages-->
-                    <div class="msgretrieve"></div> <!--Placeholder for returned results of the search. Empty if no return.-->      
-                </div>
-                <div class="msgsearch input-group form-group-no-border">
-                    <input type="text" class="form-control" placeholder="Search Messenger">
-                    <span class="input-group-addon">
-                        <i class="now-ui-icons ui-1_zoom-bold""></i>
-                    </span>
-                </div>
-              </div>
+$sql = "SELECT USER_NAME FROM USERS where USER_LOCK=0";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo '<option value="'. $row['USER_NAME'] .'"/>';
+    }
+}
+?>
+           
 
+            </datalist>
+    <hr>
+     <div class="category text-primary" align="center">unread</div>
+     <div class="unread">
+         <span id="overhere"></span>
+     </div>
     </div>
-     
+    </div>
+    <div class="max">
+          <iframe  src="" id="content1" >  </iframe>
+          <hr>
+          <span>Enter your message(max 200 chars)</span>
+          <textarea type="text" id="msg" placeholder="Your message here..." maxlength="200" style="width: 70%; border-radius: 10px; padding: 10px;"></textarea><br>
+          <button class="btn btn-success" style="width: 28%;float: right" onclick="fireMsg();">Send</button>
+          
+    </div>
+</div>
+   
 </body>
 
-<script type="text/javascript">
-    function sendmsg() {
 
-            var msginput = document.getElementById("msg-input").value;
-            
-            if (msginput != null){
-                <?php echo 'var uname = "'. $_SESSION['id'].'"'; ?> 
-                  
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function(){
-                  if(xmlhttp.readyState==4&&xmlhttp.status==200){
-                    document.getElementById('msg-area').innerHTML = xmlhttp.responseText;                    
-              }
-              }
-               xmlhttp.open('GET','./functions/sendmsg.php?uname='+uname+'&msg='+msginput,true);
-               xmlhttp.send();
-            }
-      //$(document).ready(function(e){
-      //    $.ajaxSetup({cache:false});
-      //    setInterval(function(){$('#msg-area').load()})
-     // });
-}
-            
-
-</script> 
 
 <script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="./assets/js/core/tether.min.js" type="text/javascript"></script>
@@ -208,21 +187,43 @@ TO LESSEN THE LOADING TIME OF THE PAGE
 <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="./assets/js/now-ui-kit.js" type="text/javascript"></script>
+
+
 <script type="text/javascript">
-   $(document).ready(function() {
-       // the body of this function is in assets/js/now-ui-kit.js
-       nowuiKit.initSliders();
-   });
+    $('<p>Test</p>').insertAfter("#overhere");
+    function fireMsg(){
+                var msg = document.getElementById("msg").value;
+                var u = document.getElementById('person').value;
+                if ((msg=="") || (u=="")) {
+                    alert("Oops! Mind checking your inputs?")
+                }else{
+                var dt = {}
+                dt.TO = u
+                dt.BODY = msg
+                $.ajax({
+                        url: "functions/sendmsg.php",
+                        type: "post",
+                        dataType: 'json',
+                        data: dt,
+                        success: function(data) {
+                            if (data.return) {
+                                document.getElementById("msg").value = "";
+                                gotoMsg();
 
-   function scrollToDownload() {
-
-       if ($('.section-download').length != 0) {
-           $("html, body").animate({
-               scrollTop: $('.section-download').offset().top
-           }, 1000);
-       }
+                            } else {
+                                alert("Something went wrong. Mind trying again?");
+                            }
+                        }
+                    });
+                }
+                
+                
+              }
+   function gotoMsg(){
+    var who = document.getElementById('person').value;
+    document.getElementById('content1').src = "functions/getmsgs.php?r=" + who;
    }
-</script>
+</script> 
 <script>
 var _0x22be=["\x66\x75\x6E\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6D\x69\x6C\x6F\x63\x6B\x65\x64\x2E\x70\x68\x70",
     "\x6A\x73\x6F\x6E",
@@ -264,4 +265,36 @@ var _0x22be=["\x66\x75\x6E\x63\x74\x69\x6F\x6E\x73\x2F\x61\x6D\x69\x6C\x6F\x63\x
     }
     }idleLogout()
 </script>
+
+
+
+
+
+<style type="text/css">
+a:hover{
+    
+        color: white
+    
+    
+}
+iframe{
+    flex-grow: 1; margin: 0; padding: 0;border-color: #f0f0f0;border-width: 2px;border-radius: 5px;background-color: white;
+}
+.max{
+    max-width:74%;
+    min-height: 500px;
+    float: right;
+    overflow-y: scroll;
+    display: flex; width: 100%; height: 100%; flex-direction: column;  overflow: hidden;
+}
+    .panel{
+        max-width: 25%;
+        float: left;
+        min-height: 100%;
+    }
+    .tblcontent:hover{
+        color: white;
+        background-color: #41533b;
+    }
+</style>
 </html>

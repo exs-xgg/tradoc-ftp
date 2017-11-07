@@ -1,31 +1,40 @@
 <?php
-if(isset($_POST['data'])){
-	if(isset($_SESSION['user'])){
-
-	}
-}else{
-	echo json_encode("ERROR: ILLEGAL_API_ACCESS");
+include 'db_con.php';
+include 'crypto.php';
+session_start();
+if(!isset($_SESSION['user'])){
+  header("location: ../badrequest.php?error=RESTRICTED_ACCESS");
 }
+include("class/userclass.php");
+$person = new User;
+$person = unserialize($_SESSION['user']);
 
-include 'con-db.php';
-$user = stripslashes(htmlspecialchars($_REQUEST['uname'])) ;
-$msg = stripslashes(htmlspecialchars($_REQUEST['msg'])) ;	
-mysqli_query($conn, 'INSERT INTO messages (M_SENDER, M_MSG) VALUES ('.$user.','.$msg.')');
+if ((isset($_POST['BODY']))) {
+	
+	$body = fin(strip_tags($_POST['BODY']));
+	$r = $_POST['TO'];
+	$sql = "SELECT USER_ID FROM users where USER_NAME='$r';";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+	    while($row = $result->fetch_assoc()) {
+	        $r_id = $row['USER_ID'];
+	    }
 
-$result = mysqli_query($conn, "SELECT M_SENDER, M_MSG, M_TIME, M_RCVR, users.USER_ID, users.USER_NAME,users.USER_FNAME  FROM messages INNER JOIN users ON messages.M_SENDER=users.USER_ID WHERE M_SENDER AND M_RCVR = '$user' ORDER by M_TIME DESC "); 
+	    $sql = "INSERT into messages(M_RCVR,M_MSG,M_SENDER) VALUES($r_id,'$body',$person->user_id)";
+		if($conn->query($sql)){
+					$result = true;
 
-while ($extract = mysqli_fetch_array($result)){
-	$sender = $extract['USER_FNAME'];
-	$userid = $extract['USER_ID'];
-	$msgs = $extract['M_MSG'];
-	$time = $extract['M_TIME'];
-	if($userid != $user){
-	echo "<div><h5 class =\"text-success\" title =\"".$time."\">".$sender.":&nbsp;    ".$msgs."</h5></div>";	
-	}
-	else{
-	echo "<div class =\" text-primary \" ><h5 title =\"".$time."\"style= \"text-align:right\">".$sender.": &nbsp;".$msgs."</h5></div>";	
-	}
+		}else{
+			$result = false;
+		}
+		}else{
+			x_log("XQRY: ". $sql,$person->user_id);
+			$result = false;
+		}
 
-
+}else{
+	$result = false;
+}
+die(json_encode(array('return' => $result)));
 
 ?>

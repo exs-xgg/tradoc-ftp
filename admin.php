@@ -141,9 +141,6 @@ if ($person->user_role < 2) {
     }
 </script>
 <style type="text/css">
-iframe{
-    background-color: white;
-}
 a:hover{
     
         color: white
