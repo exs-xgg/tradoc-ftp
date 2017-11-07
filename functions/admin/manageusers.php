@@ -1,5 +1,5 @@
 <?php
-
+include '../db_con.php';
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
@@ -39,90 +39,91 @@ $person = new User;
 
         </div>
     </div>
-     <table>
-            	<tr><th>Username</th><th>Role</th><th>Action</th></tr>
-            	<form action="#" method="post">
+    <table class="table">
+        <tr><th>Change Roles</th><th>Access Control</th></tr>
+        <tr><td>
+             <table>
+                <tr><th>Username</th><th>Role</th><th>Action</th></tr>
+                <form action="functions/admin/modRole.php" method="post">
                 <tr>
                     <td>
-                        <select name="username">
-                            <option>general</option>
-                            <option>adminAq</option>
+                <select class="form-control" name="username">
+                    <?php 
+                        $sql = "SELECT USER_NAME,USER_ID FROM users";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME'] . '</option>';
+                            }
+                        }
+
+                    ?>
+                    <option>general</option>
+                    <option>adminAq</option>
+                </select>
+                    </td>
+                    
+                    <td>
+                        <select class="form-control" name="role">
+                            <option id="1">Staff</option>
+                            <option id="2">Admin</option>
                         </select>
                     </td>
                     
                     <td>
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Lock</option>
-                            <option>Allow</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input class="btn" type="submit" name="submit" value="Go">
+                        <input class="btn btn-success" type="submit" name="submit" value="Go">
                     </td>
                 </tr>
                 </form>
-                <form action="#" method="post">
-                <tr>
-                    <td>
-                        <select name="username">
-                            <option>general</option>
-                            <option>adminAq</option>
-                        </select>
-                    </td>
-                    
-                    <td>
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Lock</option>
-                            <option>Allow</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input class="btn" type="submit" name="submit" value="Go">
-                    </td>
-                </tr>
-                </form><form action="#" method="post">
-                <tr>
-                    <td>
-                        <select name="username">
-                            <option>general</option>
-                            <option>adminAq</option>
-                        </select>
-                    </td>
-                    
-                    <td>
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Lock</option>
-                            <option>Allow</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input class="btn" type="submit" name="submit" value="Go">
-                    </td>
-                </tr>
-                </form>
+                
             </table>
+
+        </td>
+        <td>
+            
+             <table>
+                <tr><th>Username</th><th>Access</th><th>Action</th><th</tr>
+                <form action="functions/admin/modAxs.php" method="post">
+                <tr>
+                    <td>
+                <select class="form-control" name="username">
+                    <?php 
+                        $sql = "SELECT USER_NAME,USER_ID FROM users";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo '<option id="'. $row['USER_ID'] .'">' . $row['USER_NAME'] . '</option>';
+                            }
+                        }
+
+                    ?>
+                    <option>general</option>
+                    <option>adminAq</option>
+                </select>
+                    </td>
+                    
+                    <td>
+                        <select class="form-control" name="action">
+                            <option>Lock</option>
+                            <option>Allow</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="btn btn-success" type="submit" name="submit" value="Go">
+                    </td>
+                </tr>
+                </form>
+                
+            </table>
+        </td></tr>
+    </table>
+    
             <style type="text/css">
                 td, th{
-                    padding-left: 10px;
-                    padding-right: 10px;
+                    padding-left: 20px;
+                    padding-right: 20px;
                 }
             </style>
             <br><hr><br>
@@ -134,9 +135,17 @@ $person = new User;
         </div>
     </div>
      <table class="table">
-            	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Office</th></tr>
-            	<form action="#" method="post"><tr><td><input type="text" name="uid" value="9231" readonly  width="50px"></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td><td><input type="text" name="uid" value="9231" readonly></td></tr></form>
-            </table>
+            	<tr><th>UID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Office</th><th>Action</th></tr>
+
+            	<tr><td>88</td><td>rdalisay</td><td>Ricardo</td><td>Dalisay</td><td>MRW</td><td><button class="btn btn-primary">Approve</button>&nbsp;<button class="btn btn-danger">Decline</button></td></tr></form>
+     </table>
+     <div class="alert alert-success" role="alert" id="#pending">
+        <div class="container">
+            
+            <strong></strong> 
+
+        </div>
+    </div>
  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

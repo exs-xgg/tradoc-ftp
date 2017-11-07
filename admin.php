@@ -151,20 +151,19 @@ a:hover{
     
 }
 iframe{
-    flex-grow: 1; border: none; margin: 0; padding: 0;
+    flex-grow: 1; margin: 0; padding: 0;border-color: #f0f0f0;border-width: 2px;border-radius: 5px;background-color: white;
 }
 .max{
     max-width: 84%;
     min-height: 500px;
     float: right;
     overflow-y: scroll;
-    display: flex; width: 100%; height: 100%; flex-direction: column; background-color: blue; overflow: hidden;
+    display: flex; width: 100%; height: 100%; flex-direction: column;  overflow: hidden;
 }
     .panel{
         max-width: 15%;
         float: left;
         min-height: 100%;
-        box-shadow: 2px 2px 2px gray;
     }
     .tblcontent:hover{
         color: white;
