@@ -213,7 +213,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
 
 <script>
-var t;
+   var t;
 
 function logout() {
         window.location.href = 'logout.php';
@@ -248,7 +248,8 @@ function logout() {
     
     function resetTimer() {
         clearTimeout(t);
-        t = setTimeout(logout, 300000);  // 5 MINUTES
+        t = setTimeout(logout,  <?php if ($person->user_role > 2) {
+                         ?>90000 );<?php }else{ ?>300000);  <?php }?>
     }
 }
 idleLogout();

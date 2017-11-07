@@ -168,4 +168,57 @@ iframe{
     }
 </style>
 </body>
+<script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/tether.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="./assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+<script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script src="./assets/js/now-ui-kit.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var t;
+
+function logout() {
+        window.location.href = 'logout.php';
+    }
+
+    setInterval(function(){
+        $.ajax({
+            url: "functions/amilocked.php",
+            dataType: 'json',
+            success: function(data) {
+                if (data.return) {
+                    logout();
+                } else {
+                    //alert("return is false");
+                }
+            }
+        });
+        
+    }, 3000);
+    clearTimeout(t);
+    
+    
+    function idleLogout() {
+   
+    window.onload = resetTimer;
+    window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer; // catches touchscreen presses
+    window.onclick = resetTimer;     // catches touchpad clicks
+    window.onscroll = resetTimer;    // catches scrolling with arrow keys
+    window.onkeypress = resetTimer;
+
+    
+    function resetTimer() {
+        clearTimeout(t);
+        t = setTimeout(logout,  <?php if ($person->user_role > 2) {
+                         ?>90000 );<?php }else{ ?>300000);  <?php }?>
+    }
+}
+idleLogout();
+</script>
 </html>
