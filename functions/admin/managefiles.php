@@ -12,7 +12,7 @@ $person = new User;
         header("location: badrequest.php?error=RESTRICTED_ACCESS");
     }
 
-
+//"SELECT * FROM files WHERE F_UPLOAD_DATE > DATE_SUB(NOW(),INTERVAL 5 YEAR)
   ?>
 
  <!DOCTYPE html>
@@ -30,14 +30,21 @@ $person = new User;
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="../../assets/css/msg-css.css" rel="stylesheet" />
  <body>
-    <div class="section section-tabs" style="background-color: white">
+    <div class="alert alert-info" role="alert">
+        <div class="container">
+            
+            <strong>SEARCH FILE</strong> 
+
+        </div>
+    </div>
+    <div style="background-color: white">
         <form action="#">
                 <div class="container">
                     <?php if (isset($_REQUEST['q'])) {
-                            echo '<p>'. 'Top 20 results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+                            echo '<p>'. 'Top 5 results returned for keyword "' . $_REQUEST['q'] . '"</p>';
                         }?>
                     <div class="input-group form-group-no-border" >
-                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;" <?php if (isset($_REQUEST['q'])) {
+                        <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 15px;" <?php if (isset($_REQUEST['q'])) {
                             echo 'value="'. $_REQUEST['q'] . '"';
                         }?>>
                         <span class="input-group-addon" ><button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span></form>
@@ -56,7 +63,86 @@ $person = new User;
                 if (isset($_REQUEST['q'])) {
                     include '../db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_NAME_ORIG like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_NAME_ORIG like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 5 ";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+
+                        $tags = json_decode($row["F_TAGS"]);
+
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
+                        $tag_decode = "";
+                        for ($i=0; $i < count($tags); $i++) { 
+                            $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
+                        }
+                        echo $tag_decode;
+                        echo '</td></tr>';
+                        ?>
+
+
+            <div class="modal fade" <?php echo 'id="m'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+                        <p>Description: <?php echo $row["F_DESC"];?></p>
+                        <p>Tracking No: <?php echo $row["F_TRACK_NO"];?></p>
+                        <p>Uploader: <?php echo $row["USER_FNAME"]. " ". $row["USER_LNAME"] . ", " .$row['F_OFFICE'];?></p>
+                        <p>Date Uploaded: <?php echo $row["F_UPLOAD_DATE"];?></p>
+                        <p>&nbsp;<?php echo $tag_decode; ?></p>
+                    </div>
+                    <div class="modal-footer">
+
+                        
+                        <a href=<?php echo '"modfile.php?filex='.$row['F_ID'].'"'; ?> target="_blank" class="btn btn-default" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Edit</b></a>
+
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
+                    </div>
+                </div>
+             </div>
+            </div>
+
+                        <?php 
+
+                    }
+                } else {
+                   
+                }
+            $conn->close();
+
+
+
+                }
+               
+
+                ?>
+                
+
+                </table> 
+
+
+
+            </div>
+ <div class="alert alert-danger" role="alert">
+        <div class="container">
+            
+            <strong>FILES THAT NEED ATTENTION</strong> 
+
+        </div>
+    </div>
+    <div style="padding-left: 5%;padding-right: 5%">
+        <table class="table">
+                <tr><th>Tracking No.</th><th>Document Name</th><th>Date Uploaded</th><th>Uploaded By</th><th>Uploaded From</th><th width="30%">Document Tags</th></tr>
+
+
+                <?php 
+                if (isset($_REQUEST['q'])) {
+                    include '../db_con.php'; 
+                    $q = $_REQUEST['q'];
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_UPLOAD_DATE > DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -114,8 +200,8 @@ $person = new User;
                 
 
                 </table> 
-            </div>
- 
+    </div>
+    
 <script src="../../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="../../assets/js/core/tether.min.js" type="text/javascript"></script>
 <script src="../../assets/js/core/bootstrap.min.js" type="text/javascript"></script>

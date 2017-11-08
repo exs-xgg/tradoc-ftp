@@ -126,7 +126,7 @@ if (isset($_REQUEST['r'])) {
             <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
             <?php
             include 'functions/db_con.php';
-            $sql = "SELECT * FROM OFFICE";
+            $sql = "SELECT * FROM office";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
