@@ -215,8 +215,7 @@ function logout() {
     
     function resetTimer() {
         clearTimeout(t);
-        t = setTimeout(logout,  <?php if ($person->user_role > 2) {
-                         ?>90000 );<?php }else{ ?>300000);  <?php }?>
+        t = setTimeout(logout,  60000);
     }
 }
 idleLogout();
