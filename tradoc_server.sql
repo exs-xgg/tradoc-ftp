@@ -17,7 +17,13 @@ use tradoc;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-
+DROP TABLE IF EXISTS `ok_files`;
+CREATE TABLE `ok_files`)(
+ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+EXT VARCHAR(4) NOT NULL
+);
+INSERT INTO ok_files (EXT) values('docx'),( 'doc'),( 'ppt'),( 'pptx'),( 'xls'),( 'xlsx'),( 'pdf'),( 'txt'),( 'odt'),( 'ods'),( 'odp');
+INSERT INTO ok_files (EXT) values('avi'),( 'mp4'),( 'wmv'),( 'psd');
 --
 -- Table structure for table `file`
 --
@@ -31,6 +37,7 @@ CREATE TABLE `file` (
   `F_NAME_SERVER` varchar(100) NOT NULL,
   `F_NAME_ORIG` varchar(100) NOT NULL,
   `F_UPLOAD_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `F_DATE_LAST_CHECKED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `F_DESC` varchar(200) DEFAULT NULL,
   `F_UPLOADER` int(11) NOT NULL,
   `F_OFFICE` varchar(10) NOT NULL,

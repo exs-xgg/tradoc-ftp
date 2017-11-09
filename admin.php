@@ -29,7 +29,6 @@ if ($person->user_role < 2) {
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css" rel="stylesheet" />
-    <link href="./assets/css/msg-css.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/css/demo.css" rel="stylesheet" />
 </head>
@@ -123,22 +122,26 @@ if ($person->user_role < 2) {
     </div>
     </div>
     <div class="max">
-          <iframe  src="" id="content1" >  </iframe>
+          <iframe  src="" id="content1" onload="resizeIframe(this)" scrolling="no">  </iframe>
     </div>
 </div>
 <script type="text/javascript">
     function gotouser(){
-        document.getElementById('content1').src = "functions/admin/manageusers.php"
+        document.getElementById('content1').src = "functions/admin/manageusers.php";
     }
     function gotofile(){
-        document.getElementById('content1').src = "functions/admin/managefiles.php"
+        document.getElementById('content1').src = "functions/admin/managefiles.php";
     }
     function gotologs(){
-        document.getElementById('content1').src = "functions/admin/viewlogs.php"
+        document.getElementById('content1').src = "functions/admin/viewlogs.php";
     }
     function gotostat(){
-        document.getElementById('content1').src = "functions/admin/viewsysstat.php"
+        document.getElementById('content1').src = "functions/admin/viewsysstat.php";
     }
+    
+  function resizeIframe(iframe) {
+    iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
+  }
 </script>
 <style type="text/css">
 a:hover{
@@ -148,14 +151,13 @@ a:hover{
     
 }
 iframe{
-    flex-grow: 1; margin: 0; padding: 0;border-color: #f0f0f0;border-width: 2px;border-radius: 5px;background-color: white;
+    flex-grow: 1; margin: 0; padding: 0;background-color: white;
 }
 .max{
     max-width: 84%;
     min-height: 500px;
     float: right;
-    overflow-y: scroll;
-    display: flex; width: 100%; height: 100%; flex-direction: column;  overflow: hidden;
+    display: flex; width: 100%; height: 100%; flex-direction: column;
 }
     .panel{
         max-width: 15%;
@@ -202,7 +204,10 @@ function logout() {
     }, 3000);
     clearTimeout(t);
     
-    
+     window.onerror = function(message, url, lineNumber) {  
+        // code to execute on an error  
+        return true; // prevents browser error messages  
+    };
     function idleLogout() {
    
     window.onload = resetTimer;

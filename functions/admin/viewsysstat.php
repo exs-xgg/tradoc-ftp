@@ -14,6 +14,9 @@ $person = new User;
 
 
   ?>
+  <script type="text/javascript">
+    parent.iframeLoaded();
+</script>
  <!DOCTYPE html>
  <html>
  <head>

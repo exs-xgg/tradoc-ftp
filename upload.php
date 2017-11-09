@@ -5,17 +5,31 @@
 if (isset($_REQUEST['success'])) {
    if ($_REQUEST['success']=="yes") {
       ?>
-<script type="text/javascript">
-    alert("File upload successful!");
-</script>
+<nav class="navbar fixed-bottom bg-success " id="notif" onclick="$('#notif').hide('slow');">
+                            <div class="container">
+                                <div class="navbar-translate">
+                                     <a class="navbar-brand" href="#">FILE UPLOAD SUCCESSFUL</a>
+                                </div>
+                                <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
+                                    
+                                </div>
+                            </div>
+                        </nav>
 <?php
    }else{
 
 ?>
 
-<script type="text/javascript">
-    alert("File upload unsuccessful.");
-</script>
+<nav class="navbar fixed-bottom bg-danger" id="notif" onclick="$('#notif').hide('slow');">
+                            <div class="container">
+                                <div class="navbar-translate" data-dismiss="modal">
+                                     <a class="navbar-brand" href="#">FILE UPLOAD FAILED OR IS INVALID</a>
+                                </div>
+                                <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
+                                    
+                                </div>
+                            </div>
+                        </nav>
 
 
 <?php
@@ -48,7 +62,6 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
 
 
-
 <html lang="en"><head>
     <meta charset="utf-8">
     <link rel="icon" sizes="76x76" href="./assets/img/tradoc_logo.png">
@@ -68,7 +81,9 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
 
 
+
 <body style="padding-right: 33px;" class="modal-open">
+
           <nav class="navbar navbar-toggleable-md bg-primary fixed-top">
         <div class="container">
             <div class="logo-trad">

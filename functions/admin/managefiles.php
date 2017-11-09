@@ -139,10 +139,9 @@ $person = new User;
 
 
                 <?php 
-                if (isset($_REQUEST['q'])) {
+             
                     include '../db_con.php'; 
-                    $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_UPLOAD_DATE > DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED < DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -193,7 +192,7 @@ $person = new User;
 
 
 
-                }
+                
                
 
                 ?>
@@ -213,5 +212,8 @@ $person = new User;
 <script src="../../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="../../assets/js/now-ui-kit.js" type="text/javascript"></script>
+<script type="text/javascript">
+    parent.iframeLoaded();
+</script>
  </body>
  </html>
