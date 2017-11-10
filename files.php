@@ -97,7 +97,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="c_logout();">
+                        <a class="nav-link" href="#" onclick="logout();">
                             <i class="now-ui-icons ui-1_simple-remove"></i>
                             <p>Log Out</p>
                         </a>
@@ -106,17 +106,6 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
             </div>
         </div>
     </nav>
-    <script type="text/javascript">
-                    function c_logout(){
-                       var answer = confirm("Logout?");
-                        if (answer) {
-                            window.location.href = "./logout.php";
-                        }
-                        else {
-                            //some code
-                        }
-                    }
-                </script>
     <!-- End Navbar -->
 
 
@@ -188,7 +177,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
 
                         <button type="button" class="btn btn-primary" onclick="pinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Pin File</b></button>
 
-                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+                        <a href=<?php echo '"functions/u.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
 
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
                     </div>

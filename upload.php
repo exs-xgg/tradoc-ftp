@@ -151,17 +151,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
             </div>
         </div>
     </nav>
-    <script type="text/javascript">
-                    function logout(){
-                       var answer = confirm("Logout?");
-                        if (answer) {
-                            window.location.href = "./logout.php";
-                        }
-                        else {
-                            //some code
-                        }
-                    }
-                </script>
+    
     <!-- End Navbar -->
 
 <div class="space-50">

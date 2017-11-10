@@ -122,17 +122,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
         </div>
     </nav>
    <div class="wrapper"><div class="space-50"></div></div>
-    <script type="text/javascript">
-                    function logout(){
-                       var answer = confirm("Logout?");
-                        if (answer) {
-                            window.location.href = "./logout.php";
-                        }
-                        else {
-                            //some code
-                        }
-                    }
-                </script>
+    
     <!-- Navbar -->
 
     <div class="wrapper">
