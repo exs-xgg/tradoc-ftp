@@ -44,7 +44,7 @@
     <div class="space-100"></div>
     <center><h3>Create Account</h3></center>
 <?php
-
+include 'functions/crypto.php';
 if (isset($_REQUEST['r'])) {
     # code...
 
@@ -57,12 +57,13 @@ if (isset($_REQUEST['r'])) {
                         include("functions/db_con.php");
                         $username = $_POST['username'];
                         $pw = md5($_POST['password']);
-                        $fname = $_POST['fname'];
-                        $lname = $_POST['lname'];
-                        $role = $_POST['role'];
-                        $ofc = $_POST['office'];
-                        $sql =  "INSERT INTO USERS (USER_NAME, USER_FNAME, USER_LNAME, USER_PW, USER_OFC, ROLE_ID, USER_LOCK)
-                            VALUES('$username','$fname','$lname','$pw',$ofc,$role,1)";
+                        $sn = fin($_POST['sn']);
+                        $fname = fin($_POST['fname']);
+                        $lname = fin($_POST['lname']);
+                        $role = fin($_POST['role']);
+                        $ofc = fin($_POST['office']);
+                        $sql =  "INSERT INTO USERS (USER_NAME, USER_FNAME, USER_LNAME, USER_PW, USER_OFC, ROLE_ID, USER_SN, USER_LOCK)
+                            VALUES('$username','$fname','$lname','$pw',$ofc,$role,'$sn',1)";
                             if($conn->query($sql)){
                                        ?>
 
@@ -113,6 +114,7 @@ if (isset($_REQUEST['r'])) {
     
     <div class="container" style="max-width: 800px; float: center">
         <form action="signup.php?r=1" method="post">
+            <p class="category">SERIAL NUMBER: <p><input class="form-control" type="text" required name="sn"><br>
             <p class="category">USERNAME: <p><input class="form-control" type="text" required name="username"><br>
             <p class="category">PASSWORD: </p><input class="form-control" type="password" required name="password"><br>
             <p class="category">FIRST NAME: </p><input class="form-control" type="text" required name="fname"><br>
