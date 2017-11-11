@@ -156,6 +156,7 @@ CREATE TABLE `users` (
   KEY `USER_OFC` (`USER_OFC`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`USER_OFC`) REFERENCES `office` (`OF_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+-- TRIGGER `go_user_sys` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO user_sys(USER_ID) VALUES(New.USER_ID);
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -185,7 +186,13 @@ DELIMITER ;
 --
 -- Table structure for table `pinned`
 --
-
+CREATE TABLE user_sys(
+SYS_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+USER_ID INT NOT NULL,
+USER_ONLINE INT NOT NULL DEFAULT 0,
+USER_PW_ATTEMPT INT NOT NULL DEFAULT 3,
+FOREIGN KEY user_sys(USER_ID) REFERENCES users(USER_ID)
+)
 DROP TABLE IF EXISTS `pinned`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

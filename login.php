@@ -1,13 +1,16 @@
 <?php
     session_start();
-    $_SESSION['times'] = 0;
+   
+   
    if ((isset($_SESSION['user']))) {
        header("location: files.php");
    }
    if (isset($_REQUEST['grant'])) {
        # code...
     if (($_REQUEST['grant'])=="false") {
+        
 
+        
 
     ?>
 <nav class="navbar navbar-toggleable-md bg-danger">
@@ -30,7 +33,7 @@
 
    if (($_REQUEST['grant']=="true")){
         if(isset($_REQUEST['mark']) && ($_REQUEST['mark'] == $_SESSION['mark'])){
-
+            
 //JUST LEAVE THIS HERE
 
 }else{

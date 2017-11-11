@@ -117,7 +117,7 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
          
     </div>
     <div class="main" >
-<form action="#">
+        <form action="#">
              <div class="section section-tabs" style="background-color: white">
                 <div class="container">
                     <?php if (isset($_REQUEST['q'])) {
@@ -127,7 +127,16 @@ x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user
                         <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;" <?php if (isset($_REQUEST['q'])) {
                             echo 'value="'. $_REQUEST['q'] . '"';
                         }?>>
-                        <span class="input-group-addon" ><button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button></span></form>
+                        <span class="input-group-addon" >
+                            <button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button>
+                        </span>
+                        <span class="input-group-addon" >
+                            <select class="btn btn-primary btn-round" type="text" value="Search By" name="cat">
+                                <option>By Office</option>
+                                <option>By User</option>
+                            </select>
+                        </span>
+        </form>
                         <span class="input-group-addon" ><a class="btn btn-primary btn-round"  href="upload.php"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</a></span>
                     </div>
                 
