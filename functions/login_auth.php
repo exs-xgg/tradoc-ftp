@@ -61,6 +61,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 							$person->user_role = $row['ROLE_ID'];
 							$person->user_office = $row['OF_NAME'];
 							$person->user_pw = $row['USER_PW'];
+							$person->user_sn = $row['USER_SN'];
 							$sql = "UPDATE users set ONLINE=1 where USER_ID=$person->user_id";
 							if($conn->query($sql)){
 										echo "";
