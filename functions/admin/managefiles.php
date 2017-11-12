@@ -63,7 +63,7 @@ $person = new User;
                 if (isset($_REQUEST['q'])) {
                     include '../db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_NAME_ORIG like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 5 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_TRACKING_NO like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 5 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -95,9 +95,9 @@ $person = new User;
                     <div class="modal-footer">
 
                         
-                        <a href=<?php echo '"modfile.php?filex='.$row['F_ID'].'"'; ?> target="_blank" class="btn btn-default" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Edit</b></a>
+                        <a href=<?php echo '"modfile.php?filex='.$row['F_ID'].'"'; ?> target="_blank" class="btn btn-default" ><b>Edit</b></a>
 
-                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><b>Download</b></a>
 
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
                     </div>
@@ -129,7 +129,7 @@ $person = new User;
  <div class="alert alert-danger" role="alert">
         <div class="container">
             
-            <strong>FILES THAT NEED ATTENTION</strong> 
+            <strong>FILES THAT HAVE REACHED 5 YEARS IN SERVER</strong> 
 
         </div>
     </div>
@@ -141,7 +141,7 @@ $person = new User;
                 <?php 
              
                     include '../db_con.php'; 
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED < DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED <  DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -149,7 +149,7 @@ $person = new User;
 
                         $tags = json_decode($row["F_TAGS"]);
 
-                        echo '<tr class="tb"  data-toggle="modal" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#e'. $row["F_ID"] .'" id="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
                         $tag_decode = "";
                         for ($i=0; $i < count($tags); $i++) { 
                             $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
@@ -159,7 +159,7 @@ $person = new User;
                         ?>
 
 
-            <div class="modal fade" <?php echo 'id="m'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" <?php echo 'id="e'.$row["F_ID"].'"'?> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     
@@ -172,11 +172,11 @@ $person = new User;
                     </div>
                     <div class="modal-footer">
 
-                        <button type="button" class="btn btn-primary" onclick="pinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Pin File</b></button>
+                        <button type="button" class="btn btn-info" onclick="deleteFile(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><b>Retain</b></button>
 
-                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
+                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-danger" ><b>Delete</b></a>
 
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
+                        <button type="button" class="btn btn-neutral" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
                     </div>
                 </div>
              </div>
@@ -214,6 +214,35 @@ $person = new User;
 <script src="../../assets/js/now-ui-kit.js" type="text/javascript"></script>
 <script type="text/javascript">
     parent.iframeLoaded();
+
+    function deleteFile(fid){
+        var fidr = "m"+fid;
+
+        $.ajax({
+            url: "functions/admin/deleteFile.php?fid="+fid,
+            dataType: 'json',
+            success: function(data) {
+                if (data.return) {
+                    $(fidr).remove();
+                } else {
+                    alert("Something went wrong");
+                }
+            }
+        });
+    }
+    function stayFile(fid){
+        $.ajax({
+            url: "functions/admin/stayFile.php?fid="+fid,
+            dataType: 'json',
+            success: function(data) {
+                if (data.return) {
+                    alert("File retained");
+                } else {
+                    alert("Something went wrong");
+                }
+            }
+        });
+    }
 </script>
  </body>
  </html>

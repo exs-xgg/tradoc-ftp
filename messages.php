@@ -15,7 +15,7 @@ $person = unserialize($_SESSION['user']);
 
 
 
-x_log("access", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 
 
@@ -45,7 +45,6 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <!-- CSS Files -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/css/now-ui-kit.css" rel="stylesheet" />
-    <link href="./assets/css/msg-css.css" rel="stylesheet" />
    
 </head>
 <body>

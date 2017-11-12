@@ -11,7 +11,7 @@ $person = new User;
 $person = unserialize($_SESSION['user']);
 include 'functions/crypto.php';
 $id = $person->user_id;
-x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 ?>
 
@@ -130,12 +130,7 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
                         <span class="input-group-addon" >
                             <button class="btn btn-primary btn-round" type="submit"><i class="now-ui-icons ui-1_zoom-bold"></i>&nbsp;Search</button>
                         </span>
-                        <span class="input-group-addon" >
-                            <select class="btn btn-primary btn-round" type="text" value="Search By" name="cat">
-                                <option>By Office</option>
-                                <option>By User</option>
-                            </select>
-                        </span>
+                        
         </form>
                         <span class="input-group-addon" ><a class="btn btn-primary btn-round"  href="upload.php"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp;Upload</a></span>
                     </div>
@@ -153,7 +148,7 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
                 if (isset($_REQUEST['q'])) {
                     include 'functions/db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_NAME_ORIG like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where (file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%') ORDER BY file.F_UPLOAD_DATE DESC LIMIT 2 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -212,11 +207,11 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
 
                 </table> 
             </div>
-           
+  
 
-
            
-    </div>        
+    </div> 
+
 </body>
 <style type="text/css">
     .tb:hover{

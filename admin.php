@@ -10,7 +10,8 @@ $person = unserialize($_SESSION['user']);
 if ($person->user_role < 2) {
     header("location: badrequest.php?error=RESTRICTED_ACCESS");
 }
-x_log("access", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+include 'functions/crypto.php';
+x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
     
 ?>

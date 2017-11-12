@@ -37,7 +37,7 @@ if ($_REQUEST['action']=="allow") {
 		header("location: ".$uri."?rs=ok");
     }else{
     	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-    	x_log("XQRY=".$sql,$person->user_id);
+    	x_log("modify",$_SERVER['REQUEST_URI']." $sql",$person->user_id);
 		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
     }
 //LOCK USER
@@ -49,7 +49,7 @@ if ($_REQUEST['action']=="allow") {
 		header("location: ".$uri."?rs=ok");
     }else{
     	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-    	x_log("XQRY=".$sql,$person->user_id);
+    	x_log("modify",$_SERVER['REQUEST_URI']." $sql",$person->user_id);
 		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
     }
 //MODIFY USER INFO
@@ -92,13 +92,13 @@ if ($_REQUEST['action']=="allow") {
 		header("location: ".$uri."?rs=ok");
     }else{
     	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-    	x_log("XQRY=".$sql,$person->user_id);
+    	x_log("modify",$_SERVER['REQUEST_URI']." $sql",$person->user_id);
 		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
 
     }
 }else{
 	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-	x_log("XQRY=".$sql,$person->user_id);
+	x_log("modify",$_SERVER['REQUEST_URI']." $sql",$person->user_id);
 	header("location: ".$uri."?rs=no&er=WRONG_ARGUMENTS");
 }
 

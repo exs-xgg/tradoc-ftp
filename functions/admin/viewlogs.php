@@ -7,7 +7,6 @@ if(!isset($_SESSION['user'])){
 include("../class/userclass.php");
 $person = new User;
 $person = unserialize($_SESSION['user']);
-x_log("access", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 if ($person->user_role < 2) {
     header("location: badrequest.php?error=RESTRICTED_ACCESS");
@@ -15,9 +14,7 @@ if ($person->user_role < 2) {
 
 
   ?>
-<script type="text/javascript">
-    parent.iframeLoaded();
-</script>
+
  <!DOCTYPE html>
  <html>
  <head>
@@ -31,7 +28,6 @@ if ($person->user_role < 2) {
     <!-- CSS Files -->
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
-    <link href="../../assets/css/msg-css.css" rel="stylesheet" />
  <body>
     <div class="alert alert-info" role="alert">
         <div class="container">
@@ -41,7 +37,7 @@ if ($person->user_role < 2) {
         </div>
     </div>
     <table class="table">
-        <tr><th>User</th><th>Time</th><th>Activity</th></tr>
+        <tr><th>User</th><th>Activity</th><th>URL</th><th>Time</th><th>IP Address</th></tr>
     
  <?php
 include '../db_con.php';
@@ -50,7 +46,7 @@ $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo '<tr><td>'.$row['USER_NAME'].'</td><td>'.$row['TIME'].'</td><td>'.$row['ACT'].'</td></tr>';
+            echo '<tr><td>'.$row['USER_NAME'].'</td><td>'.$row['ACT_NAME'].'</td><td>'.$row['ACT_OBJECT'].'</td><td>'.$row['TIME'].'</td><td>'.$row['IP_ADDR'].'</td></tr>';
         }
     }
  ?>
