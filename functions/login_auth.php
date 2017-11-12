@@ -41,9 +41,8 @@ if (isset($_SESSION['user'])) {
 }
 if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 	$uname = fin(strip_tags($_POST['user_name']));
-	$_SESSION['target'] = $uname;
 	$pw = md5(fin(strip_tags($_POST['passwd'])));
-	$sql = "SELECT * FROM users INNER JOIN office ON users.USER_OFC=office.OF_ID WHERE USER_NAME='$uname' and USER_PW='$pw'";
+	$sql = "SELECT * FROM users INNER JOIN office ON users.USER_OFC=office.OF_ID WHERE USER_NAME='$uname'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -51,49 +50,57 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
                     while($row = $result->fetch_assoc()) {
                     		if ($row['USER_LOCK']==0){
                     			$uid = $row['USER_ID'];
-                    			$tries = 0;
-                    			$sql = "SELECT * from user_sys where USER_ID = $uid";
-								if($conn->query($sql)){
-									$tries = $row['USER_PW_ATTEMPT'];
-									if ($tries < 3){
-										$tries += 1;
-										$sql = "UPDATE user_sys set USER_PW_ATTEMPT = $tries where USER_ID = $uid";
-										$conn->query($sql);
-									}else{
-										$sql = "UPDATE USERS set USER_LOCK = 1 where USER_ID = $uid";
-										$conn->query($sql);
-										header("location: ../badrequest.php?error=MAX_ATTEMPT_REACHED:ACCOUNT_LOCKED");
+                    			if ($pw == $row['USER_PW']){
+                    				$person->user_id = $row['USER_ID'];
+									$person->user_name = $row['USER_NAME'];
+									$person->user_fname = $row['USER_FNAME'];
+									$person->user_lname = $row['USER_LNAME'];
+									$person->user_role = $row['ROLE_ID'];
+									$person->user_office = $row['OF_NAME'];
+									$person->user_pw = $row['USER_PW'];
+									$person->user_sn = $row['USER_SN'];
 
+									$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+									$mark = generateRandomString();
+									$_SESSION['mark'] = $mark;
+									$sql = "UPDATE users set USER_ONLINE=1,USER_PW_ATTEMPT=3 where USER_ID=$person->user_id";
+									if($conn->query($sql)){
+												echo "";
+									}
+									x_log("Login",$person->user_id);
+									$_SESSION['user'] = serialize($person);
+									
+									header("location: ".$uri."?grant=true&mark=".$mark);
+								}else{
+									$tries = $row['USER_PW_ATTEMPT'];
+                    				if ($tries > 1) {
+                    					$tries = $tries - 1;
+                    					$sql = "UPDATE users set USER_PW_ATTEMPT=$tries WHERE USER_ID=$uid";
+                    					if ($conn->query($sql)) {
+                    						$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+										header("location: ".$uri."?grant=false");
+										session_destroy();
+                    					}
+                    				}else{
+                    													
+                    					$sql = "UPDATE users set USER_LOCK=1 WHERE USER_ID=$uid";
+                    					$conn->query($sql);
+                    					session_destroy();
+										header("location: ../badrequest.php?error=MAX_TRIES_EXCEEDED: YOU ARE NOW LOCKED");
 									}
 								}
-								
-								
-								$person->user_id = $row['USER_ID'];
-								$person->user_name = $row['USER_NAME'];
-								$person->user_fname = $row['USER_FNAME'];
-								$person->user_lname = $row['USER_LNAME'];
-								$person->user_role = $row['ROLE_ID'];
-								$person->user_office = $row['OF_NAME'];
-								$person->user_pw = $row['USER_PW'];
-								$person->user_sn = $row['USER_SN'];
+                    			
+                    			}else{
+									$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+									header("location: ".$uri."?grant=false");
 
-								$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-								$mark = generateRandomString();
-								$_SESSION['mark'] = $mark;
-								$sql = "UPDATE users set ONLINE=1 where USER_ID=$person->user_id";
-								if($conn->query($sql)){
-											echo "";
-								}
-								x_log("Login",$person->user_id);
-								$_SESSION['user'] = serialize($person);
+                    			}
+                    			
 								
-								header("location: ".$uri."?grant=true&mark=".$mark);
-							}else{
-								$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-								header("location: ".$uri."?grant=false");
-								session_destroy();
-							}
+								
                     }
+                }else{
+                	header("location: ../badrequest.php?error=USER_NOT_FOUND");
                 }
 
 

@@ -30,7 +30,7 @@ if(!isset($_REQUEST['action'])){
 }
 if ($_REQUEST['action']=="allow") {
 	$uid = $_REQUEST['uid'];
-	$sql =  "UPDATE users SET USER_LOCK=0 where USER_ID= $uid";
+	$sql =  "UPDATE users SET USER_LOCK=0,USER_PW_ATTEMPT=3 where USER_ID= $uid";
     if($conn->query($sql)){
         $uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		header("location: ".$uri."?rs=ok");
