@@ -6,10 +6,12 @@ if(!isset($_SESSION['user'])){
 }
 include("../class/userclass.php");
 $person = new User;
-    $person = unserialize($_SESSION['user']);
-    if ($person->user_role < 2) {
-        header("location: badrequest.php?error=RESTRICTED_ACCESS");
-    }
+$person = unserialize($_SESSION['user']);
+x_log("access", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+
+if ($person->user_role < 2) {
+    header("location: badrequest.php?error=RESTRICTED_ACCESS");
+}
 
 
   ?>

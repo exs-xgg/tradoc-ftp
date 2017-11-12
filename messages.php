@@ -15,7 +15,7 @@ $person = unserialize($_SESSION['user']);
 
 
 
-x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+x_log("access", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 
 

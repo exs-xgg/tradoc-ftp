@@ -11,7 +11,7 @@ $person = new User;
 $person = unserialize($_SESSION['user']);
 include 'functions/crypto.php';
 $id = $person->user_id;
-x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
 ?>
 

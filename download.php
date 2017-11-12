@@ -16,10 +16,11 @@ if (isset($_SESSION['user'])) {
     $person = unserialize($_SESSION['user']);
     
     $id = $person->user_id;
-    x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+    
+
 
     $db_file_name = fin(strip_tags($_REQUEST['filex']));
-
+x_log("download", $db_file_name ,$person->user_id);
     $sql = "SELECT *, count(*) as ct FROM file WHERE F_NAME_SERVER='$db_file_name'";
 
     $result = $conn->query($sql);

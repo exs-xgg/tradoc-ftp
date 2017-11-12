@@ -84,6 +84,8 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 		VALUES('$filetrack','$file_orig','$randomString', '$desc',$person->user_id, '$ofc','$tags',0)";
 		echo '<br><br>'.$sql;
 		if($conn->query($sql)){
+			x_log("upload", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+
 					header("location: ".$uri."?success=yes");
 		}else{
 			header("location: ".$uri."?success=no");

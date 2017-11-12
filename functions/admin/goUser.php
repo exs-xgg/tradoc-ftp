@@ -19,7 +19,8 @@ if (isset($_SESSION['user'])) {
 	$person = new User;
 	$person = unserialize($_SESSION['user']);
 	$id = $person->user_id;
-	x_log("Accessed " .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+	x_log("modify", .$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
+
 
 }else{
 header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");

@@ -16,9 +16,10 @@ function generateRandomString($length = 10) {
     }
     return ($randomString);
 }
-function x_log($act,$uid){
+function x_log($act,$obj,$uid){
     include("db_con.php");
-    $sql =  "INSERT INTO activity(ACT,UID) VALUES('$act',$uid)";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $sql =  "INSERT INTO activity(ACT_NAME,ACT_OBJECT,UID,IP_ADDR) VALUES('$act','$obj',$uid,'$ip')";
     if($conn->query($sql)){
         echo "";
     }
