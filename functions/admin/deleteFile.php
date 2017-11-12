@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_SERVER['HTTP_REFERER'])) {
-	header("location: ../index.html");
+	header("location: ../index.php");
 }
 include 'db_con.php';
 include 'crypto.php';
@@ -16,6 +16,7 @@ if (isset($_SESSION['user'])) {
 		$uid = $person->user_id;
 		$fid = $_REQUEST['fid'];
 		//QUERY TO DATABASE IF PIN
+
 		$sql = 	"DELETE FROM file where F_ID=$fid";
 
 		if($conn->query($sql)){

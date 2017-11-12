@@ -63,7 +63,7 @@ $person = new User;
                 if (isset($_REQUEST['q'])) {
                     include '../db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_TRACKING_NO like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 5 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_TRACK_NO like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 5 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -141,7 +141,7 @@ $person = new User;
                 <?php 
              
                     include '../db_con.php'; 
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED <  DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED > DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -149,7 +149,7 @@ $person = new User;
 
                         $tags = json_decode($row["F_TAGS"]);
 
-                        echo '<tr class="tb"  data-toggle="modal" data-target="#e'. $row["F_ID"] .'" id="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
+                        echo '<tr class="tb"  data-toggle="modal" data-target="#e'. $row["F_ID"] .'" id="#e'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
                         $tag_decode = "";
                         for ($i=0; $i < count($tags); $i++) { 
                             $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';
@@ -172,9 +172,9 @@ $person = new User;
                     </div>
                     <div class="modal-footer">
 
-                        <button type="button" class="btn btn-info" onclick="deleteFile(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><b>Retain</b></button>
+                        <button type="button" class="btn btn-info" onclick="stayFile(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><b>Retain</b></button>
 
-                        <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-danger" ><b>Delete</b></a>
+                         <button type="button" class="btn btn-danger" onclick="deleteFile(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><b><b>Delete</b></a>
 
                         <button type="button" class="btn btn-neutral" data-dismiss="modal"><i class="now-ui-icons ui-1_simple-remove"></i><b>&nbsp;&nbsp;Close</b></button>
                     </div>
@@ -216,11 +216,10 @@ $person = new User;
     parent.iframeLoaded();
 
     function deleteFile(fid){
-        var fidr = "m"+fid;
-
+        var fidr = "e"+fid;
+        alert(fidr);
         $.ajax({
-            url: "functions/admin/deleteFile.php?fid="+fid,
-            dataType: 'json',
+            url: "deleteFile.php?fid="+fid, 
             success: function(data) {
                 if (data.return) {
                     $(fidr).remove();
@@ -231,9 +230,11 @@ $person = new User;
         });
     }
     function stayFile(fid){
+        console.log(fid);   
+        var uurl = "stayFile.php?fid="+fid;
+        console.log(uurl);
         $.ajax({
-            url: "functions/admin/stayFile.php?fid="+fid,
-            dataType: 'json',
+            url: uurl,
             success: function(data) {
                 if (data.return) {
                     alert("File retained");
@@ -242,6 +243,7 @@ $person = new User;
                 }
             }
         });
+        
     }
 </script>
  </body>

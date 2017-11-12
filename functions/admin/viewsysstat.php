@@ -32,7 +32,14 @@ $person = new User;
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../assets/css/now-ui-kit.css" rel="stylesheet" />
  <body>
- 
+ <table class="table">
+     <tr><th>System Disk Size</th><td><?php echo `df | tail -1` ?></td></tr>
+     <tr><th>Server CPU Utilization</th><td><?php echo `grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}'` ?></td></tr>
+     <tr><th>Server Time</th><td><?php echo `date | head -1` ?></td></tr>
+     <tr><th>Uptime</th><td><?php echo `uptime` ?></td></tr>
+     <tr><th>Number of CPUs</th><td><?php echo `grep processor /proc/cpuinfo | wc -l` ?></td></tr>
+     <tr><th>Last Reboot</th><td><?php echo `last reboot | head -1` ?></td></tr>
+ </table>
  
  </body>
  </html>
