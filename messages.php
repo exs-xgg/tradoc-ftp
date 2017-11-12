@@ -153,6 +153,7 @@ if ($result->num_rows > 0) {
     </div>
     </div>
     <div class="max">
+         <button class="btn btn-success" style="width: 28%;float: right" onclick="gotoMsg();">Refresh</button>
           <iframe  src="" id="content1" >  </iframe>
           <hr>
           <span>Enter your message(max 200 chars)</span>
@@ -180,7 +181,19 @@ if ($result->num_rows > 0) {
 
 
 <script type="text/javascript">
-    $('<p>Test</p>').insertAfter("#overhere");
+    function getUnread(){
+        $.ajax({
+                        url: "functions/unread.php",
+                        type: "post",
+                        dataType: 'json',
+                        data: dt,
+                        success: function(data) {
+                            if (data.return) {
+                                $('<p>Test</p>').insertAfter("#overhere");
+                            }
+                        }
+                    });
+    }
     function fireMsg(){
                 var msg = document.getElementById("msg").value;
                 var u = document.getElementById('person').value;
