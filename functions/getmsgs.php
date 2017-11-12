@@ -35,7 +35,6 @@ if ($result->num_rows > 0) {
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/now-ui-kit.css" rel="stylesheet" />
-    <link href="../assets/css/msg-css.css" rel="stylesheet" />
 </head>
  <body>
 
@@ -52,6 +51,8 @@ while($row = $result1->fetch_assoc()) {
     }
     }
 }
+$sql = "UPDATE messages set M_READ=1 where (M_RCVR=$person->user_id) and (M_SENDER=$r_id)";
+$conn->query($sql);
 ?>
 <p id="bot"></p>
 </body>

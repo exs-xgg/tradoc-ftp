@@ -148,13 +148,14 @@ if ($result->num_rows > 0) {
     <hr>
      <div class="category text-primary" align="center">unread</div>
      <div class="unread">
+        <br>
          <span id="overhere"></span>
      </div>
     </div>
     </div>
     <div class="max">
          <button class="btn btn-success" style="width: 28%;float: right" onclick="gotoMsg();">Refresh</button>
-          <iframe  src="" id="content1" >  </iframe>
+          <iframe  src="" id="content1" name="content1">  </iframe>
           <hr>
           <span>Enter your message(max 200 chars)</span>
           <textarea type="text" id="msg" placeholder="Your message here..." maxlength="200" style="width: 70%; border-radius: 10px; padding: 10px;"></textarea><br>
@@ -181,19 +182,24 @@ if ($result->num_rows > 0) {
 
 
 <script type="text/javascript">
+
     function getUnread(){
         $.ajax({
                         url: "functions/unread.php",
                         type: "post",
                         dataType: 'json',
-                        data: dt,
                         success: function(data) {
-                            if (data.return) {
-                                $('<p>Test</p>').insertAfter("#overhere");
+                            if (data) {
+                                $("#unread").remove();
+                                for (var i = 0, len = data.length; i < len; i++) {
+                                    $('<a id="unread" class="category text-primary" href="functions/getmsgs.php?r=' + data[i] + '" target="content1">' + data[i] + '</a>').insertAfter("#overhere");
+                                }
+                                
                             }
                         }
                     });
     }
+    getUnread();
     function fireMsg(){
                 var msg = document.getElementById("msg").value;
                 var u = document.getElementById('person').value;
@@ -223,8 +229,12 @@ if ($result->num_rows > 0) {
                 
               }
    function gotoMsg(){
+    getUnread();
     var who = document.getElementById('person').value;
-    document.getElementById('content1').src = "functions/getmsgs.php?r=" + who;
+    if (who!="") {
+        document.getElementById('content1').src = "functions/getmsgs.php?r=" + who;
+    }
+    
    }
 </script> 
 <script>
