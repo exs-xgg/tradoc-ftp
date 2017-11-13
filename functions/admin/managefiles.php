@@ -221,11 +221,9 @@ $person = new User;
         $.ajax({
             url: "deleteFile.php?fid="+fid, 
             success: function(data) {
-                if (data.return) {
+                
                     $(fidr).remove();
-                } else {
-                    alert("Something went wrong");
-                }
+                
             }
         });
     }
@@ -236,11 +234,9 @@ $person = new User;
         $.ajax({
             url: uurl,
             success: function(data) {
-                if (data.return) {
+                
                     alert("File retained");
-                } else {
-                    alert("Something went wrong");
-                }
+                
             }
         });
         

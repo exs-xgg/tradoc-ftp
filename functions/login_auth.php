@@ -85,7 +85,9 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
                     													
                     					$sql = "UPDATE users set USER_LOCK=1 WHERE USER_ID=$uid";
                     					$conn->query($sql);
+                    					x_log("locked","MAX TRIES EXCEEDED",$uid);
                     					session_destroy();
+
 										header("location: ../badrequest.php?error=MAX_TRIES_EXCEEDED: YOU ARE NOW LOCKED");
 									}
 								}

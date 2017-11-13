@@ -36,12 +36,13 @@ if ($person->user_role < 2) {
 
         </div>
     </div>
+
     <table class="table">
         <tr><th>User</th><th>Activity</th><th>URL</th><th>Time</th><th>IP Address</th></tr>
     
  <?php
 include '../db_con.php';
-$sql = "SELECT * FROM activity inner join users on users.USER_ID = activity.UID order by TIME DESC limit 30";
+$sql = "SELECT * FROM activity inner join users on users.USER_ID = activity.UID where TIME > DATE_SUB(NOW(),INTERVAL 1 DAY) order by TIME DESC limit 30";
 $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

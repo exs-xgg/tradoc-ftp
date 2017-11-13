@@ -1,28 +1,28 @@
 <?php
 
-// if (!isset($_SERVER['HTTP_REFERER'])) {
-// 	header("location: ../index.php");
-// }
+if (!isset($_SERVER['HTTP_REFERER'])) {
+	header("location: ../index.php");
+}
 include '../db_con.php';
 include '../crypto.php';
 include '../class/userclass.php';
 session_start();
 if (isset($_SESSION['user'])) {
-	if (isset($_REQUEST['fid'])) {
+	if (isset($_POST['uid'])) {
 		
 		//UNSERIALIZE SESSION
 		$person = new User;
 		$person = unserialize($_SESSION['user']);
 		$uid = $person->user_id;
-		$fid = $_REQUEST['fid'];
+		$uid = $_POST['uid'];
 		//QUERY TO DATABASE IF PIN
-
-		$sql = 	"DELETE FROM file where F_ID=$fid";
+		$sql = 	"UPDATE users set USER_PW=md5('') where USER_ID=$uid";
 
 		if($conn->query($sql)){
-					$return = true;
+x_log("modify",  $_SERVER['REQUEST_URI'] ,$person->user_id);
+					header("location: manageusers.php");
+
 		}else{
-			echo $sql;
 			$return = false;
 		}
 	}else{

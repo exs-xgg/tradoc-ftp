@@ -118,7 +118,6 @@ $person = new User;
                     padding-right: 20px;
                 }
             </style>
-            <br><hr><br>
     <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">
             
@@ -142,44 +141,35 @@ $person = new User;
                 ?>
                 
      </table>
-     <div class="alert alert-success" role="alert" id="#pending">
+     
+    <div class="alert alert-success" role="alert" id="#pending">
         <div class="container">
             
-            <strong></strong> 
+            <strong>RESET PASSWORD</strong> 
 
         </div>
     </div>
- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
- tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
- quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
- consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
- cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
- proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
- tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
- quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
- consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
- cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
- proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
- tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
- quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
- consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
- cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
- proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
- tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
- quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
- consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
- cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
- proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
- tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
- quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
- consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
- cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
- proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
- 
+     <form action="resetpw.php" method="post">
+         <label style="margin-left: 10px;">Input Username to reset: </label>
+         <select  name="uid">
+                    <?php 
+                        $sql = "SELECT * FROM users where USER_LOCK=0";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo '<option value="'. $row['USER_ID'] .'">' . $row['USER_NAME']. ' ('. $row['USER_FNAME'] .' ' . $row['USER_LNAME'] . ')</option>';
+                            }
+                        }
+
+                    ?>
+                    
+                </select>
+         <input class="btn btn-primary" type="submit" name="submit" name="Reset Password">
+     </form>
+     
+ <p><br><br></p>
+ <div class="space-100"></div>
  </body>
 
 

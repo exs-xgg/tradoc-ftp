@@ -3,6 +3,22 @@ include '../db_con.php';
 include '../crypto.php';
 include '../class/userclass.php';
 session_start();
+
+if ((isset($_REQUEST['r']))) {
+		$trkno = $_POST['trkno'];
+		$svname = $_POST['svname'];
+		$origname = $_POST['origname'];
+		$desc = $_POST['desc'];
+		$tags = json_encode(explode("\r\n", (strip_tags(str_replace("'", "",$_POST['tags'])))));
+		$uid = $_POST['fid'];
+		$sql = "UPDATE file set F_TRACK_NO='$trkno', F_NAME_SERVER='$svname', F_NAME_ORIG='$origname',F_DESC='$desc', F_TAGS='$tags' where F_ID = $uid";
+		if ($conn->query($sql)) {
+			echo "EDIT SUCCESSFUL";
+		}else{
+			echo "Edit Failed ".$sql;
+		}
+	}
+
 if (isset($_SESSION['user']) && (isset($_REQUEST['filex']))) {
 	$person = new User;
 	$person = unserialize($_SESSION['user']);
@@ -46,20 +62,6 @@ if ($result->num_rows > 0) {
 
 	}
 
-}elseif ((isset($_REQUEST['r']))) {
-		$trkno = $_POST['trkno'];
-		$svname = $_POST['svname'];
-		$origname = $_POST['origname'];
-		$desc = $_POST['desc'];
-		$tags = $_POST['tags'];
-		$uid = $_POST['fid'];
-		$sql = "UPDATE file set F_TRACK_NO='$trkno', F_NAME_SERVER='$svname', F_NAME_ORIG='$origname',F_DESC='$desc', F_TAGS='$tags' where F_ID = uid";
-		if ($conn->query($sql)) {
-			echo "EDIT SUCCESSFUL";
-		}
-	}
-	else{
-	header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");	
 }
 
 	}

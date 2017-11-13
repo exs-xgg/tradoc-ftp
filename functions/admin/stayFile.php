@@ -1,11 +1,11 @@
 <?php
 
-if (!isset($_SERVER['HTTP_REFERER'])) {
-	header("location: ../index.php");
-}
-include 'db_con.php';
-include 'crypto.php';
-include 'class/userclass.php';
+// if (!isset($_SERVER['HTTP_REFERER'])) {
+// 	header("location: ../index.php");
+// }
+include '../db_con.php';
+include '../crypto.php';
+include '../class/userclass.php';
 session_start();
 if (isset($_SESSION['user'])) {
 	if (isset($_REQUEST['fid'])) {
@@ -22,6 +22,7 @@ if (isset($_SESSION['user'])) {
 					$return = true;
 
 		}else{
+			echo $sql;
 			$return = false;
 		}
 	}else{
