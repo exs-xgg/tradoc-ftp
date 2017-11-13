@@ -51,7 +51,7 @@ if ($_REQUEST['action']=="allow") {
     	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
     	x_log("modify",$_SERVER['REQUEST_URI']." $sql",$person->user_id);
 		header("location: ".$uri."?rs=no&er=QUERY_FAILED");
-    }
+    } 
 //MODIFY USER INFO
 }elseif ($_REQUEST['action']=="mod") {
 	$uid = $_POST['uid'];
@@ -61,6 +61,7 @@ if ($_REQUEST['action']=="allow") {
 	$office = "";
 	$uname = "";
 	$ppw = "";
+	$role="";
 	if (isset($_POST['fname'])) {
 		$fname = " USER_FNAME='".$_POST['fname']. "', ";
 	}
@@ -73,6 +74,9 @@ if ($_REQUEST['action']=="allow") {
 	if (isset($_POST['office'])) {
 		$office = " USER_OFC=".$_POST['office']. ", ";
 	}
+	if (isset($_POST['role'])) {
+		$role = " ROLE_ID=".$_POST['role']. ", ";
+	}
 	if (isset($_POST['pw1'])) {
 		$pw1 = $_POST['pw1'];
 		$pw2 = $_POST['pw2'];
@@ -84,7 +88,7 @@ if ($_REQUEST['action']=="allow") {
 		}
 	}
 
-	$sql = "update users set $fname $lname $office $uname $ppw USER_LOCK=0 where USER_ID=$uid;";
+	$sql = "update users set $fname $lname $office $role $uname $ppw USER_LOCK=0 where USER_ID=$uid;";
 	echo $sql;
 
 	if($conn->query($sql)){

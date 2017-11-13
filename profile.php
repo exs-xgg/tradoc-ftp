@@ -213,7 +213,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     </div>
       
     <div class="navbottom">
-      <a href="bop2.php"  rel="tooltip" title="Upload a new File?">
+      <a href="upload.php"  rel="tooltip" title="Upload a new File?">
         <i class="now-ui-icons files_paper"></i>
       </a>
     </div>

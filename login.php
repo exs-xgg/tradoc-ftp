@@ -6,7 +6,27 @@
        header("location: files.php");
    }
    if (isset($_REQUEST['grant'])) {
-       # code...
+    if(($_REQUEST['grant']=="finish")){
+    ?>
+
+<nav class="navbar navbar-toggleable-md bg-success">
+                            <div class="container">
+                                <div class="navbar-translate">
+                                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#example-navbar-danger" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-bar bar1"></span>
+                                        <span class="navbar-toggler-bar bar2"></span>
+                                        <span class="navbar-toggler-bar bar3"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">SIGNUP COMPLETE. Please wait for the Administrator to approve your account request.</a>
+                                </div>
+                                <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
+                                    
+                                </div>
+                            </div>
+                        </nav>
+
+    <?php
+}
     if (($_REQUEST['grant'])=="false") {
         
 

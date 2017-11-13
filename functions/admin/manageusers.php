@@ -67,7 +67,7 @@ $person = new User;
                     <td>
                         <select class="form-control" name="role">
                             <option value="1">Staff</option>
-                            <option value="2">Admin</option>
+                            <option value="3">Admin</option>
                         </select>
                     </td>
                     
