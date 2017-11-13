@@ -79,7 +79,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
-                            <p>Admin</p>
+                            <p id="adm">Admin</p>
                         </a>
 
                          <?php 
@@ -96,7 +96,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                     <li class="nav-item">
                         <a class="nav-link" href="./messages.php" title="Messages">
                             <i class="now-ui-icons ui-1_email-85"></i>
-                            <p>Messages</p>
+                            <p id="msg">Messages</p>
                         </a>
                     </li>
                     <li class="nav-item active">
@@ -213,13 +213,15 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     </div>
       
     <div class="navbottom">
-      <a href="upload.php"  rel="tooltip" title="Upload a new File?">
+      <a href="upload.php" title="Upload a new File?">
         <i class="now-ui-icons files_paper"></i>
       </a>
     </div>
     
 </body>
 <script type="text/javascript">
+    setInterval(console.log("a"),2000);
+    setInterval(console.log("b"),3000);
     function unpinMeDaddy(fid){
         var nick = "x";
         $.get("functions/pin.php?x=0&fid=" + fid + "&nick=" + nick,
@@ -257,6 +259,25 @@ function logout() {
                     logout();
                 } else {
                     //alert("return is false");
+                }
+            }
+        });
+        $.ajax({
+            url: "functions/ismsg.php",
+            success: function(data){
+                    if (data != "") {
+
+                   $('#msg').text("Messages ( "+ data +" )"); 
+                    }
+                
+            }
+        });
+        $.ajax({
+            url: "functions/isadm.php",
+            success: function(data){
+                if (data.return) {
+                    var msga = document.getElementById('adm').value;
+                    msga = msga + ' (*)'; 
                 }
             }
         });
