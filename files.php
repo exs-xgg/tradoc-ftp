@@ -64,7 +64,7 @@ x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
-                            <p>Admin</p>
+                            <p id="adm">Admin</p>
                         </a>
 
                          <?php 
@@ -81,7 +81,7 @@ x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
                     <li class="nav-item">
                         <a class="nav-link" href="./messages.php" title="Messages">
                             <i class="now-ui-icons ui-1_email-85"></i>
-                            <p>Messages</p>
+                            <p id="msg">Messages</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -269,6 +269,25 @@ function logout() {
                     logout();
                 } else {
                     //alert("return is false");
+                }
+            }
+        });
+        $.ajax({
+            url: "functions/ismsg.php",
+            success: function(data){
+                    if (data != 0) {
+
+                   $('#msg').text("Messages ( "+ data +" )"); 
+                    }
+                
+            }
+        });
+        $.ajax({
+            url: "functions/isadm.php",
+            success: function(data){
+                if (data.return) {
+                    var msga = document.getElementById('adm').value;
+                    msga = msga + ' (*)'; 
                 }
             }
         });

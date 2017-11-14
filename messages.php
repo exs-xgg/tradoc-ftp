@@ -76,7 +76,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
-                            <p>Admin</p>
+                            <p id="adm">Admin</p>
                         </a>
 
                          <?php 
@@ -191,7 +191,7 @@ if ($result->num_rows > 0) {
                             if (data) {
                                 $("#unread").remove();
                                 for (var i = 0, len = data.length; i < len; i++) {
-                                    $('<a id="unread" class="category text-primary" href="functions/getmsgs.php?r=' + data[i] + '" target="content1">' + data[i] + '</a>').insertAfter("#overhere");
+                                    $('<a id="unread" class="category text-primary" onclick="summon(\'' + data[i] + '\');" href="functions/getmsgs.php?r=' + data[i] + '" target="content1">' + data[i] + '</a>').insertAfter("#overhere");
                                 }
                                 
                             }
@@ -199,6 +199,9 @@ if ($result->num_rows > 0) {
                     });
     }
     getUnread();
+    function summon(s){
+        $("#person").text(s);
+    }
     function fireMsg(){
                 var msg = document.getElementById("msg").value;
                 var u = document.getElementById('person').value;
@@ -252,6 +255,17 @@ function logout() {
                     logout();
                 } else {
                     //alert("return is false");
+                }
+            }
+        });
+        getUnread();
+        gotoMsg();
+        $.ajax({
+            url: "functions/isadm.php",
+            success: function(data){
+                if (data.return) {
+                    var msga = document.getElementById('adm').value;
+                    msga = msga + ' (*)'; 
                 }
             }
         });

@@ -10,7 +10,7 @@ if (isset($_SESSION['user'])) {
 	$person = new User;
 	$person = unserialize($_SESSION['user']);
 		
-	$sql = "SELECT COUNT(*) as ct  FROM messages inner join users on messages.M_SENDER = users.USER_ID where M_RCVR='$person->user_id' AND M_READ=0";	
+	$sql = "SELECT COUNT(DISTINCT messages.M_SENDER) as ct  FROM messages inner join users on messages.M_SENDER = users.USER_ID where M_RCVR='$person->user_id' AND M_READ=0";	
 	//$sql = "SELECT COUNT(*) as ct  FROM users";
 
 		$result = $conn->query($sql);

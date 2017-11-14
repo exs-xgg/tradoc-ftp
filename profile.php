@@ -265,7 +265,7 @@ function logout() {
         $.ajax({
             url: "functions/ismsg.php",
             success: function(data){
-                    if (data != "") {
+                    if (data != 0) {
 
                    $('#msg').text("Messages ( "+ data +" )"); 
                     }

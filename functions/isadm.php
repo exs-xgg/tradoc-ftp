@@ -10,7 +10,7 @@ if (isset($_SESSION['user'])) {
 	$person = new User;
 	$person = unserialize($_SESSION['user']);
 		
-	$sql = "SELECT COUNT(*) as ct  FROM users";	
+	$sql = "SELECT COUNT(*) as ct  FROM users where USER_LOCK=1";	
 	//$sql = "SELECT COUNT(*) as ct  FROM users";
 
 		$result = $conn->query($sql);
