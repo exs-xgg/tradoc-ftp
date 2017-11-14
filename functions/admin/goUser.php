@@ -21,10 +21,6 @@ if (isset($_SESSION['user'])) {
 	$id = $person->user_id;
 	x_log("modify", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
-
-}else{
-header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");
-}
 //ALLOW USER
 if(!isset($_REQUEST['action'])){
 	header("location: ../../badrequest.php?error=NO_PARAMETERS_SET");
@@ -104,6 +100,10 @@ if ($_REQUEST['action']=="allow") {
 	$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 	x_log("modify",$_SERVER['REQUEST_URI']." $sql",$person->user_id);
 	header("location: ".$uri."?rs=no&er=WRONG_ARGUMENTS");
+}
+
+}else{
+header("location: ../../badrequest.php?error=RESTRICTED_ACCESS");
 }
 
 

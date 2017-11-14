@@ -67,7 +67,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 									if($conn->query($sql)){
 												echo "";
 									}
-									x_log("Login",$person->user_id);
+									x_log("Login",$_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 									$_SESSION['user'] = serialize($person);
 									
 									header("location: ".$uri."?grant=true&mark=".$mark);

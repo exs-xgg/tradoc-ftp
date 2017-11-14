@@ -106,11 +106,16 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
     <div class="container">
        <table class="table">
             <tr><th>Menu</th></tr>
-            <tr class="tblcontent" onclick="gotouser()"><td>Manage Users</td></tr>
-            <tr class="tblcontent" onclick="gotofile()"><td>Manage Files</td></tr>
-            <tr class="tblcontent" onclick="gotologs()"><td>View Logs</td></tr>
-            <tr class="tblcontent" onclick="gotostat()"><td>View System Status</td></tr>
+            <tr class="tblcontent linker" onclick="gotouser()"><td>Manage Users</td></tr>
+            <tr class="tblcontent linker" onclick="gotofile()"><td>Manage Files</td></tr>
+            <tr class="tblcontent linker" onclick="gotologs()"><td>View Logs</td></tr>
+            <tr class="tblcontent linker" onclick="gotostat()"><td>View System Status</td></tr>
         </table>
+        <style type="text/css">
+            .linker, .linker:hover{
+                cursor: pointer;
+            }
+        </style>
     </div>
     </div>
     <div class="max">

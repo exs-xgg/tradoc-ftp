@@ -135,7 +135,7 @@
         color: white;
     }
     body{
-    background-image: url('http://cf.c.ooyala.com/1jcGtkYjE605slwPizeVEx_-_EBbKCuR/promo320279649');
+    background-image: url('assets/img/bg.jpg');
     display: table;
     position: relative;
     width: 100%;

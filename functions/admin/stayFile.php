@@ -1,8 +1,8 @@
 <?php
 
-// if (!isset($_SERVER['HTTP_REFERER'])) {
-// 	header("location: ../index.php");
-// }
+if (!isset($_SERVER['HTTP_REFERER'])) {
+	header("location: ../index.php");
+}
 include '../db_con.php';
 include '../crypto.php';
 include '../class/userclass.php';
