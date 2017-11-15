@@ -14,7 +14,21 @@ if (isset($_REQUEST['id'])) {
 
 $person = unserialize($_SESSION['user']);
 
+if (isset($_REQUEST['rs'])) {
+    ?>
+<nav class="navbar fixed-bottom bg-info" id="notif" onclick="$('#notif').hide('slow');">
+                            <div class="container">
+                                <div class="navbar-translate" data-dismiss="modal">
+                                     <a class="navbar-brand" href="#">ACCOUNT CHANGE SUCCESSFUL</a>
+                                </div>
+                                <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
+                                    
+                                </div>
+                            </div>
+                        </nav>
 
+    <?php
+}
 
 x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
 
@@ -127,21 +141,23 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <div class="connt">
         <h2 class="head">Edit Account Settings</h2>
         <div class="midform">
-            <form class="form form-control" action="functions/admin/goUser.php?action=mod" method="post">
-            <p class="category">Username</p>
-            <input class="form form-control" type="text" name="uname" value=<?php echo '"'.$person->user_name.'"';?>><br>
-            <p class="category">First Name</p>
-            <input class="form form-control" type="text" name="fname" value=<?php echo '"'.$person->user_fname.'"';?>><br>
-            <p class="category">Last Name</p>
-            <input class="form form-control" type="text" name="lname" value=<?php echo '"'.$person->user_lname.'"';?>><br><hr><br>
-            <p class="category">Current Password</p>
-            <input class="form form-control" type="password" name="pw1"><br>
-            <p class="category">New Password</p>
-            <input class="form form-control" type="password" name="pw2"><br>
-            <input class="form form-control" type="password" name="uid" value=<?php echo '"'.$person->user_id.'"';?> hidden>
+            <form class="myform" action="functions/admin/goUser.php?action=mod" method="post">
+            <p class="nopad"><b>Username</b></p>
+            <input class="myform" type="text" name="uname" value=<?php echo '"'.$person->user_name.'"';?>><br>
+            <p class="nopad"><b>Serial Number</b></p>
+            <input class="myform" type="text" name="sn" value=<?php echo '"'.$person->user_sn.'"';?>><br>
+            <p class="nopad"><b>First Name</b></p>
+            <input class="myform" type="text" name="fname" value=<?php echo '"'.$person->user_fname.'"';?>><br>
+            <p class="nopad"><b>Last Name</b></p>
+            <input class="myform" type="text" name="lname" value=<?php echo '"'.$person->user_lname.'"';?>><br><hr><br>
+            <p class="nopad"><b>Current Password</b></p>
+            <input class="myform" type="password" name="pw1"><br>
+            <p class="nopad"><b>New Password</b></p>
+            <input class="myform" type="password" name="pw2"><br>
+            <input class="myform" type="password" name="uid" value=<?php echo '"'.$person->user_id.'"';?> hidden>
             
 
-            <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
+            <p class="nopad"><b>OFFICE ASSIGNED: </b></p><select class="form form-control" name="office">
             <?php
             
             $sql = "SELECT * FROM OFFICE";
@@ -162,10 +178,23 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     </div>
     
     <style type="text/css">
+    .nopad{
+        margin-bottom: 0px;
+        padding-top: 20px;
+    }
+    .myform{
+         border-color: gray;
+         border-width: 2px;
+         border-radius: 10px;
+         padding: 5px;
+         width: 500px
+    }
         .form{
             font-size: 15px;
         }
         .connt{
+            border-color: black;
+            border-width: 5px;
         }
         .midform{ 
             padding-left: 20%;

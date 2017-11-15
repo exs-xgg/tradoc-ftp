@@ -200,7 +200,7 @@ if ($result->num_rows > 0) {
     }
     getUnread();
     function summon(s){
-        $("#person").text(s);
+        document.getElementById('person').value=s
     }
     function fireMsg(){
                 var msg = document.getElementById("msg").value;

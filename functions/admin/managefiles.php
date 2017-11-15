@@ -199,6 +199,13 @@ $person = new User;
                 
 
                 </table> 
+                <div class="alert alert-danger" role="alert">
+        <div class="container">
+            
+            <strong>ALLOWED FILE TYPES</strong> 
+
+        </div>
+    </div>
     </div>
     
 <script src="../../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>

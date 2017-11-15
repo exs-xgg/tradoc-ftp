@@ -52,6 +52,7 @@ if ($_REQUEST['action']=="allow") {
 }elseif ($_REQUEST['action']=="mod") {
 	$uid = $_POST['uid'];
 	echo $uid;
+	$sn = "";
 	$fname = "";
 	$lname = "";
 	$office = "";
@@ -63,6 +64,9 @@ if ($_REQUEST['action']=="allow") {
 	}
 	if (isset($_POST['lname'])) {
 		$lname = " USER_LNAME='".$_POST['lname']. "', ";
+	}
+	if (isset($_POST['sn'])) {
+		$sn = " USER_SN='".$_POST['sn']. "', ";
 	}
 	if (isset($_POST['uname'])) {
 		$uname = " USER_NAME='".$_POST['uname']. "', ";
@@ -84,7 +88,7 @@ if ($_REQUEST['action']=="allow") {
 		}
 	}
 
-	$sql = "update users set $fname $lname $office $role $uname $ppw USER_LOCK=0 where USER_ID=$uid;";
+	$sql = "update users set $fname $lname $office $sn $role $uname $ppw USER_LOCK=0 where USER_ID=$uid;";
 	echo $sql;
 
 	if($conn->query($sql)){
