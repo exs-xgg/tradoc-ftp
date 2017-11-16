@@ -126,9 +126,9 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     <div class="panel">
         <div class="container">
                
-        <div class="category text-primary" align="center">Search</div>
+        <div class="category text-primary" align="center">SEARCH USERS</div>
     
-        <input type="text" class="form-control " placeholder="Search People" id="person" list="peoplelist" onchange="gotoMsg()" onclick="document.getElementById('person').value='';" >
+        <input type="text" class="form-control " placeholder="Type to search people" id="person" list="peoplelist" onchange="gotoMsg()" onclick="document.getElementById('person').value='';" >
 
             <datalist id="peoplelist">
 <?php
@@ -145,7 +145,7 @@ if ($result->num_rows > 0) {
 
             </datalist>
     <hr>
-     <div class="category text-primary" align="center">unread</div>
+     <div class="category text-primary" align="center">UNREAD MESSAGES</div>
      <div class="unread">
         <br>
          <span id="overhere"></span>
@@ -154,7 +154,7 @@ if ($result->num_rows > 0) {
     </div>
     <div class="max">
          <button class="btn btn-success" style="width: 28%;float: right" onclick="gotoMsg();">Refresh</button>
-          <iframe  src="" id="content1" name="content1">  </iframe>
+          <iframe  src="" id="content1" name="content1" onmouseover="yamete()" onmouseleave="kimochi()">  </iframe>
           <hr>
           <span>Enter your message(max 200 chars)</span>
           <textarea type="text" id="msg" placeholder="Your message here..." maxlength="200" style="width: 70%; border-radius: 10px; padding: 10px;"></textarea><br>
@@ -181,7 +181,13 @@ if ($result->num_rows > 0) {
 
 
 <script type="text/javascript">
-
+    var go = true;
+    function kimochi(){
+        go = true;
+    }
+    function yamete(){
+        go = false;
+    }
     function getUnread(){
         $.ajax({
                         url: "functions/unread.php",
@@ -206,7 +212,7 @@ if ($result->num_rows > 0) {
                 var msg = document.getElementById("msg").value;
                 var u = document.getElementById('person').value;
                 if ((msg=="") || (u=="")) {
-                    alert("Oops! Mind checking your inputs?")
+                  //  alert("Oops! Mind checking your inputs?")
                 }else{
                 var dt = {}
                 dt.TO = u
@@ -231,11 +237,14 @@ if ($result->num_rows > 0) {
                 
               }
    function gotoMsg(){
-    getUnread();
-    var who = document.getElementById('person').value;
-    if (who!="") {
-        document.getElementById('content1').src = "functions/getmsgs.php?r=" + who;
+    if (go) {
+        getUnread();
+        var who = document.getElementById('person').value;
+        if (who!="") {
+            document.getElementById('content1').src = "functions/getmsgs.php?r=" + who;
+        }
     }
+    
     
    }
 </script> 

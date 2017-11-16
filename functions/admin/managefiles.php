@@ -41,7 +41,7 @@ $person = new User;
         <form action="#">
                 <div class="container">
                     <?php if (isset($_REQUEST['q'])) {
-                            echo '<p>'. 'Top 5 results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+                           
                         }?>
                     <div class="input-group form-group-no-border" >
                         <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 15px;" <?php if (isset($_REQUEST['q'])) {
@@ -63,7 +63,7 @@ $person = new User;
                 if (isset($_REQUEST['q'])) {
                     include '../db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_TRACK_NO like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 5 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_TRACK_NO like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 1 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row

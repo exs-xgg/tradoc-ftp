@@ -91,7 +91,7 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
         			
         			}else{
 						$uri = strtok($_SERVER['HTTP_REFERER'],'?');
-						header("location: ".$uri."?grant=false");
+						header("location: ../badrequest.php?error=YOUR ACCOUNT IS LOCKED. PLEASE CONTACT ADMIN");
 
         			}
         			

@@ -8,7 +8,7 @@ if (isset($_REQUEST['success'])) {
 <nav class="navbar fixed-bottom bg-success " id="notif" onclick="$('#notif').hide('slow');">
                             <div class="container">
                                 <div class="navbar-translate">
-                                     <a class="navbar-brand" href="#">FILE UPLOAD SUCCESSFUL</a>
+                                     <a class="navbar-brand" href="#">FILE UPLOAD SUCCESSFUL (click to dismiss notification)</a>
                                 </div>
                                 <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
                                     
@@ -23,7 +23,7 @@ if (isset($_REQUEST['success'])) {
 <nav class="navbar fixed-bottom bg-danger" id="notif" onclick="$('#notif').hide('slow');">
                             <div class="container">
                                 <div class="navbar-translate" data-dismiss="modal">
-                                     <a class="navbar-brand" href="#">FILE UPLOAD FAILED OR IS INVALID</a>
+                                     <a class="navbar-brand" href="#">FILE UPLOAD FAILED OR IS INVALID (click to dismiss notification)</a>
                                 </div>
                                 <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
                                     
@@ -172,6 +172,11 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
                         
                        
                             <textarea class="mytext" id="tags" name="tags" maxlength="200"  placeholder="Tags (Separate each tags with ENTER)" type="text" form="uploadform"></textarea><br>
+                           
+                                &nbsp;&nbsp;&nbsp;<input class="white" type="checkbox" name="conf" value="1"><span style="color: white">&nbsp;&nbsp;Secret</span>
+                                    
+                                
+                            
                             <br>
                             <input class="mytext" name="password" maxlength="200"  placeholder="Your Password" type="password"></input>
                             <br>

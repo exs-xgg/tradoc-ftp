@@ -1,5 +1,7 @@
 <?php
 include 'db_con.php';
+
+error_reporting(E_ALL ^ E_NOTICE);
 session_start();
 if(!isset($_SESSION['user'])){
   header("location: ../badrequest.php?error=RESTRICTED_ACCESS");
@@ -23,7 +25,7 @@ if ($result->num_rows > 0) {
 
 
  <!DOCTYPE html>
- <html>
+ <html style="width: 80%; float: left;word-wrap: break-word;">
  <head>
  	<link rel="icon" sizes="76x76" href="../assets/img/tradoc_logo.png">
     <link rel="icon" type="image/png" href="../assets/img/tradoc_logo.png">

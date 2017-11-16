@@ -17,7 +17,7 @@
                                         <span class="navbar-toggler-bar bar2"></span>
                                         <span class="navbar-toggler-bar bar3"></span>
                                     </button>
-                                    <a class="navbar-brand" href="#">SIGNUP COMPLETE. Please wait for the Administrator to approve your account request.</a>
+                                    <a class="navbar-brand" href="#">SIGNUP COMPLETE. Please wait for the Administrator to approve your account request.  (click to dismiss notification)</a>
                                 </div>
                                 <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
                                     
@@ -41,7 +41,7 @@
                                         <span class="navbar-toggler-bar bar2"></span>
                                         <span class="navbar-toggler-bar bar3"></span>
                                     </button>
-                                    <a class="navbar-brand" href="#">INVALID CREDENTIALS</a>
+                                    <a class="navbar-brand" href="#">INVALID CREDENTIALS (click to dismiss notification)</a>
                                 </div>
                                 <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
                                     

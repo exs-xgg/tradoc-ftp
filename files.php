@@ -2,6 +2,10 @@
 <?php
 session_start();
 
+
+error_reporting(E_ALL ^ E_NOTICE);
+
+
 if(!isset($_SESSION['user'])){
   header("location: badrequest.php?error=RESTRICTED_ACCESS");
 
@@ -121,7 +125,29 @@ x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
              <div class="section section-tabs" style="background-color: white">
                 <div class="container">
                     <?php if (isset($_REQUEST['q'])) {
-                            echo '<p>'. 'Top 20 results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+
+                    include 'functions/db_con.php'; 
+
+                        $count = 0;
+                         
+                    $q = $_REQUEST['q'];
+                    $sql = "SELECT count(*) as ct FROM file INNER JOIN users ON file.F_UPLOADER = users.USER_ID where ((file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%')) and file.FILE_X=0 ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $resultz = $conn->query($sql);
+                    if ($resultz->num_rows > 0) {
+                    // output data of each row
+                    while($row = $resultz->fetch_assoc()) {
+                        if ($row['ct'] != 0) {
+                           $count =$row['ct'];
+                            echo '<p>'. 'Top ' . $count . ' results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+                        }else{
+                            echo '<p>'. 'No results returned for keyword "' . $_REQUEST['q'] . '"</p>';
+                         
+                    }
+                        }
+                }
+
+
+                           
                         }?>
                     <div class="input-group form-group-no-border" >
                         <input class="form-control" type="text" name="q" placeholder="Enter keyword here..." style="font-size: 20px;" <?php if (isset($_REQUEST['q'])) {
@@ -146,9 +172,8 @@ x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
 
                 <?php 
                 if (isset($_REQUEST['q'])) {
-                    include 'functions/db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where (file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%') ORDER BY file.F_UPLOAD_DATE DESC LIMIT 2 ";
+                    $sql = "SELECT count(*) as ct, * FROM file INNER JOIN users ON file.F_UPLOADER = users.USER_ID where (file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%') ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row

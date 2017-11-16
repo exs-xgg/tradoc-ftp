@@ -19,7 +19,7 @@ if (isset($_REQUEST['rs'])) {
 <nav class="navbar fixed-bottom bg-info" id="notif" onclick="$('#notif').hide('slow');">
                             <div class="container">
                                 <div class="navbar-translate" data-dismiss="modal">
-                                     <a class="navbar-brand" href="#">ACCOUNT CHANGE SUCCESSFUL</a>
+                                     <a class="navbar-brand" href="#">ACCOUNT CHANGE SUCCESSFUL. Log in again to view changes (click to dismiss notification)</a>
                                 </div>
                                 <div class="collapse navbar-collapse justify-content-end" id="example-navbar-danger">
                                     

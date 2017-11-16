@@ -41,7 +41,7 @@ $person = new User;
         </div>
     </div>
     <table class="table">
-        <tr><th>Change Roles</th><th>Access Control</th></tr>
+        <tr><th>Change Privilege</th><th>USER ACCOUNT STATUS</th></tr>
         <tr><td>
              <table>
                 <tr><th>Username</th><th>Role</th><th>Action</th></tr>

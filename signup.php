@@ -113,12 +113,21 @@ if (isset($_REQUEST['r'])) {
         <form action="signup.php?r=1" method="post">
             <p class="category">SERIAL NUMBER: <p><input class="form-control" type="text" required name="sn"><br>
             <p class="category">USERNAME: <p><input class="form-control" type="text" required name="username"><br>
-            <p class="category">PASSWORD: </p><input class="form-control " type="password" required id="pw1"><br>
-            <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2"  required name="password"><br>
+            <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
+            <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2" required name="password"><br>
             <p class="category">FIRST NAME: </p><input class="form-control" type="text" required name="fname"><br>
             <p class="category">LAST NAME: </p><input class="form-control" type="text" required name="lname"><br>
             <input type="text" name="role" value="1" hidden="true">
             <script type="text/javascript">
+              
+                function theFocus(obj) {
+                    
+                    $('<span style="color:red" id="lebel">Recommended password: Must be 8 characters long and contain atleast (1) UPPERCASE and (1) NUMBER.</span>').insertAfter('#pw1');
+                   
+                }
+                function theBlur(){
+                    $("#lebel").remove();
+                }
                 function checkPw(){
                     var pw1 = document.getElementById('pw1').value;
                     var pw2 = document.getElementById('pw2').value;

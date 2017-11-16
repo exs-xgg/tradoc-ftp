@@ -58,6 +58,7 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 
 	if(!in_array(end(explode('.', $file_orig)), $exts)){
 		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
+		x_log("deny", $file_orig, $person->user_id);
 		header("location: ".$uri."?success=no");
 	}else{
 
@@ -80,12 +81,20 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 		$uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		
 		$ofc = $person->user_office;
+		if (isset($_POST['conf'])) {
+			$conf = 1;
+		}else{
+			$conf = 0;
+		}
 		$sql = 	"INSERT INTO file(F_TRACK_NO,F_NAME_ORIG,F_NAME_SERVER,F_DESC,F_UPLOADER,F_OFFICE,F_TAGS,FILE_X)
-		VALUES('$filetrack','$file_orig','$randomString', '$desc',$person->user_id, '$ofc','$tags',0)";
+		VALUES('$filetrack','$file_orig','$randomString', '$desc',$person->user_id, '$ofc','$tags',$conf)";
 		echo '<br><br>'.$sql;
 		if($conn->query($sql)){
 			x_log("upload", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
-
+			if($conf==1){
+				$sql = "insert into pinned(PIN_FILE, PIN_USER) SELECT F_ID, $person->user_id FROM file WHERE F_NAME_SERVER='$randomString'";
+				$conn->query($sql);
+			}
 					header("location: ".$uri."?success=yes");
 		}else{
 			header("location: ".$uri."?success=no");
