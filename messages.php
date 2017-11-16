@@ -153,7 +153,7 @@ if ($result->num_rows > 0) {
     </div>
     </div>
     <div class="max">
-         <button class="btn btn-success" style="width: 28%;float: right" onclick="gotoMsg();">Refresh</button>
+         
           <iframe  src="" id="content1" name="content1" onmouseover="yamete()" onmouseleave="kimochi()">  </iframe>
           <hr>
           <span>Enter your message(max 200 chars)</span>
@@ -197,7 +197,7 @@ if ($result->num_rows > 0) {
                             if (data) {
                                 $("#unread").remove();
                                 for (var i = 0, len = data.length; i < len; i++) {
-                                    $('<a id="unread" class="category text-primary" onclick="summon(\'' + data[i] + '\');" href="functions/getmsgs.php?r=' + data[i] + '" target="content1">' + data[i] + '</a>').insertAfter("#overhere");
+                                    $('<a id="unread" class="category text-primary" onclick="summon(\'' + data[i] + '\');" href="functions/getmsgs.php?r=' + data[i] + '" target="content1"> - ' + data[i] + '</a>').insertAfter("#overhere");
                                 }
                                 
                             }
