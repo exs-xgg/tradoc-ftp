@@ -74,4 +74,6 @@ EXT VARCHAR(4) NOT NULL
 );
 INSERT INTO ok_files (EXT) values('docx'),( 'doc'),( 'ppt'),( 'pptx'),( 'xls'),( 'xlsx'),( 'pdf'),( 'txt'),( 'odt'),( 'ods'),( 'odp'),('psd'),('mp4'),('wmv'),('avi');
 INSERT INTO ok_files (EXT) values('avi'),( 'mp4'),( 'wmv'),( 'psd');
-INSERT INTO office (OF_NAME) values ('G6 C4S'),('G1'),('G2'),('G3'),('G4')
+INSERT INTO office (OF_NAME) values ('G6 C4S'),('G1'),('G2'),('G3'),('G4');
+INSERT INTO users(USER_SN,USER_NAME,USER_LNAME,USER_FNAME,USER_OFC,USER_PW,ROLE_ID,USER_LOCK)
+VALUES('312442','admin','Lacson','Ghil',1,md5('password'),1,0);

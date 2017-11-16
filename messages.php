@@ -133,7 +133,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             <datalist id="peoplelist">
 <?php
 
-$sql = "SELECT USER_NAME FROM users where USER_LOCK=0";
+$sql = "SELECT USER_NAME FROM users where USER_LOCK=0 and USER_ID!=$person->user_id";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

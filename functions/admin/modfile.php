@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
 <table class="table"><form action="modfile.php?r=1" method="post">
 	<tr><th>File ID</th><td><input type="text" name="fid" readonly value="<?php echo $row['F_ID']; ?>"></td></tr>
 	<tr><th>File Tracking No.</th><td><input required type="text" name="trkno" value="<?php echo ($row['F_TRACK_NO']); ?>"></td></tr>
-	<tr><th>File Server Name</th><td><input required type="text" name="svname" value="<?php echo $row['F_NAME_SERVER']; ?>"></td></tr>
+	<tr><th>File Server Name</th><td><input required type="text" name="svname" readonly value="<?php echo $row['F_NAME_SERVER']; ?>"></td></tr>
 	<tr><th>File Original Name</th><td><input required type="text" name="origname" value="<?php echo $row['F_NAME_ORIG']; ?>"></td></tr>
 	<tr><th>File Desc</th><td><input type="text" name="desc" value="<?php echo $row['F_DESC']; ?>"></td></tr>
 	<tr><th>File Tags</th><td><textarea rows="5" type="text" name="tags" value="<?php echo json_encode($row['F_TAGS']); ?>"></textarea></td></tr>

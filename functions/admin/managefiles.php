@@ -188,8 +188,6 @@ $person = new User;
                 } else {
                    
                 }
-            $conn->close();
-
 
 
                 
@@ -199,14 +197,32 @@ $person = new User;
                 
 
                 </table> 
-                <div class="alert alert-danger" role="alert">
+               
+    
+    </div> 
+    <div class="alert alert-warning" role="alert">
         <div class="container">
             
             <strong>ALLOWED FILE TYPES</strong> 
 
         </div>
     </div>
+    <div class="allowed">
+        <?php
+         $sql = "SELECT * FROM ok_files";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    echo '<select name="ext" size="5" style="margin: 10px;padding:5px">';
+                    while($row = $result->fetch_assoc()) {
+                        
+                        echo '<option value="'. $row['ID'] .'">'.$row['EXT'];
+                    }
+                    echo '</select>';
+                }
+        ?>
     </div>
+    Add More Allowed File Extensions <input type="text" id="fileok">&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" id="givefile">OK</button>
+    <br><br><br><br><br>
     
 <script src="../../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="../../assets/js/core/tether.min.js" type="text/javascript"></script>

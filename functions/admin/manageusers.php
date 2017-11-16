@@ -126,7 +126,7 @@ $person = new User;
         </div>
     </div>
      <table class="table">
-            	<tr><th>Username</th><th>First Name</th><th>Last Name</th><th>Office</th><th>Action</th></tr>
+            	<tr><th>SN</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Office</th><th>Action</th></tr>
                 <?php
                     $sql = "SELECT * FROM users inner join office on users.USER_OFC=office.OF_ID where users.USER_LOCK=1";
                     $result = $conn->query($sql);
@@ -134,7 +134,7 @@ $person = new User;
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             echo '<form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post">';
-                            echo '<tr><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><input class="btn btn-primary" type="submit" value="Approve"></td></tr></form>';
+                            echo '<tr><td>' . $row['USER_SN']. '</td><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><input class="btn btn-primary" type="submit" value="Approve"></td></tr></form>';
                         }
                     }
 
