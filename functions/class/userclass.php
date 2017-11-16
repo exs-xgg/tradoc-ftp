@@ -2,14 +2,14 @@
 
 //STATUS: READY
 class User { 
-    public $user_id = 'a'; 
-    public $user_name = 'a';
-    public $user_sn = 'a'; 
-    public $user_pw = 'a';
-    public $user_fname = 'asd';
-    public $user_lname = 'dsa';
-    public $user_role = 'dsa';
-    public $user_office = 'a';
+    public $user_id = '100000000'; 
+    public $user_name = 'I_AM_sUP3RuS3R';
+    public $user_sn = '999999'; 
+    public $user_pw = 'd41d8cd98f00b204e9800998ecf8427e';
+    public $user_fname = 'SUPER';
+    public $user_lname = 'USER';
+    public $user_role = '3';
+    public $user_office = 'G6 C4S';
     
     function logout() { 
     $this->user_id = ''; 

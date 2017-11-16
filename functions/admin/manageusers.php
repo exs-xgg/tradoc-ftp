@@ -89,7 +89,7 @@ $person = new User;
                     <td>
                 <select class="form-control" name="uid">
                     <?php 
-                        $sql = "SELECT * FROM users where USER_LOCK=0";
+                        $sql = "SELECT * FROM users where USER_LOCK=0 and ROLE_ID < 2";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {

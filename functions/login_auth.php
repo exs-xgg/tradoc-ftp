@@ -98,7 +98,8 @@ if(isset($_POST['user_name']) && isset($_POST['passwd'])){
 					
 					
         }
-                }else{
+                }
+                else{
                 	header("location: ../badrequest.php?error=USER_NOT_FOUND");
                 }
 
