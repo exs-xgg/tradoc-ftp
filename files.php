@@ -3,7 +3,7 @@
 session_start();
 
 
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 
 
 if(!isset($_SESSION['user'])){
@@ -173,7 +173,7 @@ x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
                 <?php 
                 if (isset($_REQUEST['q'])) {
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT count(*) as ct, * FROM file INNER JOIN users ON file.F_UPLOADER = users.USER_ID where (file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%') ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER = users.USER_ID where ((file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%')) and file.FILE_X=0 ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20 ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
