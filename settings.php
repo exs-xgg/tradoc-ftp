@@ -160,7 +160,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             <p class="nopad"><b>OFFICE ASSIGNED: </b></p><select class="form form-control" name="office">
             <?php
             
-            $sql = "SELECT * FROM OFFICE";
+            $sql = "SELECT * FROM office";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
