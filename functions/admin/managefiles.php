@@ -63,7 +63,7 @@ $person = new User;
                 if (isset($_REQUEST['q'])) {
                     include '../db_con.php'; 
                     $q = $_REQUEST['q'];
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID where file.F_TRACK_NO like '%$q%' ORDER BY file.F_UPLOAD_DATE DESC LIMIT 1 ";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER = users.USER_ID where ((file.F_NAME_ORIG like '%$q%') or (file.F_TRACK_NO like '%$q%') OR (file.F_UPLOADER like '%$q%') OR (file.F_OFFICE like '%$q%') OR (file.F_TAGS like '%$q%') or ((users.USER_FNAME + ' ' + users.USER_LNAME) like '%q%')) and file.FILE_X=0 ORDER BY file.F_UPLOAD_DATE DESC LIMIT 20  ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -95,7 +95,7 @@ $person = new User;
                     <div class="modal-footer">
 
                         
-                        <a href=<?php echo '"modfile.php?filex='.$row['F_ID'].'"'; ?> target="_blank" class="btn btn-default" ><b>Edit</b></a>
+                        <a href=<?php echo '"modfile.php?filex='.$row['F_ID'].'"'; ?> class="btn btn-default" ><b>Edit</b></a>
 
                         <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><b>Download</b></a>
 

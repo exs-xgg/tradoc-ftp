@@ -159,7 +159,12 @@ TO LESSEN THE LOADING TIME OF THE PAGE
 
                         $tags = json_decode($row["F_TAGS"]);
 
-                        echo '<tr class="tb"  data-toggle="modal" id="e'. $row["F_ID"] .'" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
+                        echo '<tr class="tb"  '
+
+                        if($row['FILE_X']==1){
+                            echo ' style="color: red;font-weight:bold" ';
+                        }
+                        echo 'data-toggle="modal" id="e'. $row["F_ID"] .'" data-target="#m'. $row["F_ID"] .'"><td>' . $row["F_TRACK_NO"]. '</td><td>' .  $row["F_NAME_ORIG"] . "</td><td>" . $row["F_UPLOAD_DATE"] . '</td><td>' . $row["USER_FNAME"]. " ". $row["USER_LNAME"] . '</td><td>'. $row['F_OFFICE'] .'</td><td>';
                         $tag_decode = "";
                         for ($i=0; $i < count($tags); $i++) { 
                             $tag_decode .= '<span class="badge badge-primary">' . $tags[$i] . '</span>&nbsp;';

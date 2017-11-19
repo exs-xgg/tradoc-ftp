@@ -73,7 +73,7 @@ if (isset($_REQUEST['r'])) {
                         $lname = fin($_POST['lname']);
                         $role = fin($_POST['role']);
                         $ofc = fin($_POST['office']);
-                        $sql =  "INSERT INTO USERS (USER_NAME, USER_FNAME, USER_LNAME, USER_PW, USER_OFC, ROLE_ID, USER_SN, USER_LOCK)
+                        $sql =  "INSERT INTO users (USER_NAME, USER_FNAME, USER_LNAME, USER_PW, USER_OFC, ROLE_ID, USER_SN, USER_LOCK)
                             VALUES('$username','$fname','$lname','$pw',$ofc,$role,'$sn',1)";
                             if($conn->query($sql)){
                                       header("location: login.php?grant=finish");
