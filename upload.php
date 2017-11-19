@@ -173,7 +173,7 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
                        
                             <textarea class="mytext" id="tags" name="tags" maxlength="200"  placeholder="Tags (Separate each tags with ENTER)" type="text" form="uploadform"></textarea><br>
                            
-                                &nbsp;&nbsp;&nbsp;<input class="white" type="checkbox" name="conf" value="1"><span style="color: white">&nbsp;&nbsp;Secret</span>
+                                &nbsp;&nbsp;&nbsp;<input class="white" type="checkbox" name="conf" value="1"><span style="color: white">&nbsp;&nbsp;COnfidential</span>
                                     
                                 
                             

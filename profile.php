@@ -185,8 +185,15 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                         <p>&nbsp;<?php echo $tag_decode; ?></p>
                     </div>
                     <div class="modal-footer">
+                        <?php
+                        if($row['FILE_X']==0){
+?>
+ <button type="button" class="btn btn-primary" onclick="unpinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Unpin File</b></button>
+<?php
 
-                        <button type="button" class="btn btn-primary" onclick="unpinMeDaddy(<?php echo "'" . $row["F_ID"] . "'"; ?>);"><i class="now-ui-icons location_pin"></i><b>&nbsp;&nbsp;Unpin File</b></button>
+                                                }
+                        ?>
+                       
 
                         <a href=<?php echo '"download.php?filex='.$row['F_NAME_SERVER'].'"'; ?> target="_blank" class="btn btn-info" ><i class="now-ui-icons arrows-1_cloud-download-93"></i><b>&nbsp;&nbsp;Download</b></a>
 
