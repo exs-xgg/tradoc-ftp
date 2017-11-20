@@ -20,6 +20,7 @@ if (isset($_SESSION['user'])) {
 		$sql = 	"DELETE FROM file where F_ID=$fid";
 
 		if($conn->query($sql)){
+			
 					?>
 <script>
 	window.close();

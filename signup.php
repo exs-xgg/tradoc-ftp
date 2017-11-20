@@ -68,11 +68,11 @@ if (isset($_REQUEST['r'])) {
                         include("functions/db_con.php");
                         $username = $_POST['username'];
                         $pw = md5($_POST['password']);
-                        $sn = fin($_POST['sn']);
-                        $fname = fin($_POST['fname']);
-                        $lname = fin($_POST['lname']);
-                        $role = fin($_POST['role']);
-                        $ofc = fin($_POST['office']);
+                        $sn = fin(strip_tags($_POST['sn']));
+                        $fname = fin(strip_tags($_POST['fname']));
+                        $lname = fin(strip_tags($_POST['lname']));
+                        $role = fin(strip_tags($_POST['role']));
+                        $ofc = fin(strip_tags($_POST['office']));
                         $sql =  "INSERT INTO users (USER_NAME, USER_FNAME, USER_LNAME, USER_PW, USER_OFC, ROLE_ID, USER_SN, USER_LOCK)
                             VALUES('$username','$fname','$lname','$pw',$ofc,$role,'$sn',1)";
                             if($conn->query($sql)){
@@ -94,12 +94,11 @@ if (isset($_REQUEST['r'])) {
     
     <div class="container" style="max-width: 800px; float: center">
         <form action="signup.php?r=1" method="post">
-            <p class="category">SERIAL NUMBER: <p><input class="form-control" id="snn" type="text" required name="sn"><br>
+            <p class="category">SERIAL NUMBER: <p><input class="form-control" id="snn" type="text" required name="sn" maxlength="10"><br>
             
-            <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
-            <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2" required name="password"><br>
-            <p class="category">FIRST NAME: </p><input class="form-control" type="text" required name="fname"><br>
-            <p class="category">LAST NAME: </p><input class="form-control" onchange="lokk();" id="lln" type="text" required name="lname"><br>
+           
+            <p class="category">FIRST NAME: </p><input class="form-control" type="text" required name="fname" maxlength="50"><br>
+            <p class="category">LAST NAME: </p><input class="form-control" onchange="lokk();" id="lln" type="text" required maxlength="50" name="lname"><br>
             <input type="text" name="role" value="1" hidden="true">
             <p class="category">USERNAME(auto-generated): <p><input readonly id="loks" class="form-control" type="text" required name="username"><br>
             <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
@@ -115,8 +114,9 @@ if (isset($_REQUEST['r'])) {
                     }
                 }
             ?>
-            </select><br><br>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            </select><br><br> <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
+            <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2" required name="password"><br><b><p id="warning" style="color:red"></p></b>
+            <button class="btn btn-primary" type="submit" id="subb" disabled="true">Submit</button>
         </form>
         <div class="space-100"></div>
     </div>
@@ -129,8 +129,7 @@ if (isset($_REQUEST['r'])) {
               function lokk(){
                 var ist = document.getElementById("snn").value;
                 var lln = document.getElementById("lln").value;
-                ist = ist.slice(-4);
-                document.getElementById("loks").value = lln + "_" + ist;
+                document.getElementById("loks").value =  lln.toLowerCase() + '_' + ist;
                 }
                 function theFocus(obj) {
                     
@@ -143,11 +142,16 @@ if (isset($_REQUEST['r'])) {
                 function checkPw(){
                     var pw1 = document.getElementById('pw1').value;
                     var pw2 = document.getElementById('pw2').value;
-                    if(pw1!==pw2){
-                        console.log("asd");
-                        $('pw2').addClass("form-control-danger");
-                        $('<b>Passwords Must Match</b>').insertAfter('pw2');
+                    if(pw1==pw2){
+document.getElementById("subb").disabled = false;
+$('#warning').text('');
+                    }else{
+document.getElementById("subb").disabled = true;
+                        $('#warning').text('Passwords Must Match');
                     }
+                        
+                       
+                    
                 }
                 
 

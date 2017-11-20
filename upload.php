@@ -81,7 +81,7 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
 
 
 
-
+<div class="space-50"><p></p><p></p></div>
 <body style="padding-right: 33px;" class="modal-open">
 
           <nav class="navbar navbar-toggleable-md bg-primary fixed-top">

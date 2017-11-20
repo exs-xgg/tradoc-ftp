@@ -159,7 +159,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
 
                         $tags = json_decode($row["F_TAGS"]);
 
-                        echo '<tr class="tb"  '
+                        echo '<tr class="tb"  ';
 
                         if($row['FILE_X']==1){
                             echo ' style="color: red;font-weight:bold" ';
