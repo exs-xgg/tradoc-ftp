@@ -91,13 +91,14 @@ if (isset($_REQUEST['r'])) {
     
     <div class="container" style="max-width: 800px; float: center">
         <form action="signup.php?r=1" method="post">
-            <p class="category">SERIAL NUMBER: <p><input class="form-control" id="snn" type="text" required name="sn" maxlength="10"><br>
+            <p class="category">SERIAL NUMBER: <p><input class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="snn" type="text" required name="sn" maxlength="10"><br>
             
            
             <p class="category">FIRST NAME: </p><input class="form-control" type="text" required name="fname" maxlength="50"><br>
-            <p class="category">LAST NAME: </p><input class="form-control" onchange="lokk();" id="lln" type="text" required maxlength="50" name="lname"><br>
+            <p class="category">LAST NAME: </p><input class="form-control"  id="lln" type="text" required maxlength="50" name="lname"><br>
             <input type="text" name="role" value="1" hidden="true">
-            <p class="category">USERNAME(auto-generated): <p><input readonly id="loks" class="form-control" type="text" required name="username"><br>
+
+            <p class="category">USERNAME(auto-generated): <br><span class="btn btn-primary" onclick="lokk()">Generate Username</span><p><input readonly id="loks" class="form-control" type="text" required name="username"><br>
             <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
             <?php
             include 'functions/db_con.php';
@@ -113,6 +114,7 @@ if (isset($_REQUEST['r'])) {
             ?>
             </select><br><br> <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
             <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2" required name="password"><br><b><p id="warning" style="color:red"></p></b>
+            <span class="btn btn-info" onclick="validate()">VALIDATE</span>&nbsp;&nbsp;
             <button class="btn btn-primary" type="submit" id="subb" disabled="true">Submit</button>
         </form>
         <div class="space-100"></div>
@@ -123,6 +125,27 @@ if (isset($_REQUEST['r'])) {
         }
     </style>
     <script type="text/javascript">
+            function validate(){
+                var snc = document.getElementById("snn").value;
+                if (snc.length < 6) {
+                    alert("Invalid Serial Number");
+                    document.getElementById("subb").disabled = true;
+                }else{
+                   $.ajax({
+                        url: "functions/getusers.php",
+                        success: function(data) {
+                            var ar_sn = JSON.parse(data);
+                            var foundPresent = $.inArray(snc, ar_sn) > -1;
+                            if (foundPresent) {
+                                alert("USER SERIAL NUMBER ALREADY EXISTS!");
+                                document.getElementById("subb").disabled = true;
+                            } else {
+                                document.getElementById("subb").disabled = false;
+                            }
+                        }
+                    });
+                }
+            }
               function lokk(){
                 var ist = document.getElementById("snn").value;
                 var lln = document.getElementById("lln").value;
