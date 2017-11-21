@@ -52,7 +52,7 @@
 
 
     </nav>
-    <div class="space-100"></div>
+    <div style="height: 100px"></div>
     <center><h3>Create Account</h3></center>
 <?php
 include 'functions/crypto.php';
@@ -98,21 +98,25 @@ if (isset($_REQUEST['r'])) {
             <p class="category">LAST NAME: </p><input class="form-control"  id="lln" type="text" required maxlength="50" name="lname"><br>
             <input type="text" name="role" value="1" hidden="true">
 
-            <p class="category">USERNAME(auto-generated): <br><span class="btn btn-primary" onclick="lokk()">Generate Username</span><p><input readonly id="loks" class="form-control" type="text" required name="username"><br>
-            <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
+            
+            <p class="category">OFFICE ASSIGNED: </p>
+            <input type="text" class="form-control" name="office" placeholder="Type to search office" list="ofc" >
             <?php
             include 'functions/db_con.php';
             $sql = "SELECT * FROM office";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
+                        echo '<datalist id="ofc">';
                     while($row = $result->fetch_assoc()) {
 
                         echo '<option value="' . $row['OF_ID'] . '">' . $row['OF_NAME'] .'</option>';
                     }
+                        echo '</datalist>';
                 }
             ?>
-            </select><br><br> <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
+            <br><br> <p class="category">USERNAME(auto-generated): <br><span class="btn btn-primary" onclick="lokk()">Generate Username</span><p><input readonly id="loks" type="text" required name="username" style="border-radius: 10px; border-color: gray;padding:4px"><br>
+            <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
             <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2" required name="password"><br><b><p id="warning" style="color:red"></p></b>
             <span class="btn btn-info" onclick="validate()">VALIDATE</span>&nbsp;&nbsp;
             <button class="btn btn-primary" type="submit" id="subb" disabled="true">Submit</button>

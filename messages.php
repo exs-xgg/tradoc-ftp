@@ -121,7 +121,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
     
    <!-- End Navbar -->
 <br>
-   <div class="space-100"></div>
+   <div class="space-100"><br></div>
 <div class="main">
     <div class="panel">
         <div class="container">

@@ -135,7 +135,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             </div>
         </div>
     </nav>
-   <div class="wrapper"><div class="space-100"></div></div>
+   <div class="wrapper"><div class="space-100"><br><br><br><br></div></div>
    
     <!-- Navbar -->
     <div class="connt">
@@ -151,9 +151,9 @@ TO LESSEN THE LOADING TIME OF THE PAGE
             <p class="nopad"><b>Last Name</b></p>
             <input class="myform" type="text" name="lname" value=<?php echo '"'.$person->user_lname.'"';?>><br><hr><br>
             <p class="nopad"><b>Current Password</b></p>
-            <input class="myform" type="password" name="pw1"><br>
+            <input class="myform" type="password" name="pw1" required><br>
             <p class="nopad"><b>New Password</b></p>
-            <input class="myform" type="password" name="pw2"><br>
+            <input class="myform" type="password" name="pw2" required><br>
             <input class="myform" type="password" name="uid" value=<?php echo '"'.$person->user_id.'"';?> hidden>
             
 
@@ -171,10 +171,10 @@ TO LESSEN THE LOADING TIME OF THE PAGE
                 }
             ?>
             </select>
-            <input class="form form-control" type="submit" name="submit">
+            <input class="btn btn-primary" type="submit" name="submit">
         </form>
         </div>
-        
+        <br><br><br><br><br>
     </div>
     
     <style type="text/css">
