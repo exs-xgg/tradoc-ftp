@@ -2,7 +2,7 @@
 
 //STATUS: READY
 class User { 
-    public $user_id = '100000000'; 
+    public $user_id = '999999'; 
     public $user_name = 'I_AM_sUP3RuS3R';
     public $user_sn = '999999'; 
     public $user_pw = 'd41d8cd98f00b204e9800998ecf8427e';

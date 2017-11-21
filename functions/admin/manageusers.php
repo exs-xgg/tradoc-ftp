@@ -41,26 +41,32 @@ $person = new User;
         </div>
     </div>
     <table class="table">
-      <tr><th>User SN</th><th>Username</th><th>Name</th><th>Office</th><th>Privilege</th><th>Status</th><th>Action</th></tr>
+      <tr align="center"><td><b>User SN</b></td><td><b>Username</b></td><td><b>Name</b></td><td><b>Office</b></td><td><b>Privilege</b></td><td><b>Status</b></td><td><b>Action</b></td></tr>
       <?php 
-                        $sql = "SELECT * FROM users inner join office on users.USER_OFC=office.OF_ID inner join role on users.ROLE_ID=role.ROLE_ID";
+                        $sql = "SELECT * FROM users inner join office on users.USER_OFC=office.OF_ID inner join role on users.ROLE_ID=role.ROLE_ID where users.USER_LOCK < 3";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                echo '<tr><td>'. $row['USER_SN'].'</td><td>'.$row['USER_NAME'].'</td><td>'.$row['USER_LNAME'].', '.$row['USER_FNAME'].'</td><td>'.$row['OF_NAME'].'</td><td>';
+                                echo '<tr align="center"><td>'. $row['USER_SN'].'</td><td>'.$row['USER_NAME'].'</td><td>'.$row['USER_LNAME'].', '.$row['USER_FNAME'].'</td><td>'.$row['OF_NAME'].'</td><td>';
                                 if($row['ROLE_NAME']>=2){
                                     echo 'ADMIN</td><td';
                                 }else{
                                     echo 'STAFF</td><td';
                                 }
 
-                                if($row['USER_LOCK']==1){
-                                   echo  ' style="color:red;font-weight:bold">LOCKED</td><td><a href="goUser.php?action=allow&uid='. $row['USER_ID'] .'" class="btn btn-success">ALLOW</a>';
+                                if($row['USER_ONLINE']==0){
+                                   echo  ' style="color:red;font-weight:bold;background-color:pink">OFFLINE</td>';
                                 }else{
-                                     echo  ' style="color:green;font-weight:bold">ALLOWED</td><td><a href="goUser.php?action=lock&uid='. $row['USER_ID'] .'" class="btn btn-danger">LOCK</a>';
+                                     echo  ' style="color:green;font-weight:bold;background-color:lightgreen">ONLINE</td>';
                                 }
-                                echo ' <a class="btn btn-default" href="resetpw.php?uid='. $row['USER_ID'] .'">Reset PW</a></td></tr>';
+
+                                if($row['USER_LOCK']==1){
+                                   echo  '<td><a href="goUser.php?action=allow&uid='. $row['USER_ID'] .'" class="btn btn-success">ALLOW</a>';
+                                }else{
+                                     echo  '<td><a href="goUser.php?action=lock&uid='. $row['USER_ID'] .'" class="btn btn-danger">LOCK</a>';
+                                }
+                                echo ' <a class="btn btn-warning" href="resetpw.php?uid='. $row['USER_ID'] .'">Reset PW</a></td></tr>';
                             }
                         }
 
@@ -68,9 +74,9 @@ $person = new User;
     </table>
     
             <style type="text/css">
-                td, th{
-                    padding-left: 20px;
-                    padding-right: 20px;
+
+                .table{
+                    font-size: 12px;
                 }
             </style>
     <div class="alert alert-primary" role="alert" id="#pending">
@@ -89,7 +95,7 @@ $person = new User;
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             echo '';
-                            echo '<tr><td>' . $row['USER_SN']. '</td><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post"><input class="btn btn-primary" type="submit" value="Approve"></form></td></tr>';
+                            echo '<tr><td>' . $row['USER_SN']. '</td><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post"><input class="btn btn-primary" type="submit" value="Approve"></form><form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post"><input class="btn btn-warning" type="submit" value="Drop"></form></td></tr>';
                         }
                     }
 
