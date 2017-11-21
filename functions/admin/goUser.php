@@ -38,7 +38,7 @@ if ($_REQUEST['action']=="allow") {
     }
 //LOCK USER
 }elseif ($_REQUEST['action']=="lock") {
-	$uid = $_POST['uid'];
+	$uid = $_REQUEST['uid'];
 	$sql =  "UPDATE users SET USER_LOCK=1 where USER_ID= $uid";
     if($conn->query($sql)){
          $uri = strtok($_SERVER['HTTP_REFERER'],'?');

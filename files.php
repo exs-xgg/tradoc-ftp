@@ -63,7 +63,7 @@ x_log("access",  $_SERVER['REQUEST_URI'] ,$person->user_id);
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <?php 
-                        if ($person->user_role > 2) {
+                        if ($person->user_role >= 2) {
                          ?>
 <a class="nav-link" href="admin.php" title="Admin">
                             <i class="now-ui-icons business_bank"></i>
