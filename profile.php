@@ -130,7 +130,7 @@ TO LESSEN THE LOADING TIME OF THE PAGE
         <div class="section">
             <div class="container">
                 
-                <h3 class="title"><?php  echo $person->user_fname . " " . $person->user_lname; ?></h3>
+                <h3 class="title"><?php  echo $person->user_fname . " " . $person->user_lname . " - ". $person->user_sn; ?></h3>
                 <h5 class="description"><?php  echo $person->user_office; ?></h5>
               
             </div>

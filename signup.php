@@ -71,10 +71,14 @@ if (isset($_REQUEST['r'])) {
                         $role = fin(strip_tags($_POST['role']));
                         $ofc = fin(strip_tags($_POST['office']));
                         $sql =  "INSERT INTO users (USER_NAME, USER_FNAME, USER_LNAME, USER_PW, USER_OFC, ROLE_ID, USER_SN, USER_LOCK)
-                            VALUES('$username','$fname','$lname','$pw',$ofc,$role,'$sn',1)";
+                            VALUES('$username','$fname','$lname','$pw',$ofc,$role,'$sn',3)";
                             if($conn->query($sql)){
                                       header("location: login.php?grant=finish");
 
+                            }else{
+                                ?> 
+<script type="text/javascript">alert("Something went wrong");</script>
+                                <?php
                             }
 
 
@@ -97,24 +101,20 @@ if (isset($_REQUEST['r'])) {
             <p class="category">FIRST NAME: </p><input class="form-control" type="text" required name="fname" maxlength="50"><br>
             <p class="category">LAST NAME: </p><input class="form-control"  id="lln" type="text" required maxlength="50" name="lname"><br>
             <input type="text" name="role" value="1" hidden="true">
-
-            
-            <p class="category">OFFICE ASSIGNED: </p>
-            <input type="text" class="form-control" name="office" placeholder="Type to search office" list="ofc" >
+            <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
             <?php
             include 'functions/db_con.php';
             $sql = "SELECT * FROM office";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
-                        echo '<datalist id="ofc">';
                     while($row = $result->fetch_assoc()) {
-
+ 
                         echo '<option value="' . $row['OF_ID'] . '">' . $row['OF_NAME'] .'</option>';
                     }
-                        echo '</datalist>';
                 }
             ?>
+            </select>
             <br><br> <p class="category">USERNAME(auto-generated): <br><span class="btn btn-primary" onclick="lokk()">Generate Username</span><p><input readonly id="loks" type="text" required name="username" style="border-radius: 10px; border-color: gray;padding:4px"><br>
             <p class="category">PASSWORD: </p><input class="form-control" type="password" required id="pw1" onfocus="theFocus(this);" onblur="theBlur()"><br>
             <p class="category">CONFIRM PASSWORD: </p><input class="form-control form-control-danger" type="password" onchange="checkPw();" id="pw2" required name="password"><br><b><p id="warning" style="color:red"></p></b>
@@ -130,6 +130,7 @@ if (isset($_REQUEST['r'])) {
     </style>
     <script type="text/javascript">
             function validate(){
+                lokk();
                 var snc = document.getElementById("snn").value;
                 if (snc.length < 6) {
                     alert("Invalid Serial Number");

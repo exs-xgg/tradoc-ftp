@@ -8,13 +8,13 @@ include '../crypto.php';
 include '../class/userclass.php';
 session_start();
 if (isset($_SESSION['user'])) {
-	if (isset($_POST['uid'])) {
+	if (isset($_REQUEST['uid'])) {
 		
 		//UNSERIALIZE SESSION
 		$person = new User;
 		$person = unserialize($_SESSION['user']);
 		$uid = $person->user_id;
-		$uid = $_POST['uid'];
+		$uid = $_REQUEST['uid'];
 		//QUERY TO DATABASE IF PIN
 		$sql = 	"UPDATE users set USER_PW=md5('') where USER_ID=$uid";
 
