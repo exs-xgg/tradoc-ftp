@@ -125,15 +125,19 @@ x_log("access", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id
 <script type="text/javascript">
     function gotouser(){
         document.getElementById('content1').src = "functions/admin/manageusers.php";
+        resizeIframe(this);
     }
     function gotofile(){
         document.getElementById('content1').src = "functions/admin/managefiles.php";
+        resizeIframe(this);
     }
     function gotologs(){
         document.getElementById('content1').src = "functions/admin/viewlogs.php";
+        resizeIframe(this);
     }
     function gotostat(){
         document.getElementById('content1').src = "functions/admin/viewsysstat.php";
+        resizeIframe(this);
     }
     
   function resizeIframe(iframe) {
@@ -154,7 +158,7 @@ iframe{
     max-width: 84%;
     min-height: 500px;
     float: right;
-    display: flex; width: 100%; height: 100%; flex-direction: column;
+    display: flex; width: 100%; height: 100%; flex-direction: column; overflow: auto;
 }
     .panel{
         max-width: 15%;

@@ -141,10 +141,13 @@ $person = new User;
             </table>
      
  <p><br><br></p>
- <div class="space-100"></div>
  </body>
 
 
 
-
+<style type="text/css">
+    tr:nth-child(odd){
+        background-color: #f0f0f0;
+    }
+</style>
  </html>
