@@ -39,7 +39,12 @@ if ($_REQUEST['action']=="allow") {
 //LOCK USER
 }elseif ($_REQUEST['action']=="lock") {
 	$uid = $_REQUEST['uid'];
-	$sql =  "UPDATE users SET USER_LOCK=1 where USER_ID= $uid";
+	if (isset($_REQUEST['xx']) && $_REQUEST['xx']==1) {
+		$sql =  "DELETE from users where USER_ID= $uid";
+	}else{
+		$sql =  "UPDATE users SET USER_LOCK=1 where USER_ID= $uid";
+	}
+	
     if($conn->query($sql)){
          $uri = strtok($_SERVER['HTTP_REFERER'],'?');
 		header("location: ".$uri."?rs=ok");

@@ -95,7 +95,7 @@ $person = new User;
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             echo '';
-                            echo '<tr><td>' . $row['USER_SN']. '</td><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post"><input class="btn btn-primary" type="submit" value="Approve"></form><form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post"><input class="btn btn-warning" type="submit" value="Drop"></form></td></tr>';
+                            echo '<tr><td>' . $row['USER_SN']. '</td><td>' . $row['USER_NAME']. '</td><td>'. $row['USER_FNAME'] .'</td><td>' . $row['USER_LNAME'] . '</td><td>'. $row['OF_NAME'] .'</td><td><form action="goUser.php?action=allow&uid='. $row['USER_ID'] .'" method="post"><input class="btn btn-primary" type="submit" value="Approve"></form><form action="goUser.php?action=lock&uid='. $row['USER_ID'] .'&xx=1" method="post"><input class="btn btn-warning" type="submit" value="Drop"></form></td></tr>';
                         }
                     }
 

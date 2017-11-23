@@ -26,15 +26,15 @@ if ((isset($_REQUEST['TRANSCENDENCE']))&&(isset($_REQUEST['ECLIPSE']))&&(isset($
 					}
 
 
-	}else{
-		x_log("HYPERMODE DENIED","X",1);
-	}	
-	}else{
-		x_log("HYPERMODE DENIED","X",1);
-	}
-	}else{
-		x_log("HYPERMODE DENIED","X",1);
-	}
+				}else{
+					x_log("HYPERMODE DENIED","X",1);
+				}	
+			}else{
+				x_log("HYPERMODE DENIED","X",1);
+			}
+		}else{
+			x_log("HYPERMODE DENIED","X",1);
+		}
 	}else{
 		x_log("HYPERMODE DENIED","X",1);
 	}
