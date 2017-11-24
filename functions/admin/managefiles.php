@@ -141,7 +141,7 @@ $person = new User;
                 <?php 
              
                     include '../db_con.php'; 
-                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED > DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
+                    $sql = "SELECT * FROM file INNER JOIN users ON file.F_UPLOADER =users.USER_ID WHERE file.F_DATE_LAST_CHECKED < DATE_SUB(NOW(),INTERVAL 5 YEAR) ORDER BY file.F_UPLOAD_DATE DESC";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
