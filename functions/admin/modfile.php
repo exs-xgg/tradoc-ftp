@@ -13,7 +13,7 @@ if ((isset($_REQUEST['r']))) {
 		$uid = $_POST['fid'];
 		$sql = "UPDATE file set F_TRACK_NO='$trkno', F_NAME_SERVER='$svname', F_NAME_ORIG='$origname',F_DESC='$desc', F_TAGS='$tags' where F_ID = $uid";
 		if ($conn->query($sql)) {
-			echo "EDIT SUCCESSFUL";
+			echo 'EDIT SUCCESSFUL &nbsp;&nbsp;<a href="managefiles.php">Go Back</a>';
 		}else{
 			echo "Edit Failed ".$sql;
 		}

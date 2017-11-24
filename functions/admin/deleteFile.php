@@ -20,16 +20,16 @@ if (isset($_SESSION['user'])) {
 		$sql = 	"DELETE FROM file where F_ID=$fid";
 
 		if($conn->query($sql)){
-					$return = true;
+					echo 'EDIT SUCCESSFUL &nbsp;&nbsp;<a href="'. $_SERVER['HTTP_REFERER'] .'">Go Back</a>';
 		}else{
 			echo $sql;
-			$return = false;
+			echo 'Something Went Wrong. &nbsp;&nbsp;<a href="'. $_SERVER['HTTP_REFERER'] .'">Go Back</a>';
 		}
 	}else{
-		$return = false;
+		echo 'Something Went Wrong. &nbsp;&nbsp;<a href="'. $_SERVER['HTTP_REFERER'] .'">Go Back</a>';
 	}
 }else{
-	$return = false;
+	echo 'Something Went Wrong. &nbsp;&nbsp;<a href="'. $_SERVER['HTTP_REFERER'] .'">Go Back</a>';
 }
 die(json_encode(array('return' => $return)));
 
