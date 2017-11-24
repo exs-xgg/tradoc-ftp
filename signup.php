@@ -95,7 +95,7 @@ if (isset($_REQUEST['r'])) {
 
     
     <div class="container" style="max-width: 800px; float: center">
-        <form action="signup.php?r=1" method="post">
+        <form action="signup.php?r=1" method="post" class="formi">
             <p class="category">SERIAL NUMBER: <p><input class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="snn" type="text" required name="sn" maxlength="10"><br>
             
            
@@ -105,7 +105,7 @@ if (isset($_REQUEST['r'])) {
             <p class="category">OFFICE ASSIGNED: </p><select class="form form-control" name="office">
             <?php
             include 'functions/db_con.php';
-            $sql = "SELECT * FROM office";
+            $sql = "SELECT * FROM office order by OF_NAME";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     // output data of each row
@@ -130,6 +130,10 @@ if (isset($_REQUEST['r'])) {
         }
     </style>
     <script type="text/javascript">
+        $('.formi :input').focus(function(e){
+          document.getElementById("subb").disabled = true;
+        });
+
             function validate(){
                 lokk();
                 var snc = document.getElementById("snn").value;
