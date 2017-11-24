@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])) {
 		$uid = $person->user_id;
 		$fid = $_REQUEST['fid'];
 		//QUERY TO DATABASE IF PIN
-		$sql = 	"UPDATE file set F_DATE_LAST_CHECKED=CURRENT_TIMESTAMP where F_ID=$fid";
+		$sql = 	"UPDATE file set F_DATE_LAST_CHECKED=NOW() where F_ID=$fid";
 
 		if($conn->query($sql)){
 					$return = true;

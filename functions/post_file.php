@@ -86,8 +86,8 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 		}else{
 			$conf = 0;
 		}
-		$sql = 	"INSERT INTO file(F_TRACK_NO,F_NAME_ORIG,F_NAME_SERVER,F_DESC,F_UPLOADER,F_OFFICE,F_TAGS,FILE_X)
-		VALUES('$filetrack','$file_orig','$randomString', '$desc',$person->user_id, '$ofc','$tags',$conf)";
+		$sql = 	"INSERT INTO file(F_TRACK_NO,F_NAME_ORIG,F_NAME_SERVER,F_DESC,F_UPLOADER,F_OFFICE,F_TAGS,FILE_X,F_DATE_LAST_CHECKED)
+		VALUES('$filetrack','$file_orig','$randomString', '$desc',$person->user_id, '$ofc','$tags',$conf,NOW())";
 		echo '<br><br>'.$sql;
 		if($conn->query($sql)){
 			x_log("upload", $_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] ,$person->user_id);
