@@ -43,7 +43,7 @@ $person = new User;
     <table class="table">
       <tr align="center"><td><b>User SN</b></td><td><b>Username</b></td><td><b>Name</b></td><td><b>Office</b></td><td><b>Privilege</b></td><td><b>Status</b></td><td><b>Action</b></td></tr>
       <?php 
-                        $sql = "SELECT * FROM users inner join office on users.USER_OFC=office.OF_ID inner join role on users.ROLE_ID=role.ROLE_ID where users.USER_LOCK < 3";
+                        $sql = "SELECT * FROM users inner join office on users.USER_OFC=office.OF_ID inner join role on users.ROLE_ID=role.ROLE_ID where users.USER_LOCK < 3 order by role.ROLE_DESC ASC";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
