@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
 
 </table>
 
-<input type="submit" name="submit" value="Save Changes">&nbsp;&nbsp;&nbsp;<a href="deleteDaNigga.php?fid=<?php echo $row['F_ID']; ?>"></a>
+<input type="submit" name="submit" value="Save Changes">&nbsp;&nbsp;&nbsp;<a href="deleteDaNigga.php?fid=<?php echo $row['F_ID']; ?>">Delete File</a>
 </form>
 </body>
 </html>
