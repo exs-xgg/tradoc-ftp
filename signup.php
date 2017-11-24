@@ -64,6 +64,7 @@ if (isset($_REQUEST['r'])) {
             
                         include("functions/db_con.php");
                         $username = $_POST['username'];
+                        $username = str_replace(" ", "", $username); 
                         $pw = md5($_POST['password']);
                         $sn = fin(strip_tags($_POST['sn']));
                         $fname = fin(strip_tags($_POST['fname']));
