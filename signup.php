@@ -130,9 +130,7 @@ if (isset($_REQUEST['r'])) {
         }
     </style>
     <script type="text/javascript">
-        $('.formi :input').focus(function(e){
-          document.getElementById("subb").disabled = true;
-        });
+       
 
             function validate(){
                 lokk();
