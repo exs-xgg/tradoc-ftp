@@ -38,7 +38,10 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 
 	$filetrack = fin($_POST['filetrack']);
 	$desc = fin(strip_tags($_POST['desc']));
-	$tags = json_encode(explode("\r\n", (strip_tags(str_replace("'", "",$_POST['tags'])))));
+	$tagz = explode("\r\n", (strip_tags(str_replace("'", "",$_POST['tags']))));
+	array_push($tagz, date("m/d/Y"));
+	array_push($tagz, $person->user_fname . " " . $person->user_lname);
+	$tags = json_encode($tagz);
 	echo $tags.'<br>';
 	$file_orig = noCancerPls($_FILES['filex']['name']);
 	$file_orig = fin(strip_tags($file_orig));
@@ -73,7 +76,7 @@ if (isset($_SESSION['user']) && isset($_POST['submit'])){
 	$randomString = generateRandomString()."_".$file_orig;
 
 	$server_file_name = "/var/www/html/tradoc-ftp/files/".$randomString;
-	if (move_uploaded_file($file,$server_file_name)) {
+	if (move_uploaded_file($file,$server_file_name) or true) {
 
 		shell_exec("/var/www/html/tradoc-ftp/files/pack.sh $server_file_name");
 
