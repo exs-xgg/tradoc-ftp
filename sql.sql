@@ -6,7 +6,7 @@ ROLE_ID INT AUTO_INCREMENT PRIMARY KEY,
 ROLE_NAME VARCHAR(20) NOT NULL,
 ROLE_DESC VARCHAR(50)
 );
-INSERT INTO role(ROLE_NAME, ROLE_DESC) values(1,'STAFF'),(2,'ADMIN');
+INSERT INTO `role` VALUES (1,'1','STAFF'),(2,'2','ADMIN'),(3,'3','ADMIN-2');
 
 CREATE TABLE office(
 OF_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,6 +74,6 @@ EXT VARCHAR(4) NOT NULL
 );
 INSERT INTO ok_files (EXT) values('docx'),( 'doc'),( 'ppt'),( 'pptx'),( 'xls'),( 'xlsx'),( 'pdf'),( 'txt'),( 'odt'),( 'ods'),( 'odp'),('psd'),('mp4'),('wmv'),('avi');
 INSERT INTO ok_files (EXT) values('avi'),( 'mp4'),( 'wmv'),( 'psd');
-INSERT INTO office (OF_NAME) values ('G6 C4S'),('G1'),('G2'),('G3'),('G4'),('G5'),('G7'),('SDO'),('OIG');
+INSERT INTO `office` VALUES (1,'G6'),(2,'G1'),(3,'G2'),(4,'G3'),(5,'G4'),(6,'G5'),(7,'SDO'),(8,'OIG'),(9,'G7'),(10,'GADO'),(11,'SGS'),(12,'MFO'),(13,'CREO'),(14,'CPM'),(15,'CS4'),(16,'CRO'),(17,'GSMD'),(18,'OCE'),(19,'OCA'),(20,'Deputy Ofc'),(21,'OCS'),(22,'OC'),(23,'OCSM'),(24,'OCIG'),(25,'OCC');
 INSERT INTO users(USER_SN,USER_NAME,USER_LNAME,USER_FNAME,USER_OFC,USER_PW,ROLE_ID,USER_LOCK)
 VALUES('312442','admin','Lacson','Ghil',1,md5('password'),1,0);
